@@ -64,6 +64,8 @@ namespace ProjectFLS
                         RoleName = roleRow.roleName
                     };
 
+                    App.CurrentUserId = user.userID;
+
                     MainWindow mainWindow = new MainWindow(userModel);
                     mainWindow.Show();
                     this.Close();

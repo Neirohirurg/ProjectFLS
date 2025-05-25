@@ -13,5 +13,6 @@ namespace ProjectFLS
     /// </summary>
     public partial class App : Application
     {
+        public static int CurrentUserId { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using ProjectFLS.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,8 +29,6 @@ namespace ProjectFLS
         public MainWindow()
         {
             InitializeComponent();
-
-            TimerInit();
         }
 
         private UserModel _user;
@@ -38,11 +37,15 @@ namespace ProjectFLS
         {
             InitializeComponent();
             _user = user;
-
+      
+        }
+        private void mainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateDateTimeLabel();
+            TimerInit();
             WelcomeLabel.Content = $"Добро пожаловать, {_user.Firstname} {_user.Patronymic} ({_user.RoleName})";
 
             LoadPageForRole(_user.RoleID);
-            TimerInit();
         }
 
         private void LoadPageForRole(int roleID)
@@ -50,7 +53,7 @@ namespace ProjectFLS
             switch (roleID)
             {
                 case 1: // Администратор
-                    mainFrame.Navigate(new AdminMainPage(_user));
+                    mainFrame.Navigate(new AdminMainPage(_user, this.mainNavBar, this.navBarBorder));
                     break;
                 case 2: // Менеджер
                     mainFrame.Navigate(new ManagerMainPage(_user));
@@ -89,9 +92,10 @@ namespace ProjectFLS
 
         private void ExitToLoginButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
         }
 
-            
     }
 }

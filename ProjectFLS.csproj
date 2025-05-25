@@ -59,6 +59,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Admin\DataPages\AddEditUserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\DataPages\UsersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -73,6 +81,12 @@
     </Page>
     <Compile Include="Admin\AdminMainPage.xaml.cs">
       <DependentUpon>AdminMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DataPages\AddEditUserPage.xaml.cs">
+      <DependentUpon>AddEditUserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DataPages\UsersPage.xaml.cs">
+      <DependentUpon>UsersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

@@ -68,8 +68,6 @@ namespace ProjectFLS {
         
         private global::System.Data.DataRelation relationFK_dealers_city;
         
-        private global::System.Data.DataRelation relationFK_dealers_manager;
-        
         private global::System.Data.DataRelation relationFK_deliveries_from;
         
         private global::System.Data.DataRelation relationFK_deliveries_status;
@@ -104,15 +102,17 @@ namespace ProjectFLS {
         
         private global::System.Data.DataRelation relationFK_transport_type;
         
-        private global::System.Data.DataRelation relationFK_users_role;
-        
         private global::System.Data.DataRelation relationFK_warehouses_city;
-        
-        private global::System.Data.DataRelation relationFK_warehouses_manager;
         
         private global::System.Data.DataRelation relationFK__warehouse__tract__17036CC0;
         
         private global::System.Data.DataRelation relationFK__warehouse__wareh__160F4887;
+        
+        private global::System.Data.DataRelation relationFK_users_role;
+        
+        private global::System.Data.DataRelation relationFK_warehouses_manager;
+        
+        private global::System.Data.DataRelation relationFK_dealers_manager;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -681,7 +681,6 @@ namespace ProjectFLS {
             this.relationFK_cityFuelPrices_city = this.Relations["FK_cityFuelPrices_city"];
             this.relationFK_cityFuelPrices_fuelType = this.Relations["FK_cityFuelPrices_fuelType"];
             this.relationFK_dealers_city = this.Relations["FK_dealers_city"];
-            this.relationFK_dealers_manager = this.Relations["FK_dealers_manager"];
             this.relationFK_deliveries_from = this.Relations["FK_deliveries_from"];
             this.relationFK_deliveries_status = this.Relations["FK_deliveries_status"];
             this.relationFK_deliveries_to = this.Relations["FK_deliveries_to"];
@@ -699,11 +698,12 @@ namespace ProjectFLS {
             this.relationFK_routes_to = this.Relations["FK_routes_to"];
             this.relationFK_transport_fuel = this.Relations["FK_transport_fuel"];
             this.relationFK_transport_type = this.Relations["FK_transport_type"];
-            this.relationFK_users_role = this.Relations["FK_users_role"];
             this.relationFK_warehouses_city = this.Relations["FK_warehouses_city"];
-            this.relationFK_warehouses_manager = this.Relations["FK_warehouses_manager"];
             this.relationFK__warehouse__tract__17036CC0 = this.Relations["FK__warehouse__tract__17036CC0"];
             this.relationFK__warehouse__wareh__160F4887 = this.Relations["FK__warehouse__wareh__160F4887"];
+            this.relationFK_users_role = this.Relations["FK_users_role"];
+            this.relationFK_warehouses_manager = this.Relations["FK_warehouses_manager"];
+            this.relationFK_dealers_manager = this.Relations["FK_dealers_manager"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -764,10 +764,6 @@ namespace ProjectFLS {
                         this.tablecities.cityIDColumn}, new global::System.Data.DataColumn[] {
                         this.tabledealers.cityIDColumn}, false);
             this.Relations.Add(this.relationFK_dealers_city);
-            this.relationFK_dealers_manager = new global::System.Data.DataRelation("FK_dealers_manager", new global::System.Data.DataColumn[] {
-                        this.tableusers.userIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tabledealers.managerIDColumn}, false);
-            this.Relations.Add(this.relationFK_dealers_manager);
             this.relationFK_deliveries_from = new global::System.Data.DataRelation("FK_deliveries_from", new global::System.Data.DataColumn[] {
                         this.tablewarehouses.warehouseIDColumn}, new global::System.Data.DataColumn[] {
                         this.tabledeliveries.fromWarehouseIDColumn}, false);
@@ -836,18 +832,10 @@ namespace ProjectFLS {
                         this.tabletransportTypes.transportTypeIDColumn}, new global::System.Data.DataColumn[] {
                         this.tabletransport.transportTypeIDColumn}, false);
             this.Relations.Add(this.relationFK_transport_type);
-            this.relationFK_users_role = new global::System.Data.DataRelation("FK_users_role", new global::System.Data.DataColumn[] {
-                        this.tableroles.roleIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableusers.roleIDColumn}, false);
-            this.Relations.Add(this.relationFK_users_role);
             this.relationFK_warehouses_city = new global::System.Data.DataRelation("FK_warehouses_city", new global::System.Data.DataColumn[] {
                         this.tablecities.cityIDColumn}, new global::System.Data.DataColumn[] {
                         this.tablewarehouses.cityIDColumn}, false);
             this.Relations.Add(this.relationFK_warehouses_city);
-            this.relationFK_warehouses_manager = new global::System.Data.DataRelation("FK_warehouses_manager", new global::System.Data.DataColumn[] {
-                        this.tableusers.userIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tablewarehouses.managerIDColumn}, false);
-            this.Relations.Add(this.relationFK_warehouses_manager);
             this.relationFK__warehouse__tract__17036CC0 = new global::System.Data.DataRelation("FK__warehouse__tract__17036CC0", new global::System.Data.DataColumn[] {
                         this.tabletractorUnits.tractorIDColumn}, new global::System.Data.DataColumn[] {
                         this.tablewarehouseTractors.tractorIDColumn}, false);
@@ -856,6 +844,18 @@ namespace ProjectFLS {
                         this.tablewarehouses.warehouseIDColumn}, new global::System.Data.DataColumn[] {
                         this.tablewarehouseTractors.warehouseIDColumn}, false);
             this.Relations.Add(this.relationFK__warehouse__wareh__160F4887);
+            this.relationFK_users_role = new global::System.Data.DataRelation("FK_users_role", new global::System.Data.DataColumn[] {
+                        this.tableroles.roleIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableusers.roleIDColumn}, false);
+            this.Relations.Add(this.relationFK_users_role);
+            this.relationFK_warehouses_manager = new global::System.Data.DataRelation("FK_warehouses_manager", new global::System.Data.DataColumn[] {
+                        this.tableusers.userIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tablewarehouses.managerIDColumn}, false);
+            this.Relations.Add(this.relationFK_warehouses_manager);
+            this.relationFK_dealers_manager = new global::System.Data.DataRelation("FK_dealers_manager", new global::System.Data.DataColumn[] {
+                        this.tableusers.userIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tabledealers.managerIDColumn}, false);
+            this.Relations.Add(this.relationFK_dealers_manager);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6153,6 +6153,8 @@ namespace ProjectFLS {
             
             private global::System.Data.DataColumn columnroleID;
             
+            private global::System.Data.DataColumn columnstatusID;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public usersDataTable() {
@@ -6244,6 +6246,14 @@ namespace ProjectFLS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn statusIDColumn {
+                get {
+                    return this.columnstatusID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -6279,7 +6289,7 @@ namespace ProjectFLS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public usersRow AddusersRow(string surname, string firstname, string patronymic, string username, string password, rolesRow parentrolesRowByFK_users_role) {
+            public usersRow AddusersRow(string surname, string firstname, string patronymic, string username, string password, rolesRow parentrolesRowByFK_users_role, string statusID) {
                 usersRow rowusersRow = ((usersRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -6288,7 +6298,8 @@ namespace ProjectFLS {
                         patronymic,
                         username,
                         password,
-                        null};
+                        null,
+                        statusID};
                 if ((parentrolesRowByFK_users_role != null)) {
                     columnValuesArray[6] = parentrolesRowByFK_users_role[0];
                 }
@@ -6328,6 +6339,7 @@ namespace ProjectFLS {
                 this.columnusername = base.Columns["username"];
                 this.columnpassword = base.Columns["password"];
                 this.columnroleID = base.Columns["roleID"];
+                this.columnstatusID = base.Columns["statusID"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6347,6 +6359,8 @@ namespace ProjectFLS {
                 base.Columns.Add(this.columnpassword);
                 this.columnroleID = new global::System.Data.DataColumn("roleID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnroleID);
+                this.columnstatusID = new global::System.Data.DataColumn("statusID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstatusID);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnuserID}, true));
                 this.columnuserID.AutoIncrement = true;
@@ -8847,6 +8861,22 @@ namespace ProjectFLS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string statusID {
+                get {
+                    try {
+                        return ((string)(this[this.tableusers.statusIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'statusID\' в таблице \'users\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableusers.statusIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public rolesRow rolesRow {
                 get {
                     return ((rolesRow)(this.GetParentRow(this.Table.ParentRelations["FK_users_role"])));
@@ -8894,13 +8924,14 @@ namespace ProjectFLS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dealersRow[] GetdealersRows() {
-                if ((this.Table.ChildRelations["FK_dealers_manager"] == null)) {
-                    return new dealersRow[0];
-                }
-                else {
-                    return ((dealersRow[])(base.GetChildRows(this.Table.ChildRelations["FK_dealers_manager"])));
-                }
+            public bool IsstatusIDNull() {
+                return this.IsNull(this.tableusers.statusIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstatusIDNull() {
+                this[this.tableusers.statusIDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8911,6 +8942,17 @@ namespace ProjectFLS {
                 }
                 else {
                     return ((warehousesRow[])(base.GetChildRows(this.Table.ChildRelations["FK_warehouses_manager"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dealersRow[] GetdealersRows() {
+                if ((this.Table.ChildRelations["FK_dealers_manager"] == null)) {
+                    return new dealersRow[0];
+                }
+                else {
+                    return ((dealersRow[])(base.GetChildRows(this.Table.ChildRelations["FK_dealers_manager"])));
                 }
             }
         }
@@ -15419,7 +15461,7 @@ SELECT transportTypeID, transportTypeName FROM transportTypes WHERE (transportTy
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[users] WHERE (([userID] = @Original_userID) AND ((@IsNull_surname = 1 AND [surname] IS NULL) OR ([surname] = @Original_surname)) AND ((@IsNull_firstname = 1 AND [firstname] IS NULL) OR ([firstname] = @Original_firstname)) AND ((@IsNull_patronymic = 1 AND [patronymic] IS NULL) OR ([patronymic] = @Original_patronymic)) AND ([username] = @Original_username) AND ([password] = @Original_password) AND ([roleID] = @Original_roleID))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [users] WHERE (([userID] = @Original_userID) AND ((@IsNull_surname = 1 AND [surname] IS NULL) OR ([surname] = @Original_surname)) AND ((@IsNull_firstname = 1 AND [firstname] IS NULL) OR ([firstname] = @Original_firstname)) AND ((@IsNull_patronymic = 1 AND [patronymic] IS NULL) OR ([patronymic] = @Original_patronymic)) AND ([username] = @Original_username) AND ([password] = @Original_password) AND ([roleID] = @Original_roleID))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_userID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "userID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_surname", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "surname", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -15433,7 +15475,7 @@ SELECT transportTypeID, transportTypeName FROM transportTypes WHERE (transportTy
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_roleID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roleID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[users] ([surname], [firstname], [patronymic], [username], [password], [roleID]) VALUES (@surname, @firstname, @patronymic, @username, @password, @roleID);
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [users] ([surname], [firstname], [patronymic], [username], [password], [roleID]) VALUES (@surname, @firstname, @patronymic, @username, @password, @roleID);
 SELECT userID, surname, firstname, patronymic, username, password, roleID FROM users WHERE (userID = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@surname", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "surname", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -15444,7 +15486,7 @@ SELECT userID, surname, firstname, patronymic, username, password, roleID FROM u
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@roleID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roleID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[users] SET [surname] = @surname, [firstname] = @firstname, [patronymic] = @patronymic, [username] = @username, [password] = @password, [roleID] = @roleID WHERE (([userID] = @Original_userID) AND ((@IsNull_surname = 1 AND [surname] IS NULL) OR ([surname] = @Original_surname)) AND ((@IsNull_firstname = 1 AND [firstname] IS NULL) OR ([firstname] = @Original_firstname)) AND ((@IsNull_patronymic = 1 AND [patronymic] IS NULL) OR ([patronymic] = @Original_patronymic)) AND ([username] = @Original_username) AND ([password] = @Original_password) AND ([roleID] = @Original_roleID));
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [users] SET [surname] = @surname, [firstname] = @firstname, [patronymic] = @patronymic, [username] = @username, [password] = @password, [roleID] = @roleID WHERE (([userID] = @Original_userID) AND ((@IsNull_surname = 1 AND [surname] IS NULL) OR ([surname] = @Original_surname)) AND ((@IsNull_firstname = 1 AND [firstname] IS NULL) OR ([firstname] = @Original_firstname)) AND ((@IsNull_patronymic = 1 AND [patronymic] IS NULL) OR ([patronymic] = @Original_patronymic)) AND ([username] = @Original_username) AND ([password] = @Original_password) AND ([roleID] = @Original_roleID));
 SELECT userID, surname, firstname, patronymic, username, password, roleID FROM users WHERE (userID = @userID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@surname", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "surname", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -15476,12 +15518,30 @@ SELECT userID, surname, firstname, patronymic, username, password, roleID FROM u
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT userID, surname, firstname, patronymic, username, password, roleID FROM db" +
-                "o.users";
+            this._commandCollection[0].CommandText = "SELECT userID, surname, firstname, patronymic, username, password, roleID\r\nFROM  " +
+                "   users";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "DELETE FROM users WHERE userID = @userID\r\n";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@userID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "userID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "UPDATE users\r\nSET surname = @surname,\r\n    firstname = @firstname,\r\n    patronymi" +
+                "c = @patronymic,\r\n    username = @username,\r\n    password = @password,\r\n    role" +
+                "ID = @roleID\r\nWHERE userID = @userID\r\n";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@surname", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "surname", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@firstname", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "firstname", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@patronymic", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "patronymic", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@username", global::System.Data.SqlDbType.NVarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "username", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@password", global::System.Data.SqlDbType.NVarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@roleID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "roleID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@userID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "userID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15745,6 +15805,85 @@ SELECT userID, surname, firstname, patronymic, username, password, roleID FROM u
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(string surname, string firstname, string patronymic, string username, string password, int roleID, int Original_userID, string Original_surname, string Original_firstname, string Original_patronymic, string Original_username, string Original_password, int Original_roleID) {
             return this.Update(surname, firstname, patronymic, username, password, roleID, Original_userID, Original_surname, Original_firstname, Original_patronymic, Original_username, Original_password, Original_roleID, Original_userID);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteUserByID(int userID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(userID));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateQuery(string surname, string firstname, string patronymic, string username, string password, int roleID, int userID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((surname == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(surname));
+            }
+            if ((firstname == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(firstname));
+            }
+            if ((patronymic == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(patronymic));
+            }
+            if ((username == null)) {
+                throw new global::System.ArgumentNullException("username");
+            }
+            else {
+                command.Parameters[3].Value = ((string)(username));
+            }
+            if ((password == null)) {
+                throw new global::System.ArgumentNullException("password");
+            }
+            else {
+                command.Parameters[4].Value = ((string)(password));
+            }
+            command.Parameters[5].Value = ((int)(roleID));
+            command.Parameters[6].Value = ((int)(userID));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     
@@ -16420,106 +16559,6 @@ SELECT warehouseID, tractorID, quantity FROM warehouseTractors WHERE (tractorID 
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(int quantity, int Original_warehouseID, int Original_tractorID, int Original_quantity) {
             return this.Update(Original_warehouseID, Original_tractorID, quantity, Original_warehouseID, Original_tractorID, Original_quantity);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class QueriesTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.IDbCommand[] _commandCollection;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        protected global::System.Data.IDbCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.IDbCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Connection = new global::System.Data.SqlClient.SqlConnection(global::ProjectFLS.Properties.Settings.Default.flsdbConnectionString);
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).CommandText = "dbo.FindBestRoute";
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).CommandType = global::System.Data.CommandType.StoredProcedure;
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@startCityID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@endCityID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@outDist", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.InputOutput, 53, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@outPath", global::System.Data.SqlDbType.VarChar, 2147483647, global::System.Data.ParameterDirection.InputOutput, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int FindBestRoute(global::System.Nullable<int> startCityID, global::System.Nullable<int> endCityID, ref global::System.Nullable<double> outDist, ref string outPath) {
-            global::System.Data.SqlClient.SqlCommand command = ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[0]));
-            if ((startCityID.HasValue == true)) {
-                command.Parameters[1].Value = ((int)(startCityID.Value));
-            }
-            else {
-                command.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((endCityID.HasValue == true)) {
-                command.Parameters[2].Value = ((int)(endCityID.Value));
-            }
-            else {
-                command.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((outDist.HasValue == true)) {
-                command.Parameters[3].Value = ((double)(outDist.Value));
-            }
-            else {
-                command.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((outPath == null)) {
-                command.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                command.Parameters[4].Value = ((string)(outPath));
-            }
-            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
-            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                command.Connection.Open();
-            }
-            int returnValue;
-            try {
-                returnValue = command.ExecuteNonQuery();
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    command.Connection.Close();
-                }
-            }
-            if (((command.Parameters[3].Value == null) 
-                        || (command.Parameters[3].Value.GetType() == typeof(global::System.DBNull)))) {
-                outDist = new global::System.Nullable<double>();
-            }
-            else {
-                outDist = new global::System.Nullable<double>(((double)(command.Parameters[3].Value)));
-            }
-            if (((command.Parameters[4].Value == null) 
-                        || (command.Parameters[4].Value.GetType() == typeof(global::System.DBNull)))) {
-                outPath = null;
-            }
-            else {
-                outPath = ((string)(command.Parameters[4].Value));
-            }
-            return returnValue;
         }
     }
     

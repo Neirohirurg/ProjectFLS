@@ -1,0 +1,42 @@
+﻿<Window x:Name="Login" x:Class="ProjectFLS.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Вход в систему"
+        Height="500" 
+        Width="800"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Width="291">
+
+            <Label Content="Factory Logistic System" FontSize="24" FontWeight="Bold" Foreground="#3498DB" HorizontalAlignment="Center" Margin="0,0,0,20" />
+
+            <Label Content="Логин" Style="{StaticResource labelForm}" />
+            <TextBox x:Name="UsernameTextBox" Style="{StaticResource textBoxForm}" Width="250" KeyDown="UsernameTextBox_KeyDown" />
+
+            <Label Content="Пароль" Style="{StaticResource labelForm}" />
+            <PasswordBox x:Name="PasswordBox"
+                 Style="{StaticResource passwordBoxForm}"
+                 Width="250"
+                 Visibility="Visible" KeyDown="PasswordBox_KeyDown"/>
+            <TextBox x:Name="PasswordVisibleTextBox"
+                 Style="{StaticResource textBoxForm}"
+                 Width="250"
+                 Visibility="Collapsed"/>
+            <CheckBox Content="Показать пароль"
+          Style="{StaticResource StableCheckBox}"
+          Checked="ShowPasswordCheckBox_Checked"
+          Unchecked="ShowPasswordCheckBox_Unchecked"/>
+            <Button x:Name="loginButton" Content="Войти" Style="{StaticResource RoundButtonStyle}" Click="LoginButton_Click" Width="150" HorizontalAlignment="Center" Margin="0,20,0,0" KeyDown="loginButton_KeyDown" />
+        </StackPanel>
+    </Grid>
+</Window>
+
+

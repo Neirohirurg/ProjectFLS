@@ -15,5 +15,7 @@ namespace ProjectFLS.Models
         public string Patronymic { get; set; }
         public int RoleID { get; set; }
         public string RoleName { get; set; }
+        public int StatusID { get; set; }
+        public string StatusName { get; set; }
     }
 }

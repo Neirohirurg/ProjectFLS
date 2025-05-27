@@ -3,27 +3,39 @@ using System.Windows.Controls;
 using ProjectFLS.flsdbDataSetTableAdapters;
 using System;
 using System.Windows.Media;
+using System.Windows.Navigation;
+using ProjectFLS.UI;
 
-namespace ProjectFLS.Admin.DataPages
+namespace ProjectFLS.Admin.DataPages.UsersButton
 {
     public partial class AddEditUserPage : Page
     {
         private readonly usersTableAdapter _users = new usersTableAdapter();
         private readonly rolesTableAdapter _roles = new rolesTableAdapter();
+        private readonly userStatusTableAdapter _statuses = new userStatusTableAdapter(); // новый адаптер
+        private StackPanel _stackPanel;
 
         private int? _editUserId = null;
 
-        public AddEditUserPage(int? userId = null)
+        public AddEditUserPage(StackPanel  stackPanel, int? userId = null)
         {
             InitializeComponent();
             RoleComboBox.ItemsSource = _roles.GetData();
+            RoleComboBox.DisplayMemberPath = "roleName";
+            RoleComboBox.SelectedValuePath = "roleID";
+
+            StatusComboBox.ItemsSource = _statuses.GetData(); // инициализация ComboBox статуса
+            StatusComboBox.DisplayMemberPath = "statusName";
+            StatusComboBox.SelectedValuePath = "statusID";
 
             if (userId.HasValue)
             {
                 LoadUser(userId.Value);
                 _editUserId = userId;
+                _stackPanel = stackPanel;
             }
         }
+
 
         private void LoadUser(int userId)
         {
@@ -36,6 +48,7 @@ namespace ProjectFLS.Admin.DataPages
                 UsernameTextBox.Text = user.username;
                 PasswordBox.Password = user.password;
                 RoleComboBox.SelectedValue = user.roleID;
+                StatusComboBox.SelectedValue = user.statusID; // загрузка статуса
             }
         }
 
@@ -70,6 +83,7 @@ namespace ProjectFLS.Admin.DataPages
             UsernameTextBox.ClearValue(TextBox.BackgroundProperty);
             PasswordBox.ClearValue(PasswordBox.BackgroundProperty);
             RoleComboBox.ClearValue(ComboBox.BackgroundProperty);
+            StatusComboBox.ClearValue(ComboBox.BackgroundProperty);
 
             bool hasError = false;
             var redBrush = new SolidColorBrush(Color.FromRgb(255, 200, 200));
@@ -92,7 +106,7 @@ namespace ProjectFLS.Admin.DataPages
                 hasError = true;
             }
 
-            // Проверка логина и пароля
+            // Проверка логина, пароля, роли и статуса
             if (string.IsNullOrWhiteSpace(UsernameTextBox.Text))
             {
                 UsernameTextBox.Background = redBrush;
@@ -108,29 +122,35 @@ namespace ProjectFLS.Admin.DataPages
                 RoleComboBox.Background = redBrush;
                 hasError = true;
             }
+            if (StatusComboBox.SelectedItem == null)
+            {
+                StatusComboBox.Background = redBrush;
+                hasError = true;
+            }
 
             if (hasError)
             {
-                MessageBox.Show("Пожалуйста, заполните все поля корректно (только буквы в ФИО).", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show("Пожалуйста, заполните все поля корректно (только буквы в ФИО).", "Ошибка", showCancel: false);
                 return;
             }
 
-            if (_editUserId.HasValue)
+            try
             {
-                _users.UpdateQuery(
-                    SurnameTextBox.Text,
-                    FirstnameTextBox.Text,
-                    PatronymicTextBox.Text,
-                    UsernameTextBox.Text,
-                    PasswordBox.Password,
-                    (int)RoleComboBox.SelectedValue,
-                    _editUserId.Value
-                );
-                MessageBox.Show("Пользователь обновлен.", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                try
+                if (_editUserId.HasValue)
+                {
+                    _users.UpdateQuery(
+                        SurnameTextBox.Text,
+                        FirstnameTextBox.Text,
+                        PatronymicTextBox.Text,
+                        UsernameTextBox.Text,
+                        PasswordBox.Password,
+                        (int)RoleComboBox.SelectedValue,
+                        (int)StatusComboBox.SelectedValue, // статус
+                        _editUserId.Value
+                    );
+                    CustomMessageBox.Show("Пользователь обновлен.", "Успешно", showCancel: false);
+                }
+                else
                 {
                     _users.Insert(
                         SurnameTextBox.Text,
@@ -138,20 +158,24 @@ namespace ProjectFLS.Admin.DataPages
                         PatronymicTextBox.Text,
                         UsernameTextBox.Text,
                         PasswordBox.Password,
-                        (int)RoleComboBox.SelectedValue
+                        (int)RoleComboBox.SelectedValue,
+                        (int)StatusComboBox.SelectedValue // статус
                     );
-                    MessageBox.Show("Пользователь добавлен.", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CustomMessageBox.Show("Пользователь добавлен.", "Успешно", showCancel: false);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка при добавлении пользователя: " + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
 
-            NavigationService.GoBack();
+                NavigationService.GoBack();
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Show("Ошибка при сохранении пользователя: " + ex.Message, "Ошибка", showCancel: false);
+            }
         }
 
-
-
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (_stackPanel != null)
+                _stackPanel.IsEnabled = true;
+        }
     }
 }

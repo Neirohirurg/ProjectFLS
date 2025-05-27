@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="FLS" Icon="/Images/logo.png" WindowState="Maximized" Foreground="#FFF3F3F3"
-        MinWidth="800" MinHeight="450" Padding="5" Loaded="mainWindow_Loaded">
+        MinWidth="1300" MinHeight="950" Padding="5" Loaded="mainWindow_Loaded">
 
     <Grid>
         <!-- Главная сетка: верх, центр, низ -->
@@ -20,10 +20,10 @@
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Margin="10,0,0,0" >
                 <Image Source="/Images/logo.png" Height="41" Width="46" />
                 <Label Content="Factory Logistic System" FontSize="17" FontWeight="Bold" 
-                       VerticalContentAlignment="Center" Foreground="#FF3498DB" Margin="10,0,0,0" />
+                       VerticalContentAlignment="Center" Foreground="#3498DB" Margin="10,0,0,0" />
             </StackPanel>
 
-            <Border x:Name="navBarBorder" BorderBrush="#000000" Margin="10,0,10,0" BorderThickness="0,0,0,1" HorizontalAlignment="Right">
+            <Border x:Name="navBarBorder" BorderBrush="#000000"  Margin="10,0,10,0" BorderThickness="0,0,0,1" HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Stretch" Margin="0,0,10,0">
                     <StackPanel x:Name="mainNavBar"  Orientation="Horizontal" VerticalAlignment="Center">
                         <Label x:Name="activeLabel" Content="Входящие" Style="{StaticResource menuLabel}" />
@@ -54,11 +54,11 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label x:Name="dateLabel" Content="DateTime" VerticalAlignment="Center"
-                       FontSize="16" Grid.Column="0" HorizontalAlignment="Left" />
+                <Label x:Name="dateLabel" Content="DateTime"
+                       FontSize="16" Grid.Column="0" Margin="0,8,0,7" HorizontalAlignment="Left" />
 
                 <Label x:Name="WelcomeLabel" Content="Добро пожаловать" VerticalAlignment="Center"
-                       FontSize="16" Grid.Column="1" HorizontalAlignment="Center" />
+                       FontSize="16" Grid.Column="1"  HorizontalAlignment="Center"  />
 
                 <Button x:Name="ExitToLoginButton" Style="{StaticResource RoundButtonStyle}" FontSize="12"
                         Width="80" Height="30" Content="Выход" HorizontalAlignment="Right"

@@ -1,4 +1,5 @@
 ﻿using ProjectFLS.Models;
+using ProjectFLS.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace ProjectFLS
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Введите логин и пароль.");
+                CustomMessageBox.Show("Введите логин и пароль.", "Уведомление", showCancel: false);
                 return;
             }
 */
@@ -72,12 +73,12 @@ namespace ProjectFLS
                 }
                 else
                 {
-                    MessageBox.Show("Роль пользователя не найдена.");
+                    CustomMessageBox.Show("Роль пользователя не найдена.", "Ошибка", showCancel: false);
                 }
             }
             else
             {
-                MessageBox.Show("Неверное имя пользователя или пароль.");
+                CustomMessageBox.Show("Неверное имя пользователя или пароль.", "Ошибка", showCancel: false);
             }
         }
 

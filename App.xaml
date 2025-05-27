@@ -5,8 +5,125 @@
              StartupUri="LoginWindow.xaml">
     <Application.Resources>
         
+        <!-- Гладкое масштабирование текста -->
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="TextOptions.TextFormattingMode" Value="Ideal"/>
+            <Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <!-- Гладкое масштабирование контрола -->
+        <Style TargetType="{x:Type Control}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
         <!-- Стили для форм -->
+        <Style x:Key="RoundedBorderBoxStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="15"></Setter>
+            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="BorderBrush" Value="#DDD"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Padding" Value="10"></Setter>
+        </Style>
+        
+        <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,10,0,30"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Смена цвета при наведении -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#3498DB"/>
+                            </Trigger>
+                            <!-- Смена цвета при фокусе (ввод текста) -->
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#3498DB"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="passwordBox" TargetType="PasswordBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,10,0,30"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border 
+                    Background="{TemplateBinding Background}" 
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}" 
+                    CornerRadius="10"
+                    SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <Style x:Key="labelForm" TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="50"/>
+        </Style>
+
+        <Style x:Key="textBoxForm" TargetType="TextBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,10,0,30"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Height" Value="50"/>
+        </Style>
+
+
+
+        <Style x:Key="StableCheckBox" TargetType="CheckBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,15,0,15"/>
+        </Style>
+        
+        <!--"<Style x:Key="labelForm" TargetType="Label">
             <Setter Property="FontSize" Value="16"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
@@ -24,7 +141,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="Width" Value="160"></Setter>
             <Setter Property="Height" Value="40"></Setter>
-        </Style>
+        </Style> -->
 
         <!-- Стиль для ListView-->
         <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
@@ -77,13 +194,13 @@
             </Border>
         </ControlTemplate>
         <Style x:Key="comboBoxForm" TargetType="ComboBox">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Margin" Value="0,10,0,10"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,10,0,30"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Width" Value="160"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Padding" Value="5,0"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Padding" Value="10,0"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="#000000"/>
@@ -206,7 +323,7 @@
             <Setter Property="Width" Value="421"></Setter>
         </Style>
 
-        <Style x:Key="passwordBoxForm" TargetType="PasswordBox">
+        <!--<Style x:Key="passwordBoxForm" TargetType="PasswordBox">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="0,10,0,25"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -222,8 +339,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,10,0,10"/>
-            <!-- НЕ задавай Height -->
-        </Style>
+        </Style> -->
 
     </Application.Resources>
 </Application>

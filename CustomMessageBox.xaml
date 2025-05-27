@@ -1,0 +1,30 @@
+﻿<Window x:Name="CustomMessageBox1" x:Class="ProjectFLS.UI.CustomMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" ResizeMode="NoResize" SizeToContent="WidthAndHeight"
+        Foreground="Black" Background="Transparent"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True">
+
+    <Border CornerRadius="10" BorderBrush="Black" BorderThickness="2" Padding="10" Background="White">
+        <StackPanel>
+
+            <!-- Заголовок окна -->
+            <Border BorderBrush="#DDD" BorderThickness="0,0,0,1" Margin="0,0,0,20">
+                <TextBlock x:Name="titleText" Text="Уведомление" FontWeight="Bold" FontSize="18" 
+                           HorizontalAlignment="Center" Margin="0,0,0,15"/>
+            </Border>
+
+            <!-- Сообщение -->
+            <TextBlock x:Name="MessageTextBlock" TextWrapping="Wrap" FontSize="16" Margin="0,0,0,20"/>
+
+            <!-- Кнопки -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="OkButton" Content="Подтвердить" Width="90" Margin="0,0,10,0" Height="40" 
+                        Click="OkButton_Click" Style="{StaticResource RoundButtonStyle}" FontSize="12"/>
+                <Button x:Name="CancelButton" Content="Отменить" Width="80" Height="40"
+                        Click="CancelButton_Click" Style="{StaticResource RoundButtonStyle}" FontSize="12" 
+                        Visibility="Collapsed"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Border>
+</Window>

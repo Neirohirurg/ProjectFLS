@@ -15956,7 +15956,7 @@ SELECT userID, surname, firstname, patronymic, username, password, roleID, statu
             this._commandCollection[2].Connection = this.Connection;
             this._commandCollection[2].CommandText = "UPDATE users\r\nSET surname = @surname,\r\n    firstname = @firstname,\r\n    patronymi" +
                 "c = @patronymic,\r\n    username = @username,\r\n    password = @password,\r\n    role" +
-                "ID = @roleID\r\nWHERE userID = @userID\r\n";
+                "ID = @roleID,\r\n    statusID = @statusID\r\nWHERE userID = @userID\r\n";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@surname", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "surname", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@firstname", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "firstname", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -15964,6 +15964,7 @@ SELECT userID, surname, firstname, patronymic, username, password, roleID, statu
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@username", global::System.Data.SqlDbType.NVarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "username", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@password", global::System.Data.SqlDbType.NVarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@roleID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "roleID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statusID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "statusID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@userID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "userID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
@@ -16302,7 +16303,7 @@ SELECT userID, surname, firstname, patronymic, username, password, roleID, statu
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
-        public virtual int UpdateQuery(string surname, string firstname, string patronymic, string username, string password, int roleID, int userID) {
+        public virtual int UpdateQuery(string surname, string firstname, string patronymic, string username, string password, int roleID, global::System.Nullable<int> statusID, int userID) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
             if ((surname == null)) {
                 command.Parameters[0].Value = global::System.DBNull.Value;
@@ -16335,7 +16336,13 @@ SELECT userID, surname, firstname, patronymic, username, password, roleID, statu
                 command.Parameters[4].Value = ((string)(password));
             }
             command.Parameters[5].Value = ((int)(roleID));
-            command.Parameters[6].Value = ((int)(userID));
+            if ((statusID.HasValue == true)) {
+                command.Parameters[6].Value = ((int)(statusID.Value));
+            }
+            else {
+                command.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            command.Parameters[7].Value = ((int)(userID));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

@@ -2,6 +2,7 @@
 using ProjectFLS.Logist;
 using ProjectFLS.Manager;
 using ProjectFLS.Models;
+using ProjectFLS.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +63,7 @@ namespace ProjectFLS
                     mainFrame.Navigate(new LogistMainPage(_user));
                     break;
                 default:
-                    MessageBox.Show("Неизвестная роль. Невозможно загрузить интерфейс.");
+                    CustomMessageBox.Show("Неизвестная роль. Невозможно загрузить интерфейс.", "Ошибка", showCancel: false);
                     break;
             }
         }

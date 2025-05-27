@@ -1,4 +1,5 @@
 ﻿using ProjectFLS.flsdbDataSetTableAdapters;
+using ProjectFLS.UI;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjectFLS.Admin.DataPages
+namespace ProjectFLS.Admin.DataPages.UsersButton
 {
     /// <summary>
     /// Логика взаимодействия для UsersPage.xaml
@@ -24,13 +25,16 @@ namespace ProjectFLS.Admin.DataPages
     {
         private usersTableAdapter _users;
         private rolesTableAdapter _roles;
+        private userStatusTableAdapter _userStatuses;
+        private StackPanel _stackpanel;
 
-        public UsersPage()
+        public UsersPage(StackPanel stackpanel)
         {
             InitializeComponent();
             _users = new usersTableAdapter();
-            _roles = new rolesTableAdapter();  
-
+            _roles = new rolesTableAdapter();
+            _userStatuses = new userStatusTableAdapter();
+            _stackpanel = stackpanel;
         }
 
         public dynamic GetSelectedUser()
@@ -46,30 +50,26 @@ namespace ProjectFLS.Admin.DataPages
                 dynamic user = selectedItem;
                 int userID = user.userID;
 
-                var result = MessageBox.Show(
-                    $"Вы действительно хотите удалить пользователя с ID = {userID}?",
-                    "Подтверждение удаления",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Warning
-                );
-
-                if (result == MessageBoxResult.Yes)
+                bool? result = CustomMessageBox.Show("Вы действительно хотите удалить пользователя с ID = " + userID + "?", "Подтверждение удаления", showCancel: true);
+                if (result == true)
                 {
                     try
                     {
                         _users.DeleteUserByID(userID);
                         RefreshUsers();
-                        MessageBox.Show("Пользователь успешно удалён.", "Удаление", MessageBoxButton.OK, MessageBoxImage.Information);
+                        CustomMessageBox.Show("Пользователь успешно удалён.", "Удаление", showCancel: false);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Ошибка при удалении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        CustomMessageBox.Show($"Ошибка при удалении: {ex.Message}", "Ошибка", showCancel: false);
                     }
                 }
+
+
             }
             else
             {
-                MessageBox.Show("Выберите пользователя для удаления", "Удаление", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                CustomMessageBox.Show("Выберите пользователя для удаления", "Удаление", showCancel: false);
             }
             
         }
@@ -78,35 +78,40 @@ namespace ProjectFLS.Admin.DataPages
         {
             var users = _users.GetData();
             var roles = _roles.GetData();
+            var statuses = _userStatuses.GetData();
 
             int currentUserId = App.CurrentUserId; // ID текущего пользователя
 
             var joined = from user in users
                          where user.userID != currentUserId // Исключить себя
                          join role in roles on user.roleID equals role.roleID
+                         join status in statuses on user.statusID equals status.statusID
                          select new
                          {
                              user.userID,
                              user.surname,
                              user.firstname,
                              user.patronymic,
-                             role.roleName
+                             role.roleName,
+                             status.statusName // новое поле
                          };
 
             UsersListView.ItemsSource = joined.ToList();
         }
 
+
         private void UsersListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (UsersListView.SelectedItem != null)
             {
-                // Приведение к анонимному типу не работает напрямую, используем dynamic
                 dynamic user = UsersListView.SelectedItem;
-
                 int userId = user.userID;
 
+                // Отключаем навбар
+                _stackpanel.IsEnabled = false;
+
                 // Навигация на страницу редактирования
-                NavigationService?.Navigate(new AddEditUserPage(userId));
+                NavigationService?.Navigate(new AddEditUserPage(_stackpanel, userId));
             }
         }
 

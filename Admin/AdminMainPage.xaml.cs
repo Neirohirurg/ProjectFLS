@@ -13,8 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ProjectFLS.Admin.DataPages;
+using ProjectFLS.Admin.DataPages.UsersButton;
 using System.Windows.Controls.Primitives;
+using System.Windows.Media.Animation;
+using ProjectFLS.Admin.DataPages.DerictoriesButton;
 namespace ProjectFLS.Admin
 {
     /// <summary>
@@ -30,7 +32,8 @@ namespace ProjectFLS.Admin
         private UserModel _user;
         private StackPanel _stackPanel;
         private Border _border;
-        private UsersPage _usersPage = new UsersPage();
+        private UsersPage _usersPage;
+        private DerictoriesPage _derictoriesPage;
 
         public AdminMainPage(UserModel user, StackPanel mainNavBar, Border navBarBorder)
         {
@@ -38,12 +41,16 @@ namespace ProjectFLS.Admin
             _user = user;
             _stackPanel = mainNavBar;
             _border = navBarBorder;
+            _usersPage = new UsersPage(_stackPanel);
+            _derictoriesPage = new DerictoriesPage(_stackPanel);
         }
         private void UpdateWidthMainNavBarBorder()
         {
             this._border.Width = this._stackPanel.ActualWidth;
 
         }
+
+        // Пользователи 
         private void users_Click(object sender, RoutedEventArgs e)
         {
             AdminMainFrame.Navigate(_usersPage);
@@ -77,6 +84,7 @@ namespace ProjectFLS.Admin
             _stackPanel.Children.Add(CreateNavLabel("Добавить", Add_Click));
             _stackPanel.Children.Add(CreateNavLabel("Удалить", Delete_Click));
             _stackPanel.Children.Add(CreateNavLabel("Редактировать", Change_Click));
+
         }
 
 
@@ -88,7 +96,7 @@ namespace ProjectFLS.Admin
         private void Add_Click(object sender, MouseButtonEventArgs e)
         {
             // Навигация на страницу добавления — без параметров (userId == null)
-            AdminMainFrame.Navigate(new AddEditUserPage());
+            AdminMainFrame.Navigate(new AddEditUserPage(_stackPanel));
         }
 
         private void Delete_Click(object sender, MouseButtonEventArgs e)
@@ -110,14 +118,25 @@ namespace ProjectFLS.Admin
             int userId = selectedUser.userID;
 
             // Навигация на страницу AddEditUserPage с параметром userId для редактирования
-            AdminMainFrame.Navigate(new AddEditUserPage(userId));
+            AdminMainFrame.Navigate(new AddEditUserPage(_stackPanel, userId));
         }
 
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private bool _animationPlayed = false;
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             AdminMainFrame.Navigate(_usersPage); 
             ShowUsersNavBar();
+
+            var panelStoryboard = (Storyboard)FindResource("SlideInSidebar");
+            panelStoryboard.Begin();
+
+            // Ждём завершения анимации панели
+            await Task.Delay(500);
+
+            // Затем анимация полоски
+            var lineStoryboard = (Storyboard)FindResource("GrowVerticalLine");
+            lineStoryboard.Begin();
         }
 
         private void AdminMainFrame_Navigated(object sender, NavigationEventArgs e)
@@ -125,7 +144,16 @@ namespace ProjectFLS.Admin
             if (e.Content is UsersPage)
             {
                 _usersPage.RefreshUsers();
+ 
             }
+        }
+
+        // Справочники
+
+
+        private void derictories_Click(object sender, RoutedEventArgs e)
+        {
+            AdminMainFrame.Navigate(_derictoriesPage);
         }
     }
 }

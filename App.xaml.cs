@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ProjectFLS
 {
@@ -15,6 +16,9 @@ namespace ProjectFLS
     public partial class App : Application
     {
         public static int CurrentUserId { get; set; }
+
+        public static Border mainStackPanelBorder { get; set; }
+        public static StackPanel mainStackPanel { get; set; }
 
         public static void TryPerformSearch(object currentContent, string query)
         {

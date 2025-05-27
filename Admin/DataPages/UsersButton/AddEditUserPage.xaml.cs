@@ -17,7 +17,7 @@ namespace ProjectFLS.Admin.DataPages.UsersButton
 
         private int? _editUserId = null;
 
-        public AddEditUserPage(StackPanel  stackPanel, int? userId = null)
+        public AddEditUserPage(int? userId = null)
         {
             InitializeComponent();
             RoleComboBox.ItemsSource = _roles.GetData();
@@ -32,7 +32,7 @@ namespace ProjectFLS.Admin.DataPages.UsersButton
             {
                 LoadUser(userId.Value);
                 _editUserId = userId;
-                _stackPanel = stackPanel;
+                _stackPanel = App.mainStackPanel;
             }
         }
 

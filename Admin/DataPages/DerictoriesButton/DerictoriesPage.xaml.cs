@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProjectFLS.Interfaces;
+using ProjectFLS.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,19 +20,115 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton
     /// <summary>
     /// Логика взаимодействия для DerictoriesPage.xaml
     /// </summary>
-    public partial class DerictoriesPage : Page
+    public partial class DerictoriesPage : Page, ISearchable
     {
         private StackPanel _stackpanel;
+        private Border _stackpanelBorder;
         public DerictoriesPage(StackPanel stackPanel)
         {
             InitializeComponent();
 
-            _stackpanel = stackPanel;
+            _stackpanel = App.mainStackPanel;
+            _stackpanelBorder = App.mainStackPanelBorder;
+
+        }
+
+        public void EnableSearch()
+        {
+            // Включить поисковую строку — ничего не нужно, если не требуется поведение при активации
+        }
+
+        public void PerformSearch(string query)
+        {
+            query = query.ToLower().Trim();
+
+            var buttons = new List<Button>
+            {
+                RolesButton,
+                UserStatusesButton,
+                TransportButton,
+                TransportTypesButton,
+                FuelTypesButton,
+                DeliveryStatusesButton,
+                PartsButton,
+                RoutesButton,
+                DeliveriesButton,
+                TractorTypesButton,
+                CitiesButton,
+                WarehousesButton,
+                PartnersButton,
+                DeliveryCostsButton,
+                FuelCostsButton
+            };
+
+            // Сбросить видимость всех кнопок
+            foreach (var btn in buttons)
+            {
+                btn.Visibility = Visibility.Visible;
+                btn.ClearValue(Button.BorderBrushProperty);
+                btn.ClearValue(Button.BorderThicknessProperty);
+            }
+
+            if (string.IsNullOrWhiteSpace(query))
+                return;
+
+            var matched = buttons
+                .Where(b => b.Content.ToString().ToLower().Contains(query))
+                .ToList();
+
+            // Скрыть неподходящие
+            foreach (var btn in buttons.Except(matched))
+            {
+                btn.Visibility = Visibility.Collapsed;
+            }
+
+            // Выделить и фокус на первой
+            if (matched.Any())
+            {
+                matched[0].BorderBrush = Brushes.DodgerBlue;
+                matched[0].BorderThickness = new Thickness(2);
+            }
+        }
+
+        public void SearchSubmit()
+        {
+            var buttons = new List<Button>
+            {
+                RolesButton,
+                UserStatusesButton,
+                TransportButton,
+                TransportTypesButton,
+                FuelTypesButton,
+                DeliveryStatusesButton,
+                PartsButton,
+                RoutesButton,
+                DeliveriesButton,
+                TractorTypesButton,
+                CitiesButton,
+                WarehousesButton,
+                PartnersButton,
+                DeliveryCostsButton,
+                FuelCostsButton
+            };
+
+            // Найти первую видимую кнопку (она уже прошла фильтрацию в PerformSearch)
+            var firstVisible = buttons.FirstOrDefault(b => b.Visibility == Visibility.Visible);
+
+            // Сымитировать клик
+            if (firstVisible != null)
+            {
+                firstVisible.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                
+            }
+        }
+        private void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
+        {
+            _stackpanelBorder.Visibility = Visibility.Collapsed;
         }
 
         private void RolesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            CustomMessageBox.Show("Роли", "Уведомление", showCancel:false);
         }
 
         private void UserStatusesButton_Click(object sender, RoutedEventArgs e)
@@ -102,5 +200,6 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton
         {
 
         }
+
     }
 }

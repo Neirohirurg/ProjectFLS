@@ -37,12 +37,13 @@ namespace ProjectFLS.Admin
         private UsersPage _usersPage;
         private DerictoriesPage _derictoriesPage;
 
-        public AdminMainPage(UserModel user, StackPanel mainNavBar, Border navBarBorder)
+        public AdminMainPage(UserModel user)
         {
             InitializeComponent();
+
             _user = user;
-            _stackPanel = mainNavBar;
-            _border = navBarBorder;
+            _stackPanel = App.mainStackPanel;
+            _border = App.mainStackPanelBorder;
             _usersPage = new UsersPage(_stackPanel);
             _derictoriesPage = new DerictoriesPage(_stackPanel);
         }
@@ -109,7 +110,7 @@ namespace ProjectFLS.Admin
         private void Add_Click(object sender, MouseButtonEventArgs e)
         {
             // Навигация на страницу добавления — без параметров (userId == null)
-            AdminMainFrame.Navigate(new AddEditUserPage(_stackPanel));
+            AdminMainFrame.Navigate(new AddEditUserPage());
         }
 
         private void Delete_Click(object sender, MouseButtonEventArgs e)
@@ -131,7 +132,7 @@ namespace ProjectFLS.Admin
             int userId = selectedUser.userID;
 
             // Навигация на страницу AddEditUserPage с параметром userId для редактирования
-            AdminMainFrame.Navigate(new AddEditUserPage(_stackPanel, userId));
+            AdminMainFrame.Navigate(new AddEditUserPage(userId));
         }
 
 

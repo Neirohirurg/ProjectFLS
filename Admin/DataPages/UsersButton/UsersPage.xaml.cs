@@ -28,6 +28,7 @@ namespace ProjectFLS.Admin.DataPages.UsersButton
         private rolesTableAdapter _roles;
         private userStatusTableAdapter _userStatuses;
         private StackPanel _stackpanel;
+        private Border _stackpanelBorder;
 
         private string _currentSortField = null;
         private bool _sortAscending = true;
@@ -52,6 +53,7 @@ namespace ProjectFLS.Admin.DataPages.UsersButton
             _roles = new rolesTableAdapter();
             _userStatuses = new userStatusTableAdapter();
             _stackpanel = stackpanel;
+            _stackpanelBorder = App.mainStackPanelBorder;
         }
 
         public dynamic GetSelectedUser()
@@ -219,14 +221,14 @@ namespace ProjectFLS.Admin.DataPages.UsersButton
                 _stackpanel.IsEnabled = false;
 
                 // Навигация на страницу редактирования
-                NavigationService?.Navigate(new AddEditUserPage(_stackpanel, userId));
+                NavigationService?.Navigate(new AddEditUserPage(userId));
             }
         }
 
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
+            _stackpanelBorder.Visibility = Visibility.Visible;
             RefreshUsers();
         }
     }

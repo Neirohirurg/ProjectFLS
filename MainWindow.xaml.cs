@@ -40,7 +40,9 @@ namespace ProjectFLS
         {
             InitializeComponent();
             _user = user;
-      
+
+            App.mainStackPanelBorder = this.navBarBorder;
+            App.mainStackPanel = this.mainNavBar;
         }
         private void mainWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -56,7 +58,7 @@ namespace ProjectFLS
             switch (roleID)
             {
                 case 1: // Администратор
-                    mainFrame.Navigate(new AdminMainPage(_user, this.mainNavBar, this.navBarBorder));
+                    mainFrame.Navigate(new AdminMainPage(_user));
                     break;
                 case 2: // Менеджер
                     mainFrame.Navigate(new ManagerMainPage(_user));

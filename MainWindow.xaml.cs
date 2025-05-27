@@ -1,4 +1,5 @@
 ﻿using ProjectFLS.Admin;
+using ProjectFLS.Interfaces;
 using ProjectFLS.Logist;
 using ProjectFLS.Manager;
 using ProjectFLS.Models;
@@ -15,6 +16,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -96,6 +98,74 @@ namespace ProjectFLS
             var loginWindow = new LoginWindow();
             loginWindow.Show();
             this.Close();
+        }
+
+        // Поиск
+
+        private bool isSearchAvailable = false;
+
+        private void searchIcon_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (!isSearchAvailable) return;
+
+            searchIcon.Visibility = Visibility.Collapsed;
+            var storyboard = (Storyboard)this.Resources["ShowSearchBox"];
+            storyboard.Begin();
+            searchTextBox.Focus();
+        }
+
+        private void searchTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!isSearchAvailable) return;
+
+            var storyboard = (Storyboard)this.Resources["HideSearchBox"];
+
+            // После завершения — вернуть иконку
+            storyboard.Completed += (s, a) =>
+            {
+                searchIcon.Visibility = Visibility.Visible;
+            };
+
+            storyboard.Begin();
+        }
+
+
+        private void searchTextBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            searchTextBox_LostFocus(sender, e);
+        }
+        private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!isSearchAvailable) return;
+
+            string query = searchTextBox.Text;
+
+            if (mainFrame.Content is AdminMainPage adminPage)
+            {
+                adminPage.PerformSearch(query);
+            }
+            else if (mainFrame.Content is ISearchable searchablePage)
+            {
+                searchablePage.PerformSearch(query);
+            }
+        }
+
+        private void mainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            if (e.Content is AdminMainPage adminPage)
+            {
+                this.EnableSearch();
+            }
+            else if (e.Content is ISearchable searchablePage)
+            {
+                searchablePage.EnableSearch();
+                this.EnableSearch();
+            }
+        }
+
+        public void EnableSearch()
+        {
+            isSearchAvailable = true;
         }
 
     }

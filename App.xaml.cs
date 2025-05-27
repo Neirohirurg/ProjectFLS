@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectFLS.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -14,5 +15,13 @@ namespace ProjectFLS
     public partial class App : Application
     {
         public static int CurrentUserId { get; set; }
+
+        public static void TryPerformSearch(object currentContent, string query)
+        {
+            if (currentContent is ISearchable searchable)
+            {
+                searchable.PerformSearch(query);
+            }
+        }   
     }
 }

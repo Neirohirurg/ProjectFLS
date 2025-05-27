@@ -1,4 +1,5 @@
 ﻿using ProjectFLS.flsdbDataSetTableAdapters;
+using ProjectFLS.Interfaces;
 using ProjectFLS.UI;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace ProjectFLS.Admin.DataPages.UsersButton
     /// <summary>
     /// Логика взаимодействия для UsersPage.xaml
     /// </summary>
-    public partial class UsersPage : Page
+    public partial class UsersPage : Page, ISearchable
     {
         private usersTableAdapter _users;
         private rolesTableAdapter _roles;
@@ -42,6 +43,43 @@ namespace ProjectFLS.Admin.DataPages.UsersButton
             return UsersListView.SelectedItem;
         }
 
+        public void PerformSearch(string query)
+        {
+            var users = _users.GetData();
+            var roles = _roles.GetData();
+            var statuses = _userStatuses.GetData();
+
+            int currentUserId = App.CurrentUserId;
+
+            query = query?.ToLowerInvariant() ?? "";
+
+            var joined = from user in users
+                         where user.userID != currentUserId
+                         join role in roles on user.roleID equals role.roleID
+                         join status in statuses on user.statusID equals status.statusID
+                         let fullName = $"{user.firstname} {user.surname} {user.patronymic}".ToLowerInvariant()
+                         let roleName = role.roleName.ToLowerInvariant()
+                         let statusName = status.statusName.ToLowerInvariant()
+                         where fullName.Contains(query)
+                            || roleName.Contains(query)
+                            || statusName.Contains(query)
+                         select new
+                         {
+                             user.userID,
+                             user.surname,
+                             user.firstname,
+                             user.patronymic,
+                             role.roleName,
+                             status.statusName
+                         };
+
+            UsersListView.ItemsSource = joined.ToList();
+        }
+
+        public void EnableSearch()
+        {
+            // реализация обязательна для активации поиска в MainWindow
+        }
         public void DeleteSelectedUser()
         {
             var selectedItem = UsersListView.SelectedItem;

@@ -17,6 +17,8 @@ using ProjectFLS.Admin.DataPages.UsersButton;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media.Animation;
 using ProjectFLS.Admin.DataPages.DerictoriesButton;
+using ProjectFLS.Interfaces;
+using ProjectFLS.UI;
 namespace ProjectFLS.Admin
 {
     /// <summary>
@@ -57,6 +59,17 @@ namespace ProjectFLS.Admin
             ShowUsersNavBar();
         }
 
+        public void PerformSearch(string query)
+        {
+            if (AdminMainFrame?.Content is ISearchable searchablePage)
+            {
+                searchablePage.PerformSearch(query);
+            }
+            else
+            {
+                CustomMessageBox.Show("Поиск недоступен на этой странице.", "Информация", showCancel: false);
+            }
+        }
         private Label CreateNavLabel(string content, MouseButtonEventHandler handler)
         {
             var label = new Label

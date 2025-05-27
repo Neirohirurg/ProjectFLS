@@ -114,6 +114,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>flsdbDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\ISearchable.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -170,7 +171,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\search.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\logo.png" />
   </ItemGroup>

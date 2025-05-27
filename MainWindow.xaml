@@ -4,6 +4,26 @@
         Title="FLS" Icon="/Images/logo.png" WindowState="Maximized" Foreground="#FFF3F3F3"
         MinWidth="1300" MinHeight="950" Padding="5" Loaded="mainWindow_Loaded">
 
+    <Window.Resources>
+        <Storyboard x:Key="ShowSearchBox">
+            <DoubleAnimation Storyboard.TargetName="searchTextBox"
+                         Storyboard.TargetProperty="Width"
+                         To="200" Duration="0:0:0.3" />
+            <DoubleAnimation Storyboard.TargetName="searchTextBox"
+                         Storyboard.TargetProperty="Opacity"
+                         To="1" Duration="0:0:0.3" />
+        </Storyboard>
+
+        <Storyboard x:Key="HideSearchBox">
+            <DoubleAnimation Storyboard.TargetName="searchTextBox"
+                         Storyboard.TargetProperty="Width"
+                         To="0" Duration="0:0:0.3" />
+            <DoubleAnimation Storyboard.TargetName="searchTextBox"
+                         Storyboard.TargetProperty="Opacity"
+                         To="0" Duration="0:0:0.2" />
+        </Storyboard>
+    </Window.Resources>
+
     <Grid>
         <!-- Главная сетка: верх, центр, низ -->
         <Grid.RowDefinitions>
@@ -16,22 +36,62 @@
         </Grid.RowDefinitions>
 
         <!-- ⬆ Шапка -->
-        <DockPanel Grid.Row="0" Margin="0,10,0,10">
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Margin="10,0,0,0" >
+        <Grid Grid.Row="0" Margin="0,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <!-- Логотип и заголовок -->
+                <ColumnDefinition Width="*"/>
+                <!-- Пустое пространство по центру -->
+                <ColumnDefinition Width="Auto"/>
+                <!-- Поиск -->
+                <ColumnDefinition Width="Auto"/>
+                <!-- Навбар -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Логотип и заголовок -->
+            <StackPanel Orientation="Horizontal" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Column="0">
                 <Image Source="/Images/logo.png" Height="41" Width="46" />
                 <Label Content="Factory Logistic System" FontSize="17" FontWeight="Bold" 
-                       VerticalContentAlignment="Center" Foreground="#3498DB" Margin="10,0,0,0" />
+               VerticalContentAlignment="Center" Foreground="#3498DB" Margin="10,0,0,0" />
             </StackPanel>
 
-            <Border x:Name="navBarBorder" BorderBrush="#000000"  Margin="10,0,10,0" BorderThickness="0,0,0,1" HorizontalAlignment="Right">
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Stretch" Margin="0,0,10,0">
-                    <StackPanel x:Name="mainNavBar"  Orientation="Horizontal" VerticalAlignment="Center">
+            <!-- Поисковая строка -->
+            <Border x:Name="SearchUnderline" Margin="0,0,20,0" VerticalAlignment="Center" Grid.Column="2">
+                <Grid HorizontalAlignment="Right">
+                    <!-- Лупа -->
+                    <Image x:Name="searchIcon"
+                   Source="/Images/search.png"
+                   Width="30" Height="30"
+                   VerticalAlignment="Center"
+                   Cursor="Hand"
+                   MouseEnter="searchIcon_MouseEnter"/>
+
+                    <!-- Поисковый текстбокс -->
+                    <TextBox x:Name="searchTextBox"
+                     Foreground="Black"
+                     Width="0" 
+                     VerticalAlignment="Center"
+                     Margin="0,0,35,0"
+                     Opacity="0"
+                     LostFocus="searchTextBox_LostFocus"
+                     Style="{StaticResource RoundedTextBoxStyle}"
+                     MouseLeave="searchTextBox_MouseLeave" 
+                     TextChanged="searchTextBox_TextChanged"/>
+                </Grid>
+            </Border>
+
+            <!-- Навигационные кнопки -->
+            <Border x:Name="navBarBorder" BorderBrush="#000000" Margin="10,0,10,0"
+            BorderThickness="0,0,0,1" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="3">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,0,10,0">
+                    <StackPanel x:Name="mainNavBar" Orientation="Horizontal" VerticalAlignment="Center">
                         <Label x:Name="activeLabel" Content="Входящие" Style="{StaticResource menuLabel}" />
                         <Label x:Name="endLabel" Content="Завершенные" Style="{StaticResource menuLabel}" />
                     </StackPanel>
                 </StackPanel>
             </Border>
-        </DockPanel>
+        </Grid>
+
 
         <!-- ⬅ Центр с навигацией и фреймом -->
         <Grid Grid.Row="1">
@@ -42,7 +102,7 @@
 
 
             <!-- Frame справа -->
-            <Frame x:Name="mainFrame" Margin="10,0,10,0" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="mainFrame" Margin="10,0,10,0" NavigationUIVisibility="Hidden" Navigated="mainFrame_Navigated"/>
         </Grid>
 
         <!-- ⬇ Подвал -->

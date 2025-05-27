@@ -3,12 +3,43 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ProjectFLS.Admin.DataPages.DerictoriesButton"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="900"
       Title="DerictoriesPage">
 
-    <Grid>
-        
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Background="White">
+        <Grid Margin="20" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Крупные кнопки в виде карточек -->
+            <Button Grid.Column="0" Grid.Row="0" Content="Роли" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="RolesButton_Click"/>
+            <Button Grid.Column="0" Grid.Row="1" Content="Пользовательские статусы" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="UserStatusesButton_Click"/>
+            <Button Grid.Column="1" Grid.Row="0" Content="Транспорт" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="TransportButton_Click"/>
+            <Button Grid.Column="1" Grid.Row="1" Content="Типы транспорта" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="TransportTypesButton_Click"/>
+            <Button Grid.Column="1" Grid.Row="2" Content="Типы топлива" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="FuelTypesButton_Click" Height="NaN"/>
+            <Button Grid.Column="2" Grid.Row="0" Content="Города" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="CitiesButton_Click"/>
+            <Button Grid.Column="2" Grid.Row="1" Content="Склады" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="WarehousesButton_Click"/>
+            <Button Grid.Column="2" Grid.Row="2" Content="Дилеры-партнёры" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="PartnersButton_Click"/>
+            <Button Grid.Column="0" Grid.Row="2" Content="Маршруты" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="RoutesButton_Click"/>
+            <Button Grid.Column="0" Grid.Row="3" Content="Доставки" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="DeliveriesButton_Click"/>
+            <Button Grid.Column="1" Grid.Row="3" Content="Статусы доставки" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="DeliveryStatusesButton_Click"/>
+            <Button Grid.Column="2" Grid.Row="3" Content="Стоимость доставок" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="DeliveryCostsButton_Click"/>
+            <Button Grid.Column="0" Grid.Row="4" Content="Типы тракторов" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="TractorTypesButton_Click"/>
+            <Button Grid.Column="1" Grid.Row="4" Content="Запчасти" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="PartsButton_Click"/>
+            <Button Grid.Column="2" Grid.Row="4" Content="Стоимость топлива" Style="{StaticResource RoundButtonStyleBig}" Margin="10" Click="FuelCostsButton_Click"/>
+
+        </Grid>
+    </ScrollViewer>
 </Page>

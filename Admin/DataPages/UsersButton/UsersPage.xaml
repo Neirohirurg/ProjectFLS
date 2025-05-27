@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ProjectFLS.Admin.DataPages"
+      xmlns:local="clr-namespace:ProjectFLS.Admin.DataPages.UsersButton"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="UsersPage" Loaded="Page_Loaded">
@@ -28,13 +28,49 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="ID" Style="{StaticResource LabelStyle}" Grid.Column="0"/>
-            <Label Content="Фамилия" Style="{StaticResource LabelStyle}" Grid.Column="1"/>
-            <Label Content="Имя" Style="{StaticResource LabelStyle}" Grid.Column="2"/>
-            <Label Content="Отчество" Style="{StaticResource LabelStyle}" Grid.Column="3"/>
-            <Label Content="Роль" Style="{StaticResource LabelStyle}" Grid.Column="4"/>
-            <Label Content="Статус" Style="{StaticResource LabelStyle}" Grid.Column="5"/>
+            <Button Click="Sort_Click" Tag="userID" Grid.Column="0" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="ID"/>
+                    <TextBlock Text="{Binding SortArrow_userID}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="surname" Grid.Column="1" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Фамилия"/>
+                    <TextBlock Text="{Binding SortArrow_surname}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="firstname" Grid.Column="2" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Имя"/>
+                    <TextBlock Text="{Binding SortArrow_firstname}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="patronymic" Grid.Column="3" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Отчество"/>
+                    <TextBlock Text="{Binding SortArrow_patronymic}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="roleName" Grid.Column="4" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Роль"/>
+                    <TextBlock Text="{Binding SortArrow_roleName}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="statusName" Grid.Column="5" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Статус"/>
+                    <TextBlock Text="{Binding SortArrow_statusName}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
         </Grid>
+
 
         <!-- Таблица -->
         <ListView Grid.Row="1" Name="UsersListView" BorderThickness="0,1,0,0" MouseDoubleClick="UsersListView_MouseDoubleClick" BorderBrush="#000000" ItemContainerStyle="{StaticResource ListViewItemStyle}">

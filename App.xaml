@@ -26,7 +26,17 @@
             <Setter Property="Padding" Value="10"></Setter>
         </Style>
 
-
+        <Style x:Key="HeaderButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+        </Style>
 
         <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
             <Setter Property="FontSize" Value="16"/>
@@ -298,6 +308,45 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="RoundButtonStyleBig" TargetType="Button">
+
+            <Setter Property="Background" Value="#ffffff"/>
+            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0, 8, 8, 8"/>
+            <Setter Property="BorderBrush" Value="#000000"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+
+            <Setter Property="Height" Value="80"/>
+
+
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="BorderBrush" Value="#2980B9"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
 
         <!-- Стили для бокового меню -->
         <Style x:Key="menuLabel" TargetType="Label">

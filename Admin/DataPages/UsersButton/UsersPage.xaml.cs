@@ -29,6 +29,22 @@ namespace ProjectFLS.Admin.DataPages.UsersButton
         private userStatusTableAdapter _userStatuses;
         private StackPanel _stackpanel;
 
+        private string _currentSortField = null;
+        private bool _sortAscending = true;
+
+        public string SortArrow_userID => GetSortArrow("userID");
+        public string SortArrow_surname => GetSortArrow("surname");
+        public string SortArrow_firstname => GetSortArrow("firstname");
+        public string SortArrow_patronymic => GetSortArrow("patronymic");
+        public string SortArrow_roleName => GetSortArrow("roleName");
+        public string SortArrow_statusName => GetSortArrow("statusName");
+
+        private string GetSortArrow(string field)
+        {
+            if (_currentSortField != field) return "";
+            return _sortAscending ? "▲" : "▼";
+        }
+
         public UsersPage(StackPanel stackpanel)
         {
             InitializeComponent();
@@ -79,6 +95,60 @@ namespace ProjectFLS.Admin.DataPages.UsersButton
         public void EnableSearch()
         {
             // реализация обязательна для активации поиска в MainWindow
+        }
+
+        private void Sort_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Tag is string sortField)
+            {
+                if (_currentSortField == sortField)
+                    _sortAscending = !_sortAscending;
+                else
+                {
+                    _currentSortField = sortField;
+                    _sortAscending = true;
+                }
+
+                ApplySorting();
+            }
+        }
+
+        private void ApplySorting()
+        {
+            var users = _users.GetData();
+            var roles = _roles.GetData();
+            var statuses = _userStatuses.GetData();
+
+            int currentUserId = App.CurrentUserId;
+
+            var joined = from user in users
+                         where user.userID != currentUserId
+                         join role in roles on user.roleID equals role.roleID
+                         join status in statuses on user.statusID equals status.statusID
+                         select new
+                         {
+                             user.userID,
+                             user.surname,
+                             user.firstname,
+                             user.patronymic,
+                             roleName = role.roleName,
+                             statusName = status.statusName
+                         };
+
+            var sorted = _sortAscending
+                ? joined.OrderBy(x => GetFieldValue(x, _currentSortField))
+                : joined.OrderByDescending(x => GetFieldValue(x, _currentSortField));
+
+            UsersListView.ItemsSource = sorted.ToList();
+
+            // Обновить стрелки
+            DataContext = null;
+            DataContext = this;
+        }
+
+        private object GetFieldValue(dynamic item, string fieldName)
+        {
+            return item.GetType().GetProperty(fieldName)?.GetValue(item, null);
         }
         public void DeleteSelectedUser()
         {

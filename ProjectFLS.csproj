@@ -63,6 +63,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditRolesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Admin\DataPages\DerictoriesButton\Derictories\RolesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -96,6 +100,9 @@
     </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\DerictoriesPage.xaml.cs">
       <DependentUpon>DerictoriesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditRolesPage.xaml.cs">
+      <DependentUpon>AddEditRolesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\RolesPage.xaml.cs">
       <DependentUpon>RolesPage.xaml</DependentUpon>
@@ -143,6 +150,8 @@
     <Compile Include="Manager\ManagerMainPage.xaml.cs">
       <DependentUpon>ManagerMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\FieldDefinition.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

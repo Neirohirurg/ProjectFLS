@@ -60,6 +60,7 @@ namespace ProjectFLS.Admin.DataPages.UsersButton
         {
             return UsersListView.SelectedItem;
         }
+ 
 
         public void PerformSearch(string query)
         {

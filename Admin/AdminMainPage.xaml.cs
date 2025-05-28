@@ -166,6 +166,7 @@ namespace ProjectFLS.Admin
             else if (e.Content is INavigationPanelHost navHost && e.Content is ISearchable)
             {
                 navHost.SetupNavigationPanel(App.mainStackPanel, App.mainStackPanelBorder);
+                App.mainStackPanel.IsEnabled = true;
             }
             else if (!(e.Content is AddEditUserPage))
             {

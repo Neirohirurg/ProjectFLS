@@ -17,15 +17,15 @@
     <Shape ID="DesignTable:deliveryTypes" ZOrder="39" X="933" Y="1235" Height="135" Width="265" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="76" />
     <Shape ID="DesignTable:fuelTypes" ZOrder="38" X="676" Y="70" Height="135" Width="235" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="76" />
     <Shape ID="DesignTable:parts" ZOrder="37" X="1266" Y="1440" Height="204" Width="202" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="145" />
-    <Shape ID="DesignTable:roles" ZOrder="7" X="1014" Y="362" Height="135" Width="200" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="76" />
+    <Shape ID="DesignTable:roles" ZOrder="1" X="1013" Y="363" Height="158" Width="204" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="76" />
     <Shape ID="DesignTable:routes" ZOrder="36" X="342" Y="2331" Height="181" Width="211" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="122" />
     <Shape ID="DesignTable:tractorUnits" ZOrder="35" X="1032" Y="1714" Height="250" Width="252" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="191" />
     <Shape ID="DesignTable:transport" ZOrder="34" X="981" Y="70" Height="273" Width="233" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="214" />
     <Shape ID="DesignTable:transportTypes" ZOrder="33" X="1284" Y="70" Height="135" Width="275" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="76" />
-    <Shape ID="DesignTable:users" ZOrder="1" X="619" Y="294" Height="319" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="214" />
+    <Shape ID="DesignTable:users" ZOrder="2" X="619" Y="294" Height="319" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="214" />
     <Shape ID="DesignTable:warehouses" ZOrder="32" X="342" Y="1714" Height="181" Width="250" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="122" />
     <Shape ID="DesignTable:warehouseTractors" ZOrder="31" X="662" Y="1714" Height="158" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="99" />
-    <Shape ID="DesignTable:userStatus" ZOrder="3" X="1172" Y="528" Height="135" Width="241" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="76" />
+    <Shape ID="DesignTable:userStatus" ZOrder="4" X="1172" Y="528" Height="135" Width="241" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="76" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:FK_cityFuelPrices_city" ZOrder="30" LineWidth="11">
@@ -348,19 +348,19 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_users_role" ZOrder="6" LineWidth="11">
+    <Connector ID="DesignRelation:FK_users_role" ZOrder="7" LineWidth="11">
       <RoutePoints>
         <Point>
-          <X>1014</X>
-          <Y>411</Y>
+          <X>1013</X>
+          <Y>412</Y>
         </Point>
         <Point>
           <X>919</X>
-          <Y>411</Y>
+          <Y>412</Y>
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_warehouses_manager" ZOrder="5" LineWidth="11">
+    <Connector ID="DesignRelation:FK_warehouses_manager" ZOrder="6" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>636</X>
@@ -376,7 +376,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_dealers_manager" ZOrder="4" LineWidth="11">
+    <Connector ID="DesignRelation:FK_dealers_manager" ZOrder="5" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>619</X>
@@ -388,7 +388,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_users_userStatus" ZOrder="2" LineWidth="11">
+    <Connector ID="DesignRelation:FK_users_userStatus" ZOrder="3" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>1172</X>

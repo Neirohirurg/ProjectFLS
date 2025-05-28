@@ -63,6 +63,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\RolesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Admin\DataPages\UsersButton\AddEditUserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,6 +97,10 @@
     <Compile Include="Admin\DataPages\DerictoriesButton\DerictoriesPage.xaml.cs">
       <DependentUpon>DerictoriesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\RolesPage.xaml.cs">
+      <DependentUpon>RolesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\NavigationPanelHelper.cs" />
     <Compile Include="Admin\DataPages\UsersButton\AddEditUserPage.xaml.cs">
       <DependentUpon>AddEditUserPage.xaml</DependentUpon>
     </Compile>
@@ -114,6 +122,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>flsdbDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\INavigationPanelHost.cs" />
     <Compile Include="Interfaces\ISearchable.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -177,8 +186,6 @@
   <ItemGroup>
     <Resource Include="Images\logo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Admin\DataPages\DerictoriesButton\Derictories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

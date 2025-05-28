@@ -174,8 +174,12 @@ namespace ProjectFLS.Admin.DataPages.UsersButton
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            if (_stackPanel != null)
-                _stackPanel.IsEnabled = true;
+            App.mainStackPanel.IsEnabled = true;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.mainStackPanel.IsEnabled = false;
         }
     }
 }

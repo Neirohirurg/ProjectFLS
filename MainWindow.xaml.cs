@@ -43,6 +43,7 @@ namespace ProjectFLS
 
             App.mainStackPanelBorder = this.navBarBorder;
             App.mainStackPanel = this.mainNavBar;
+            App.mainSearchTextBox = this.searchTextBox;
         }
         private void mainWindow_Loaded(object sender, RoutedEventArgs e)
         {

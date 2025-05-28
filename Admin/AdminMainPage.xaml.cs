@@ -95,7 +95,7 @@ namespace ProjectFLS.Admin
                 _eventsAttached = true;
             }
 
-            _stackPanel.Children.Add(CreateNavLabel("Добавить", Add_Click));
+            _stackPanel.Children.Add(CreateNavLabel("Зарегистрировать", Add_Click));
             _stackPanel.Children.Add(CreateNavLabel("Удалить", Delete_Click));
             _stackPanel.Children.Add(CreateNavLabel("Редактировать", Change_Click));
 
@@ -110,6 +110,7 @@ namespace ProjectFLS.Admin
         private void Add_Click(object sender, MouseButtonEventArgs e)
         {
             // Навигация на страницу добавления — без параметров (userId == null)
+            App.mainStackPanel.IsEnabled = false;
             AdminMainFrame.Navigate(new AddEditUserPage());
         }
 
@@ -136,7 +137,6 @@ namespace ProjectFLS.Admin
         }
 
 
-        private bool _animationPlayed = false;
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             AdminMainFrame.Navigate(_usersPage); 
@@ -155,10 +155,22 @@ namespace ProjectFLS.Admin
 
         private void AdminMainFrame_Navigated(object sender, NavigationEventArgs e)
         {
-            if (e.Content is UsersPage)
+          
+            if (e.Content is UsersPage && e.Content is ISearchable)
             {
                 _usersPage.RefreshUsers();
- 
+                App.mainStackPanel.IsEnabled = true;
+            }
+          
+            // Только страницы справочников получат меню
+            else if (e.Content is INavigationPanelHost navHost && e.Content is ISearchable)
+            {
+                navHost.SetupNavigationPanel(App.mainStackPanel, App.mainStackPanelBorder);
+            }
+            else if (!(e.Content is AddEditUserPage))
+            {
+                App.mainStackPanel.Children.Clear();
+                App.mainStackPanelBorder.Visibility = Visibility.Collapsed;
             }
         }
 

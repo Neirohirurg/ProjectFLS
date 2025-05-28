@@ -19,6 +19,7 @@ namespace ProjectFLS
 
         public static Border mainStackPanelBorder { get; set; }
         public static StackPanel mainStackPanel { get; set; }
+        public static TextBox mainSearchTextBox { get; set; }
 
         public static void TryPerformSearch(object currentContent, string query)
         {

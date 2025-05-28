@@ -158,12 +158,12 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton
 
         private void PartsButton_Click(object sender, RoutedEventArgs e)
         {
-
+            _AdminMainFrame.Navigate(new PartsPage());
         }
 
         private void RoutesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            _AdminMainFrame.Navigate(new RoutesPage());
         }
 
         private void DeliveriesButton_Click(object sender, RoutedEventArgs e)
@@ -173,12 +173,12 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton
 
         private void TractorTypesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            _AdminMainFrame.Navigate(new TractorTypesPage());
         }
 
         private void CitiesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            _AdminMainFrame.Navigate(new CitiesPage());
         }
 
         private void WarehousesButton_Click(object sender, RoutedEventArgs e)

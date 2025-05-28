@@ -1,0 +1,78 @@
+﻿<Page x:Class="ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories.RoutesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Маршруты" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовки таблицы -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Кнопки для сортировки -->
+            <Button Click="Sort_Click" Tag="RouteID" Grid.Column="0" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="ID"/>
+                    <TextBlock Text="{Binding SortArrow_routeID}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="FromCityName" Grid.Column="1" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Город отправления"/>
+                    <TextBlock Text="{Binding SortArrow_fromCity}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="ToCityName" Grid.Column="2" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Город назначения"/>
+                    <TextBlock Text="{Binding SortArrow_toCity}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="DistanceKm" Grid.Column="3" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Расстояние (км)"/>
+                    <TextBlock Text="{Binding SortArrow_distanceKm}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- Таблица -->
+        <ListView Grid.Row="1" Name="RoutesListView" BorderThickness="0,1,0,0"
+          MouseDoubleClick="RoutesListView_MouseDoubleClick"
+          BorderBrush="#000000" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Style="{StaticResource ListViewItemGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{Binding RouteID}" Grid.Column="0" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding FromCityName}" Grid.Column="1" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding ToCityName}" Grid.Column="2" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding DistanceKm}" Grid.Column="3" Style="{StaticResource TextBlockStyle}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

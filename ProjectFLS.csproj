@@ -63,6 +63,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditCityPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditDeliveryStatusPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -71,7 +75,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditPartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditRolesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditRoutePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditTractorTypePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -87,6 +103,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\CitiesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Admin\DataPages\DerictoriesButton\Derictories\DeliveryStatusesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,7 +115,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\PartsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Admin\DataPages\DerictoriesButton\Derictories\RolesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\RoutesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\TractorTypesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,14 +173,26 @@
     <Compile Include="Admin\DataPages\DerictoriesButton\DerictoriesPage.xaml.cs">
       <DependentUpon>DerictoriesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditCityPage.xaml.cs">
+      <DependentUpon>AddEditCityPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditDeliveryStatusPage.xaml.cs">
       <DependentUpon>AddEditDeliveryStatusPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditFuelTypePage.xaml.cs">
       <DependentUpon>AddEditFuelTypePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditPartPage.xaml.cs">
+      <DependentUpon>AddEditPartPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditRolesPage.xaml.cs">
       <DependentUpon>AddEditRolesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditRoutePage.xaml.cs">
+      <DependentUpon>AddEditRoutePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditTractorTypePage.xaml.cs">
+      <DependentUpon>AddEditTractorTypePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditTransportPage.xaml.cs">
       <DependentUpon>AddEditTransportPage.xaml</DependentUpon>
@@ -159,14 +203,26 @@
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditUserStatusPage.xaml.cs">
       <DependentUpon>AddEditUserStatusPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\CitiesPage.xaml.cs">
+      <DependentUpon>CitiesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\DeliveryStatusesPage.xaml.cs">
       <DependentUpon>DeliveryStatusesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\FuelTypesPage.xaml.cs">
       <DependentUpon>FuelTypesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\PartsPage.xaml.cs">
+      <DependentUpon>PartsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\RolesPage.xaml.cs">
       <DependentUpon>RolesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\RoutesPage.xaml.cs">
+      <DependentUpon>RoutesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\TractorTypesPage.xaml.cs">
+      <DependentUpon>TractorTypesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\TransportsPage.xaml.cs">
       <DependentUpon>TransportsPage.xaml</DependentUpon>
@@ -222,6 +278,7 @@
     </Compile>
     <Compile Include="Models\FieldDefinition.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Route.cs" />
     <Compile Include="Models\TransportViewModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

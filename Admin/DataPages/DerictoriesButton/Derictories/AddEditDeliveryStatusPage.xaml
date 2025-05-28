@@ -1,0 +1,31 @@
+﻿<Page x:Class="ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories.AddEditDeliveryStatusPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Добавление / Редактирование статуса доставки"
+      Background="White" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Название статуса доставки -->
+        <Border Grid.Column="0" Grid.Row="0" Style="{StaticResource RoundedBorderBoxStyle}">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Название статуса доставки:" Style="{StaticResource labelForm}" Target="{Binding ElementName=StatusNameTextBox}"/>
+                <TextBox x:Name="StatusNameTextBox" Style="{StaticResource RoundedTextBoxStyle}"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="Сохранить" Style="{StaticResource RoundButtonStyle}" Click="Save_Click"/>
+            <Button Content="Отмена" Style="{StaticResource RoundButtonStyle}" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

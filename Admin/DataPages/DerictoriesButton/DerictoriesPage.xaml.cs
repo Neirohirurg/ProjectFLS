@@ -138,22 +138,22 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton
 
         private void TransportButton_Click(object sender, RoutedEventArgs e)
         {
-
+            _AdminMainFrame.Navigate(new TransportsPage());
         }
 
         private void TransportTypesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            _AdminMainFrame.Navigate(new TransportTypesPage());
         }
 
         private void FuelTypesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            _AdminMainFrame.Navigate(new FuelTypesPage());
         }
 
         private void DeliveryStatusesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            _AdminMainFrame.Navigate(new DeliveryStatusesPage());
         }
 
         private void PartsButton_Click(object sender, RoutedEventArgs e)

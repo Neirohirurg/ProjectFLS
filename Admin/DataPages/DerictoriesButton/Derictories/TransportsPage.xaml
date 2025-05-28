@@ -1,0 +1,118 @@
+﻿<Page x:Class="ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories.TransportsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TransportsPage" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовки таблицы -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Кнопки для сортировки -->
+            <Button Click="Sort_Click" Tag="transportID" Grid.Column="0" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="ID"/>
+                    <TextBlock Text="{Binding SortArrow_transportID}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="transportName" Grid.Column="1" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Название"/>
+                    <TextBlock Text="{Binding SortArrow_transportName}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="transportTypeID" Grid.Column="2" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Тип"/>
+                    <TextBlock Text="{Binding SortArrow_transportTypeID}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="fuelTypeID" Grid.Column="3" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Топливо"/>
+                    <TextBlock Text="{Binding SortArrow_fuelTypeID}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="maxLengthM" Grid.Column="4" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Длина (м)"/>
+                    <TextBlock Text="{Binding SortArrow_maxLengthM}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="maxWidthM" Grid.Column="5" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Ширина (м)"/>
+                    <TextBlock Text="{Binding SortArrow_maxWidthM}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="maxHeightM" Grid.Column="6" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Высота (м)"/>
+                    <TextBlock Text="{Binding SortArrow_maxHeightM}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="Sort_Click" Tag="consumptionLPer100Km" Grid.Column="7" Style="{StaticResource HeaderButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Расход л/100км"/>
+                    <TextBlock Text="{Binding SortArrow_consumptionLPer100Km}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- Таблица -->
+        <ListView Grid.Row="1" Name="TransportsListView" BorderThickness="0,1,0,0"
+                  MouseDoubleClick="TransportsListView_MouseDoubleClick"
+                  BorderBrush="#000000" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Style="{StaticResource ListViewItemGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{Binding transportID}" Grid.Column="0" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding transportName}" Grid.Column="1" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding transportTypeID}" Grid.Column="2" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding fuelTypeID}" Grid.Column="3" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding maxLengthM}" Grid.Column="4" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding maxWidthM}" Grid.Column="5" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding maxHeightM}" Grid.Column="6" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding consumptionLPer100Km}" Grid.Column="7" Style="{StaticResource TextBlockStyle}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

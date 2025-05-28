@@ -18,7 +18,7 @@
         <Storyboard x:Key="GrowVerticalLine">
             <DoubleAnimation Storyboard.TargetName="AnimatedLine"
                              Storyboard.TargetProperty="Height"
-                             From="0" To="345"
+                             From="0" To="190"
                              Duration="0:0:1"
                              DecelerationRatio="0.9"/>
         </Storyboard>
@@ -44,9 +44,6 @@
                         <Button x:Name="users" Content="Пользователи" Style="{StaticResource RoundButtonStyle}" Click="users_Click"/>
                         <Button x:Name="derictories" Content="Справочники" Style="{StaticResource RoundButtonStyle}" Click="derictories_Click"/>
                         <Button x:Name="button2" Content="Маршруты" Style="{StaticResource RoundButtonStyle}"/>
-                        <Button x:Name="button3" Content="История" Style="{StaticResource RoundButtonStyle}"/>
-                        <Button x:Name="button5" Content="Настройки" Style="{StaticResource RoundButtonStyle}"/>
-                        <Button x:Name="button6" Content="Выход" Style="{StaticResource RoundButtonStyle}"/>
                     </StackPanel>
 
                     <!-- Вертикальная полоска справа -->

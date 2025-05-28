@@ -103,6 +103,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditWarehousePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Admin\DataPages\DerictoriesButton\Derictories\CitiesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Admin\DataPages\DerictoriesButton\Derictories\UserStatusesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\WarehousesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,6 +211,9 @@
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditUserStatusPage.xaml.cs">
       <DependentUpon>AddEditUserStatusPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditWarehousePage.xaml.cs">
+      <DependentUpon>AddEditWarehousePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\CitiesPage.xaml.cs">
       <DependentUpon>CitiesPage.xaml</DependentUpon>
     </Compile>
@@ -232,6 +243,9 @@
     </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\UserStatusesPage.xaml.cs">
       <DependentUpon>UserStatusesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\WarehousesPage.xaml.cs">
+      <DependentUpon>WarehousesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\NavigationPanelHelper.cs" />
     <Compile Include="Admin\DataPages\UsersButton\AddEditUserPage.xaml.cs">

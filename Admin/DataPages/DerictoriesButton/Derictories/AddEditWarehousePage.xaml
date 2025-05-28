@@ -1,0 +1,52 @@
+﻿<Page x:Class="ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories.AddEditWarehousePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Добавление / Редактирование склада"
+      Background="White" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Название склада -->
+        <Border Grid.Column="0" Grid.Row="0" Style="{StaticResource RoundedBorderBoxStyle}">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Название склада:" Style="{StaticResource labelForm}" Target="{Binding ElementName=WarehouseNameTextBox}"/>
+                <TextBox x:Name="WarehouseNameTextBox" Style="{StaticResource RoundedTextBoxStyle}"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Город -->
+        <Border Grid.Column="1" Grid.Row="0" Style="{StaticResource RoundedBorderBoxStyle}">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Город:" Style="{StaticResource labelForm}" Target="{Binding ElementName=CityComboBox}"/>
+                <ComboBox x:Name="CityComboBox" Style="{StaticResource comboBoxForm}" DisplayMemberPath="cityName" SelectedValuePath="cityID"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Менеджер -->
+        <Border Grid.Column="2" Grid.Row="0" Style="{StaticResource RoundedBorderBoxStyle}">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Менеджер:" Style="{StaticResource labelForm}" Target="{Binding ElementName=ManagerComboBox}"/>
+                <ComboBox x:Name="ManagerComboBox" Style="{StaticResource comboBoxForm}" DisplayMemberPath="managerName" SelectedValuePath="userID"/>
+
+            </StackPanel>
+        </Border>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="Сохранить" Style="{StaticResource RoundButtonStyle}" Click="Save_Click"/>
+            <Button Content="Отмена" Style="{StaticResource RoundButtonStyle}" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

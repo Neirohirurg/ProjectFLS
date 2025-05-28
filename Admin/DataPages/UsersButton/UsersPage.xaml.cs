@@ -46,13 +46,13 @@ namespace ProjectFLS.Admin.DataPages.UsersButton
             return _sortAscending ? "▲" : "▼";
         }
 
-        public UsersPage(StackPanel stackpanel)
+        public UsersPage()
         {
             InitializeComponent();
             _users = new usersTableAdapter();
             _roles = new rolesTableAdapter();
             _userStatuses = new userStatusTableAdapter();
-            _stackpanel = stackpanel;
+            _stackpanel = App.mainStackPanel;
             _stackpanelBorder = App.mainStackPanelBorder;
         }
 

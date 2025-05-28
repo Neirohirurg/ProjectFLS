@@ -19,34 +19,57 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
     /// <summary>
     /// Логика взаимодействия для RolesPage.xaml
     /// </summary>
-    public partial class RolesPage : Page, INavigationPanelHost
+    public partial class RolesPage : Page, INavigationPanelHost, ISearchable
     {
         public RolesPage()
         {
             InitializeComponent();
         }
 
+        public void EnableSearch()
+        {
+
+        }
         public void SetupNavigationPanel(StackPanel panel, Border border)
         {
-            NavigationPanelHelper.SetupDefaultPanel(
-                panel, border,
-                Add_Click, Delete_Click, Edit_Click
-            );
+            panel.Children.Clear();
+            border.Visibility = Visibility.Visible;
+
+            void AddItem(string name, MouseButtonEventHandler handler)
+            {
+                var label = new Label
+                {
+                    Content = name,
+                    Style = (Style)Application.Current.FindResource("menuLabel")
+                };
+                label.MouseLeftButtonUp += handler;
+                panel.Children.Add(label);
+            }
+
+            AddItem("Добавить", Add_Click);
+            AddItem("Удалить", Delete_Click);
+            AddItem("Редактировать", Edit_Click);
         }
 
         private void Add_Click(object sender, MouseButtonEventArgs e)
         {
-            // логика добавления
+            // Навигация или логика
         }
 
         private void Delete_Click(object sender, MouseButtonEventArgs e)
         {
-            // логика удаления
+            // Навигация или логика
         }
 
         private void Edit_Click(object sender, MouseButtonEventArgs e)
         {
-            // логика редактирования
+            // Навигация или логика
+        }
+
+        public void PerformSearch(string query)
+        {
+            // Поиск внутри списка ролей
         }
     }
+
 }

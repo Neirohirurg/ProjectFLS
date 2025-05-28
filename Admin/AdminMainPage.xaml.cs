@@ -44,8 +44,8 @@ namespace ProjectFLS.Admin
             _user = user;
             _stackPanel = App.mainStackPanel;
             _border = App.mainStackPanelBorder;
-            _usersPage = new UsersPage(_stackPanel);
-            _derictoriesPage = new DerictoriesPage(_stackPanel);
+            _usersPage = new UsersPage();
+            _derictoriesPage = new DerictoriesPage(this.AdminMainFrame);
         }
         private void UpdateWidthMainNavBarBorder()
         {

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories;
 
 namespace ProjectFLS.Admin.DataPages.DerictoriesButton
 {
@@ -24,13 +25,14 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton
     {
         private StackPanel _stackpanel;
         private Border _stackpanelBorder;
-        public DerictoriesPage(StackPanel stackPanel)
+        private Frame _AdminMainFrame;
+        public DerictoriesPage(Frame adminMainFrame)
         {
             InitializeComponent();
 
             _stackpanel = App.mainStackPanel;
             _stackpanelBorder = App.mainStackPanelBorder;
-
+            _AdminMainFrame = adminMainFrame;
         }
 
 
@@ -123,14 +125,10 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton
                 
             }
         }
-        private void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
-        {
-            _stackpanelBorder.Visibility = Visibility.Collapsed;
-        }
 
         private void RolesButton_Click(object sender, RoutedEventArgs e)
         {
-            CustomMessageBox.Show("Роли", "Уведомление", showCancel:false);
+            _AdminMainFrame.Navigate(new RolesPage());
         }
 
         private void UserStatusesButton_Click(object sender, RoutedEventArgs e)

@@ -7,7 +7,7 @@
       d:DesignHeight="600" d:DesignWidth="900"
       Title="DerictoriesPage">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Background="White" Loaded="ScrollViewer_Loaded">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Background="White">
         <Grid Margin="20" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

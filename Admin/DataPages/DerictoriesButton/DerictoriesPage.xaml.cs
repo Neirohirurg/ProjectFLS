@@ -133,7 +133,7 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton
 
         private void UserStatusesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            _AdminMainFrame.Navigate(new UserStatusesPage());
         }
 
         private void TransportButton_Click(object sender, RoutedEventArgs e)

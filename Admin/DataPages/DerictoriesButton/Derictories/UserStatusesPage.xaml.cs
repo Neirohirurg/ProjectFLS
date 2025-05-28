@@ -11,17 +11,17 @@ using System.Windows.Input;
 
 namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
 {
-    public partial class RolesPage : Page, ISearchable, INavigationPanelHost
+    public partial class UserStatusesPage : Page, ISearchable, INavigationPanelHost
     {
-        private rolesTableAdapter _roles;
+        private userStatusTableAdapter _statuses;
         private StackPanel _stackpanel;
         private Border _stackpanelBorder;
 
         private string _currentSortField = null;
         private bool _sortAscending = true;
 
-        public string SortArrow_roleID => GetSortArrow("roleID");
-        public string SortArrow_roleName => GetSortArrow("roleName");
+        public string SortArrow_statusID => GetSortArrow("statusID");
+        public string SortArrow_statusName => GetSortArrow("statusName");
 
         private string GetSortArrow(string field)
         {
@@ -29,17 +29,12 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
             return _sortAscending ? "▲" : "▼";
         }
 
-        public RolesPage()
+        public UserStatusesPage()
         {
             InitializeComponent();
-            _roles = new rolesTableAdapter();
+            _statuses = new userStatusTableAdapter();
             _stackpanel = App.mainStackPanel;
             _stackpanelBorder = App.mainStackPanelBorder;
-        }
-
-        public dynamic GetSelectedRole()
-        {
-            return RolesListView.SelectedItem;
         }
 
         public void SetupNavigationPanel(StackPanel panel, Border border)
@@ -56,7 +51,7 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
             addLabel.MouseLeftButtonUp += (s, e) =>
             {
                 App.mainStackPanel.IsEnabled = false;
-                NavigationService?.Navigate(new AddEditRolesPage());
+                NavigationService?.Navigate(new AddEditUserStatusPage());
             };
 
             var editLabel = new Label
@@ -68,10 +63,11 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
             };
             editLabel.MouseLeftButtonUp += (s, e) =>
             {
-                if (GetSelectedRole() != null)
+                if (UserStatusesListView.SelectedItem != null)
                 {
+                    dynamic item = UserStatusesListView.SelectedItem;
                     App.mainStackPanel.IsEnabled = false;
-                    NavigationService?.Navigate(new AddEditRolesPage(GetSelectedRole().roleID));
+                    NavigationService?.Navigate(new AddEditUserStatusPage(item.statusID));
                 }
             };
 
@@ -82,7 +78,7 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
                 Margin = new Thickness(5),
                 Cursor = Cursors.Hand
             };
-            deleteLabel.MouseLeftButtonUp += (s, e) => DeleteSelectedRole();
+            deleteLabel.MouseLeftButtonUp += (s, e) => DeleteSelectedStatus();
 
             panel.Children.Add(addLabel);
             panel.Children.Add(editLabel);
@@ -91,26 +87,23 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
 
         public void PerformSearch(string query)
         {
-            var roles = _roles.GetData();
+            var statuses = _statuses.GetData();
 
             query = query?.ToLowerInvariant() ?? "";
 
-            var filtered = from role in roles
-                           let roleName = role.roleName.ToLowerInvariant()
-                           where roleName.Contains(query)
+            var filtered = from status in statuses
+                           let statusName = status.statusName.ToLowerInvariant()
+                           where statusName.Contains(query)
                            select new
                            {
-                               role.roleID,
-                               role.roleName
+                               status.statusID,
+                               status.statusName
                            };
 
-            RolesListView.ItemsSource = filtered.ToList();
+            UserStatusesListView.ItemsSource = filtered.ToList();
         }
 
-        public void EnableSearch()
-        {
-            // реализация обязательна для активации поиска в MainWindow
-        }
+        public void EnableSearch() { }
 
         private void Sort_Click(object sender, RoutedEventArgs e)
         {
@@ -130,15 +123,14 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
 
         private void ApplySorting()
         {
-            var roles = _roles.GetData();
+            var statuses = _statuses.GetData();
 
             var sorted = _sortAscending
-                ? roles.OrderBy(x => GetFieldValue(x, _currentSortField))
-                : roles.OrderByDescending(x => GetFieldValue(x, _currentSortField));
+                ? statuses.OrderBy(x => GetFieldValue(x, _currentSortField))
+                : statuses.OrderByDescending(x => GetFieldValue(x, _currentSortField));
 
-            RolesListView.ItemsSource = sorted.ToList();
+            UserStatusesListView.ItemsSource = sorted.ToList();
 
-            // Обновить стрелки
             DataContext = null;
             DataContext = this;
         }
@@ -148,22 +140,21 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
             return item.GetType().GetProperty(fieldName)?.GetValue(item, null);
         }
 
-        public void DeleteSelectedRole()
+        public void DeleteSelectedStatus()
         {
-            var selectedItem = RolesListView.SelectedItem;
-            if (selectedItem != null)
+            if (UserStatusesListView.SelectedItem != null)
             {
-                dynamic role = selectedItem;
-                int roleID = role.roleID;
+                dynamic status = UserStatusesListView.SelectedItem;
+                int id = status.statusID;
 
-                bool? result = CustomMessageBox.Show("Вы действительно хотите удалить роль с ID = " + roleID + "?", "Подтверждение удаления", showCancel: true);
+                bool? result = CustomMessageBox.Show($"Удалить статус с ID = {id}?", "Удаление", showCancel: true);
                 if (result == true)
                 {
                     try
                     {
-                        _roles.DeleteRoleByID(roleID);
-                        RefreshRoles();
-                        CustomMessageBox.Show("Роль успешно удалена.", "Удаление", showCancel: false);
+                        _statuses.DeleteQuery(id);
+                        RefreshStatuses();
+                        CustomMessageBox.Show("Статус успешно удалён.", "Успешно", showCancel: false);
                     }
                     catch (Exception ex)
                     {
@@ -173,46 +164,42 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
             }
             else
             {
-                CustomMessageBox.Show("Выберите роль для удаления", "Удаление", showCancel: false);
+                CustomMessageBox.Show("Выберите статус для удаления.", "Удаление", showCancel: false);
             }
         }
 
-        public void RefreshRoles()
+        public void RefreshStatuses()
         {
-            var roles = _roles.GetData();
+            var statuses = _statuses.GetData();
 
-            var roleList = from role in roles
-                           select new
-                           {
-                               role.roleID,
-                               role.roleName
-                           };
+            var list = from status in statuses
+                       select new
+                       {
+                           status.statusID,
+                           status.statusName
+                       };
 
-            RolesListView.ItemsSource = roleList.ToList();
+            UserStatusesListView.ItemsSource = list.ToList();
         }
 
-        private void RolesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void UserStatusesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (RolesListView.SelectedItem != null)
+            if (UserStatusesListView.SelectedItem != null)
             {
-                dynamic role = RolesListView.SelectedItem;
-                int roleId = role.roleID;
+                dynamic status = UserStatusesListView.SelectedItem;
+                int id = status.statusID;
 
-                // Отключаем навбар
-                 _stackpanelBorder.Visibility = Visibility.Visible;
+                _stackpanelBorder.Visibility = Visibility.Visible;
                 _stackpanel.IsEnabled = false;
 
-                // Навигация на страницу редактирования
-                NavigationService?.Navigate(new AddEditRolesPage(roleId));
+                NavigationService?.Navigate(new AddEditUserStatusPage(id));
             }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _stackpanelBorder.Visibility = Visibility.Visible;
-            RefreshRoles();
+            RefreshStatuses();
         }
-
-
     }
 }

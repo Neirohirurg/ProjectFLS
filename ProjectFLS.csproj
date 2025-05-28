@@ -59,6 +59,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\AddEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Admin\DataPages\DerictoriesButton\DerictoriesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -67,7 +71,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditUserStatusPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Admin\DataPages\DerictoriesButton\Derictories\RolesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\UserStatusesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,14 +110,23 @@
     <Compile Include="Admin\AdminMainPage.xaml.cs">
       <DependentUpon>AdminMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\AddEditPage.xaml.cs">
+      <DependentUpon>AddEditPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\DerictoriesPage.xaml.cs">
       <DependentUpon>DerictoriesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditRolesPage.xaml.cs">
       <DependentUpon>AddEditRolesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditUserStatusPage.xaml.cs">
+      <DependentUpon>AddEditUserStatusPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\RolesPage.xaml.cs">
       <DependentUpon>RolesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\UserStatusesPage.xaml.cs">
+      <DependentUpon>UserStatusesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\NavigationPanelHelper.cs" />
     <Compile Include="Admin\DataPages\UsersButton\AddEditUserPage.xaml.cs">

@@ -188,7 +188,7 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton
 
         private void PartnersButton_Click(object sender, RoutedEventArgs e)
         {
-
+            _AdminMainFrame.Navigate(new PartnersPage());
         }
 
         private void DeliveryCostsButton_Click(object sender, RoutedEventArgs e)

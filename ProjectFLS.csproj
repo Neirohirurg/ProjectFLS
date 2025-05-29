@@ -75,6 +75,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditPartnerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditPartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +123,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Admin\DataPages\DerictoriesButton\Derictories\PartnersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Admin\DataPages\DerictoriesButton\Derictories\PartsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Admin\DataPages\DerictoriesButton\Derictories\WarehousesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\DataPages\History\HistoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,6 +202,9 @@
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditFuelTypePage.xaml.cs">
       <DependentUpon>AddEditFuelTypePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditPartnerPage.xaml.cs">
+      <DependentUpon>AddEditPartnerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\AddEditPartPage.xaml.cs">
       <DependentUpon>AddEditPartPage.xaml</DependentUpon>
     </Compile>
@@ -223,6 +238,9 @@
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\FuelTypesPage.xaml.cs">
       <DependentUpon>FuelTypesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\PartnersPage.xaml.cs">
+      <DependentUpon>PartnersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\Derictories\PartsPage.xaml.cs">
       <DependentUpon>PartsPage.xaml</DependentUpon>
     </Compile>
@@ -248,6 +266,9 @@
       <DependentUpon>WarehousesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Admin\DataPages\DerictoriesButton\NavigationPanelHelper.cs" />
+    <Compile Include="Admin\DataPages\History\HistoryPage.xaml.cs">
+      <DependentUpon>HistoryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Admin\DataPages\UsersButton\AddEditUserPage.xaml.cs">
       <DependentUpon>AddEditUserPage.xaml</DependentUpon>
     </Compile>
@@ -290,7 +311,9 @@
     <Compile Include="Manager\ManagerMainPage.xaml.cs">
       <DependentUpon>ManagerMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\DealerInfo.cs" />
     <Compile Include="Models\FieldDefinition.cs" />
+    <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Route.cs" />
     <Compile Include="Models\TransportViewModel.cs" />

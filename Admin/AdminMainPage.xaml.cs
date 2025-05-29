@@ -19,6 +19,7 @@ using System.Windows.Media.Animation;
 using ProjectFLS.Admin.DataPages.DerictoriesButton;
 using ProjectFLS.Interfaces;
 using ProjectFLS.UI;
+using ProjectFLS.Admin.DataPages.History;
 namespace ProjectFLS.Admin
 {
     /// <summary>
@@ -36,6 +37,8 @@ namespace ProjectFLS.Admin
         private Border _border;
         private UsersPage _usersPage;
         private DerictoriesPage _derictoriesPage;
+
+
 
         public AdminMainPage(UserModel user)
         {
@@ -181,6 +184,11 @@ namespace ProjectFLS.Admin
         private void derictories_Click(object sender, RoutedEventArgs e)
         {
             AdminMainFrame.Navigate(_derictoriesPage);
+        }
+
+        private void logs_Click(object sender, RoutedEventArgs e)
+        {
+            AdminMainFrame.Navigate(new HistoryPage());
         }
     }
 }

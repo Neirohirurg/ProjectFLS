@@ -44,9 +44,9 @@
                 <Grid>
                     <!-- Кнопки -->
                     <StackPanel Margin="10" x:Name="ButtonsPanel">
-                        <Button x:Name="users" Content="Пользователи" Style="{StaticResource RoundButtonStyle}" Click="users_Click"/>
-                        <Button x:Name="derictories" Content="Справочники" Style="{StaticResource RoundButtonStyle}" Click="derictories_Click"/>
-                        <Button x:Name="logs" Content="История" Style="{StaticResource RoundButtonStyle}" Click="logs_Click"/>
+                        <Button x:Name="applications" Content="Заявки" Style="{StaticResource RoundButtonStyle}" />
+                        <Button x:Name="deliveries" Content="Доставка" Style="{StaticResource RoundButtonStyle}" />
+                        <Button x:Name="routes" Content="Маршруты" Style="{StaticResource RoundButtonStyle}" />
                     </StackPanel>
 
                     <!-- Вертикальная полоска справа -->
@@ -64,7 +64,7 @@
 
         <!-- Контент -->
         <Border Grid.Column="1" BorderBrush="#CCC" BorderThickness="1" CornerRadius="4" Padding="10">
-            <Frame x:Name="AdminMainFrame" NavigationUIVisibility="Hidden" Navigated="AdminMainFrame_Navigated"/>
+            <Frame x:Name="LogistMainFrame" NavigationUIVisibility="Hidden" Navigated="LogistMainFrame_Navigated"/>
         </Border>
     </Grid>
 </Page>

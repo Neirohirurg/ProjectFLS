@@ -16865,7 +16865,7 @@ SELECT warehouseID, warehouseName, cityID, managerID FROM warehouses WHERE (ware
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT warehouseID, warehouseName, cityID, managerID\r\nFROM     warehouses";
@@ -16875,6 +16875,12 @@ SELECT warehouseID, warehouseName, cityID, managerID FROM warehouses WHERE (ware
             this._commandCollection[1].CommandText = "DELETE FROM [dbo].[warehouses] WHERE warehouseID = @warehouseID";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@warehouseID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "warehouseID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT warehouseID, warehouseName, cityID, managerID\r\nFROM     warehouses WHERE m" +
+                "anagerID = @userID";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@userID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "managerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -16896,6 +16902,42 @@ SELECT warehouseID, warehouseName, cityID, managerID FROM warehouses WHERE (ware
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual flsdbDataSet.warehousesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            flsdbDataSet.warehousesDataTable dataTable = new flsdbDataSet.warehousesDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillBy(flsdbDataSet.warehousesDataTable dataTable, global::System.Nullable<int> userID) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            if ((userID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(userID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual flsdbDataSet.warehousesDataTable GetWarehousesByUserId(global::System.Nullable<int> userID) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            if ((userID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(userID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
             flsdbDataSet.warehousesDataTable dataTable = new flsdbDataSet.warehousesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;

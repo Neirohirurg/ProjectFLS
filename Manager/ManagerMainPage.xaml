@@ -5,7 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProjectFLS.Manager"
       mc:Ignorable="d" 
-        mc:Ignorable="d" 
   Title="LogistMainPage" Loaded="Page_Loaded">
 
     <Page.Resources>
@@ -45,9 +44,8 @@
                 <Grid>
                     <!-- Кнопки -->
                     <StackPanel Margin="10" x:Name="ButtonsPanel">
-                        <Button x:Name="users" Content="Пользователи" Style="{StaticResource RoundButtonStyle}" Click="users_Click"/>
-                        <Button x:Name="derictories" Content="Справочники" Style="{StaticResource RoundButtonStyle}" Click="derictories_Click"/>
-                        <Button x:Name="logs" Content="История" Style="{StaticResource RoundButtonStyle}" Click="logs_Click"/>
+                        <Button x:Name="warehouses" Content="Склады" Style="{StaticResource RoundButtonStyle}" />
+                        <Button x:Name="partners" Content="Партнеры" Style="{StaticResource RoundButtonStyle}" />
                     </StackPanel>
 
                     <!-- Вертикальная полоска справа -->
@@ -65,7 +63,7 @@
 
         <!-- Контент -->
         <Border Grid.Column="1" BorderBrush="#CCC" BorderThickness="1" CornerRadius="4" Padding="10">
-            <Frame x:Name="AdminMainFrame" NavigationUIVisibility="Hidden" Navigated="AdminMainFrame_Navigated"/>
+            <Frame x:Name="ManagerMainFrame" NavigationUIVisibility="Hidden" Navigated="ManagerMainFrame_Navigated"/>
         </Border>
     </Grid>
 </Page>

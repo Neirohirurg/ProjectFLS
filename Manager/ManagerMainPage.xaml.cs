@@ -3,16 +3,15 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using ProjectFLS.Manager.DataPages.WarehousesButton;
-using ProjectFLS.Manager.DataPages.PartnersButton;
 using System.Threading.Tasks;
-using ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories;
+using ProjectFLS.Manager.DataPages;
 using ProjectFLS.Interfaces;
 using System.Windows.Input;
+using ProjectFLS.UI;
 
 namespace ProjectFLS.Manager
 {
-    public partial class ManagerMainPage : Page
+    public partial class ManagerMainPage : Page, ISearchable, INavigationPanelHost
     {
         private UserModel _user;
         private StackPanel _stackPanel;
@@ -44,7 +43,6 @@ namespace ProjectFLS.Manager
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             ManagerMainFrame.Navigate(_warehousesPage);
-            ShowWarehousesNavBar();
 
             var panelStoryboard = (Storyboard)FindResource("SlideInSidebar");
             panelStoryboard.Begin();
@@ -55,19 +53,23 @@ namespace ProjectFLS.Manager
             // Затем анимация полоски
             var lineStoryboard = (Storyboard)FindResource("GrowVerticalLine");
             lineStoryboard.Begin();
+
         }
 
         private void ManagerMainFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
+            //UpdateWidthMainNavBarBorder();
+
             if (e.Content is WarehousesPage && e.Content is ISearchable)
             {
                 _warehousesPage.RefreshWarehouses();
-                App.mainStackPanel.IsEnabled = true;
             }
             else if (e.Content is PartnersPage && e.Content is ISearchable)
             {
                 _partnersPage.RefreshPartners();
                 App.mainStackPanel.IsEnabled = true;
+
+                SetupNavigationPanel(_stackPanel, _border);
             }
             else if (!(e.Content is AddEditWarehousePage))
             {
@@ -76,104 +78,78 @@ namespace ProjectFLS.Manager
             }
         }
 
+        public void EnableSearch() { }
+
+        public void PerformSearch(string query)
+        {
+            if (ManagerMainFrame?.Content is ISearchable searchablePage)
+            {
+                searchablePage.PerformSearch(query);
+            }
+            else
+            {
+                CustomMessageBox.Show("Поиск недоступен на этой странице.", "Информация", showCancel: false);
+            }
+        }
+
         // Кнопка "Склады"
         private void warehouses_Click(object sender, RoutedEventArgs e)
         {
             ManagerMainFrame.Navigate(_warehousesPage);
-            ShowWarehousesNavBar();
         }
 
         // Кнопка "Партнеры"
         private void partners_Click(object sender, RoutedEventArgs e)
         {
             ManagerMainFrame.Navigate(_partnersPage);
-            ShowPartnersNavBar();
+            //ShowPartnersNavBar();
         }
 
-        // Показывает панель навигации для складов
-        private void ShowWarehousesNavBar()
+        /*private void ShowPartnersNavBar()
         {
-            _stackPanel.Children.Clear();
-
-            _stackPanel.Children.Add(CreateNavLabel("Добавить склад", AddWarehouse_Click));
-            _stackPanel.Children.Add(CreateNavLabel("Удалить склад", DeleteWarehouse_Click));
-            _stackPanel.Children.Add(CreateNavLabel("Редактировать склад", EditWarehouse_Click));
-        }
-
-        // Показывает панель навигации для партнеров
-        private void ShowPartnersNavBar()
-        {
-            _stackPanel.Children.Clear();
 
             _stackPanel.Children.Add(CreateNavLabel("Добавить партнера", AddPartner_Click));
             _stackPanel.Children.Add(CreateNavLabel("Удалить партнера", DeletePartner_Click));
-            _stackPanel.Children.Add(CreateNavLabel("Редактировать партнера", EditPartner_Click));
-        }
-
-        // Создаёт Label с обработчиком клика
-        private Label CreateNavLabel(string content, MouseButtonEventHandler handler)
+        }*/
+        // Реализация метода интерфейса INavigationPanelHost для настройки панели навигации для партнёров
+        public void SetupNavigationPanel(StackPanel panel, Border border)
         {
-            var label = new Label
+            panel.Children.Clear();
+
+            // Добавление метки для добавления партнёра
+            var addLabel = new Label { Content = "Добавить", Style = (Style)Application.Current.FindResource("menuLabel"), Margin = new Thickness(5), Cursor = Cursors.Hand };
+            addLabel.MouseLeftButtonUp += (s, e) =>
             {
-                Content = content,
-                Style = (Style)FindResource("menuLabel")
+                _stackPanel.IsEnabled = false;
+                ManagerMainFrame.Navigate(new AddEditPartnerPage());
             };
-            label.MouseLeftButtonUp += handler;
-            return label;
+
+            // Добавление метки для удаления партнёра
+            var deleteLabel = new Label { Content = "Удалить", Style = (Style)Application.Current.FindResource("menuLabel"), Margin = new Thickness(5), Cursor = Cursors.Hand };
+            deleteLabel.MouseLeftButtonUp += (s, e) => DeleteSelectedPartner();
+
+            panel.Children.Add(addLabel);
+            panel.Children.Add(deleteLabel);
         }
 
-        // Обработчик добавления склада
-        private void AddWarehouse_Click(object sender, MouseButtonEventArgs e)
+        // Обработчик удаления партнёра
+        private void DeleteSelectedPartner()
         {
-            App.mainStackPanel.IsEnabled = false;
-            ManagerMainFrame.Navigate(new AddEditWarehousePage());
+            _partnersPage.DeleteSelectedPartner();
         }
 
-        // Обработчик удаления склада
-        private void DeleteWarehouse_Click(object sender, MouseButtonEventArgs e)
-        {
-            _warehousesPage.DeleteSelectedWarehouse();
-        }
-
-        // Обработчик редактирования склада
-        private void EditWarehouse_Click(object sender, MouseButtonEventArgs e)
-        {
-            var selectedWarehouse = _warehousesPage.GetSelectedWarehouse();
-            if (selectedWarehouse == null)
-            {
-                MessageBox.Show("Выберите склад для редактирования", "Редактирование", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                return;
-            }
-
-            int warehouseId = selectedWarehouse.WarehouseID;
-            ManagerMainFrame.Navigate(new AddEditWarehousePage(warehouseId));
-        }
-
-        // Обработчик добавления партнера
+        // Обработчик добавления партнёра
         private void AddPartner_Click(object sender, MouseButtonEventArgs e)
         {
             App.mainStackPanel.IsEnabled = false;
             ManagerMainFrame.Navigate(new AddEditPartnerPage());
         }
 
-        // Обработчик удаления партнера
+        // Обработчик удаления партнёра
         private void DeletePartner_Click(object sender, MouseButtonEventArgs e)
         {
             _partnersPage.DeleteSelectedPartner();
         }
-
-        // Обработчик редактирования партнера
-        private void EditPartner_Click(object sender, MouseButtonEventArgs e)
-        {
-            var selectedPartner = _partnersPage.GetSelectedPartner();
-            if (selectedPartner == null)
-            {
-                MessageBox.Show("Выберите партнера для редактирования", "Редактирование", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                return;
-            }
-
-            int partnerId = selectedPartner.PartnerID;
-            ManagerMainFrame.Navigate(new AddEditPartnerPage(partnerId));
-        }
     }
+
 }

@@ -44,7 +44,7 @@ namespace ProjectFLS
             var rolesTable = new flsdbDataSetTableAdapters.rolesTableAdapter();
 
             //var userRows = usersTable.GetData().Where(u => u.username == username && u.password == password);
-            var userRow = usersTable.GetData().FirstOrDefault(u => u.userID == 3);
+            var userRow = usersTable.GetData().FirstOrDefault(u => u.userID == 2);
 
             //var user = userRows.FirstOrDefault();
             var user = userRow;

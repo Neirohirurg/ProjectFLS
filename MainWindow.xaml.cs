@@ -159,6 +159,10 @@ namespace ProjectFLS
             {
                 this.EnableSearch();
             }
+            else if (e.Content is ManagerMainPage managerPage)
+            {
+                this.EnableSearch();
+            }
             else if (e.Content is ISearchable searchablePage)
             {
                 searchablePage.EnableSearch();

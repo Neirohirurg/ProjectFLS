@@ -302,7 +302,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Manager\DataPages\AddEditPartnerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\DataPages\AddEditWarehousePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\DataPages\PartnersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\DataPages\WarehousesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\DataPages\WarehouseTractorData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -312,8 +328,20 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Manager\DataPages\AddEditPartnerPage.xaml.cs">
+      <DependentUpon>AddEditPartnerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\DataPages\AddEditWarehousePage.xaml.cs">
+      <DependentUpon>AddEditWarehousePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\DataPages\PartnersPage.xaml.cs">
+      <DependentUpon>PartnersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\DataPages\WarehousesPage.xaml.cs">
       <DependentUpon>WarehousesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\DataPages\WarehouseTractorData.xaml.cs">
+      <DependentUpon>WarehouseTractorData.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\ManagerMainPage.xaml.cs">
       <DependentUpon>ManagerMainPage.xaml</DependentUpon>
@@ -325,6 +353,7 @@
     <Compile Include="Models\Route.cs" />
     <Compile Include="Models\TransportViewModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\WarehouseTractorInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

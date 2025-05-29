@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ProjectFLS.flsdbDataSetTableAdapters;
+using ProjectFLS.Interfaces;
 using ProjectFLS.Models;
 
 namespace ProjectFLS.Manager.DataPages
 {
-    public partial class WarehousesPage : Page
+    public partial class WarehousesPage : Page, ISearchable
     {
         // Адаптер для работы с таблицей складов
         private warehousesTableAdapter _warehousesAdapter;
@@ -21,11 +23,65 @@ namespace ProjectFLS.Manager.DataPages
             LoadWarehouses();
         }
 
+        public void RefreshWarehouses()
+        {
+
+        }
+
+        public void EnableSearch() { }
+        public void PerformSearch(string query)
+        {
+            // Преобразуем строку запроса в нижний регистр для поиска
+            query = query?.ToLowerInvariant() ?? "";
+
+            try
+            {
+                // Получаем список складов для текущего пользователя
+                var warehousesData = _warehousesAdapter.GetWarehousesByUserId(CurrentUserID);
+
+                // Фильтруем склады по имени склада (поиск по части имени)
+                var filteredWarehouses = warehousesData
+                    .Where(warehouse => warehouse.warehouseName.ToLowerInvariant().Contains(query))
+                    .ToList();
+
+                // Очищаем панель от старых кнопок
+                WarehousesPanel.Children.Clear();
+
+                // Динамически создаём кнопки для отфильтрованных складов
+                foreach (var warehouse in filteredWarehouses)
+                {
+                    var warehouseButton = new Button
+                    {
+                        Content = warehouse.warehouseName, // Название склада
+                        Tag = warehouse.warehouseID, // Для получения ID склада
+                        Style = (Style)FindResource("RoundButtonStyleBig"), // Применение стиля
+                        Margin = new Thickness(10)
+                    };
+
+                    // Подключаем обработчик события нажатия
+                    warehouseButton.Click += WarehouseButton_Click;
+
+                    // Добавляем кнопку в панель
+                    WarehousesPanel.Children.Add(warehouseButton);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при поиске складов: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public void DeleteSelectedWarehouse()
+        {
+
+        }
         // Загрузка складов из базы данных и создание кнопок
         private void LoadWarehouses()
         {
             try
             {
+                App.mainStackPanelBorder.Visibility = Visibility.Collapsed;
+
                 // Загрузим данные о складах для текущего пользователя
                 var warehousesData = _warehousesAdapter.GetWarehousesByUserId(CurrentUserID);
 

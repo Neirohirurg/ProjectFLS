@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectFLS.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,42 @@ namespace ProjectFLS.Manager.DataPages
     /// <summary>
     /// Логика взаимодействия для PartnersPage.xaml
     /// </summary>
-    public partial class PartnersPage : Page
+    public partial class PartnersPage : Page, ISearchable
     {
-        public PartnersPage()
+        private Frame _managerMainFrame;
+        private Border _mainBorder;
+        public PartnersPage(Frame managerMainFrame)
         {
             InitializeComponent();
+            _managerMainFrame = managerMainFrame;
+            _mainBorder = App.mainStackPanelBorder;
+        }
+
+        public void PerformSearch(string query)
+        {
+
+        }
+
+        public void EnableSearch() { }
+
+        public void RefreshPartners()
+        {
+
+        }
+
+        public void DeleteSelectedPartner()
+        {
+
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            _mainBorder.Visibility = Visibility.Visible;
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            _mainBorder.Visibility = Visibility.Collapsed;
         }
     }
 }

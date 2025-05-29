@@ -44,8 +44,8 @@
                 <Grid>
                     <!-- Кнопки -->
                     <StackPanel Margin="10" x:Name="ButtonsPanel">
-                        <Button x:Name="warehouses" Content="Склады" Style="{StaticResource RoundButtonStyle}" />
-                        <Button x:Name="partners" Content="Партнеры" Style="{StaticResource RoundButtonStyle}" />
+                        <Button x:Name="warehouses" Content="Склады" Style="{StaticResource RoundButtonStyle}" Click="warehouses_Click" />
+                        <Button x:Name="partners" Content="Партнеры" Style="{StaticResource RoundButtonStyle}" Click="partners_Click"/>
                     </StackPanel>
 
                     <!-- Вертикальная полоска справа -->

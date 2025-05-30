@@ -11,13 +11,15 @@ using ProjectFLS.UI;
 
 namespace ProjectFLS.Manager
 {
-    public partial class ManagerMainPage : Page, ISearchable, INavigationPanelHost
+    partial class ManagerMainPage : Page, ISearchable, INavigationPanelHost
     {
         private UserModel _user;
         private StackPanel _stackPanel;
         private Border _border;
         private WarehousesPage _warehousesPage;
         private PartnersPage _partnersPage;
+        private InWarehouse _inWarehouse;
+
 
         public ManagerMainPage()
         {
@@ -30,8 +32,10 @@ namespace ProjectFLS.Manager
             _user = user;
             _stackPanel = App.mainStackPanel;
             _border = App.mainStackPanelBorder;
-            _warehousesPage = new WarehousesPage();
+
+            _warehousesPage = new WarehousesPage(this.ManagerMainFrame);
             _partnersPage = new PartnersPage(this.ManagerMainFrame);
+            _inWarehouse = new InWarehouse(this.ManagerMainFrame);
         }
 
         private void UpdateWidthMainNavBarBorder()
@@ -59,23 +63,28 @@ namespace ProjectFLS.Manager
         private void ManagerMainFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
             //UpdateWidthMainNavBarBorder();
+            if (e.Content is ISearchable searchablePage)
+            {
+                // обработка страницы, поддерживающей поиск
+                if (e.Content is WarehousesPage warehousesPage)
+                {
+                    warehousesPage.RefreshWarehouses();
 
-            if (e.Content is WarehousesPage && e.Content is ISearchable)
-            {
-                _warehousesPage.RefreshWarehouses();
+                }
+                else if (e.Content is PartnersPage partnersPage)
+                {
+                    partnersPage.RefreshPartners();
+                    App.mainStackPanel.IsEnabled = true;
+                    SetupNavigationPanel(_stackPanel, _border);
+                }
+                else if (e.Content is InWarehouse inWarehousePage)
+                {
+                    _inWarehouse.RefreshAsync();
+                    App.mainStackPanel.IsEnabled = true;
+                    _inWarehouse.SetupNavigationPanel(_stackPanel, _border);
+                }
             }
-            else if (e.Content is PartnersPage && e.Content is ISearchable)
-            {
-                _partnersPage.RefreshPartners();
-                App.mainStackPanel.IsEnabled = true;
-
-                SetupNavigationPanel(_stackPanel, _border);
-            }
-            else if (!(e.Content is AddEditWarehousePage))
-            {
-                App.mainStackPanel.Children.Clear();
-                App.mainStackPanelBorder.Visibility = Visibility.Collapsed;
-            }
+            
         }
 
         public void EnableSearch() { }
@@ -117,19 +126,19 @@ namespace ProjectFLS.Manager
             panel.Children.Clear();
 
             // Добавление метки для добавления партнёра
-            var addLabel = new Label { Content = "Добавить", Style = (Style)Application.Current.FindResource("menuLabel"), Margin = new Thickness(5), Cursor = Cursors.Hand };
+            var addLabel = new Label { Content = "Принять доставку", Style = (Style)Application.Current.FindResource("menuLabel"), Margin = new Thickness(5), Cursor = Cursors.Hand };
             addLabel.MouseLeftButtonUp += (s, e) =>
             {
                 _stackPanel.IsEnabled = false;
-                ManagerMainFrame.Navigate(new AddEditPartnerPage());
+                ManagerMainFrame.Navigate(new AddEditDealerPage(this.ManagerMainFrame));
             };
 
-            // Добавление метки для удаления партнёра
-            var deleteLabel = new Label { Content = "Удалить", Style = (Style)Application.Current.FindResource("menuLabel"), Margin = new Thickness(5), Cursor = Cursors.Hand };
-            deleteLabel.MouseLeftButtonUp += (s, e) => DeleteSelectedPartner();
+           /* // Добавление метки для удаления партнёра
+            var deleteLabel = new Label { Content = "Удалить", Style = (Style)Aplication.Current.FindResource("menuLabel"), Margin = new Thickness(5), Cursor = Cursors.Hand };
+            deleteLabel.MouseLeftButtonUp += (s, e) => DeleteSelectedPartner();*/
 
             panel.Children.Add(addLabel);
-            panel.Children.Add(deleteLabel);
+            //panel.Children.Add(deleteLabel);
         }
 
         // Обработчик удаления партнёра
@@ -142,7 +151,7 @@ namespace ProjectFLS.Manager
         private void AddPartner_Click(object sender, MouseButtonEventArgs e)
         {
             App.mainStackPanel.IsEnabled = false;
-            ManagerMainFrame.Navigate(new AddEditPartnerPage());
+            ManagerMainFrame.Navigate(new AddEditDealerPage(this.ManagerMainFrame));
         }
 
         // Обработчик удаления партнёра

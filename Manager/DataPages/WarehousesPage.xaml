@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:ProjectFLS.Manager.DataPages"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="900"
-      Title="WarehousesPage">
+      Title="WarehousesPage" Loaded="Page_Loaded">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" Background="White">
         <Grid Margin="20" VerticalAlignment="Top">

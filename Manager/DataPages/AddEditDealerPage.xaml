@@ -1,0 +1,73 @@
+﻿<Page x:Class="ProjectFLS.Manager.DataPages.AddEditDealerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ProjectFLS.Manager.DataPages"
+      mc:Ignorable="d" 
+      Title="AddEditPartnerPage" Loaded="Page_Loaded_1">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовки столбцов для информации о доставках -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Tag="DeliveryType" Content="Тип Доставки" Style="{StaticResource HeaderButtonStyle}" Click="Sort_Click"/>
+            <Button Grid.Column="1" Tag="FromWarehouse" Content="Со склада" Style="{StaticResource HeaderButtonStyle}" Click="Sort_Click"/>
+            <Button Grid.Column="2" Tag="ToWarehouse" Content="В склад" Style="{StaticResource HeaderButtonStyle}" Click="Sort_Click"/>
+            <Button Grid.Column="3" Tag="ToDealer" Content="К партнеру" Style="{StaticResource HeaderButtonStyle}" Click="Sort_Click"/>
+            <Button Grid.Column="4" Tag="Transport" Content="Транспорт" Style="{StaticResource HeaderButtonStyle}" Click="Sort_Click"/>
+            <Button Grid.Column="5" Tag="Status" Content="Статус" Style="{StaticResource HeaderButtonStyle}" Click="Sort_Click"/>
+        </Grid>
+
+        <!-- Таблица с данными о доставках -->
+        <ListView Grid.Row="1" Name="ActiveDeliveryListView" Margin="5" ItemContainerStyle="{StaticResource ListViewItemStyle}" Padding="5" SelectionChanged="ActiveDeliveryListView_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Style="{StaticResource ListViewItemGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{Binding DeliveryTypeName}" Grid.Column="0" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding FromWarehouseName}" Grid.Column="1" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding ToWarehouseName}" Grid.Column="2" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding ToDealerName}" Grid.Column="3" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding TransportName}" Grid.Column="4" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding StatusName}" Grid.Column="5" Style="{StaticResource TextBlockStyle}"/>
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Button  Content="Назад" 
+   Style="{StaticResource RoundButtonStyle}" 
+   Width="150" Height="50" 
+   Margin="10" Click="BackButton_Click"/>
+            <Button  Content="Подтвердить доставку" 
+   Style="{StaticResource RoundButtonStyle}" 
+   Margin="10" Click="ApproovButton_Click"  Width="200" Height="50" x:Name="ApproovButton"/>
+            
+        </StackPanel>
+
+    </Grid>
+</Page>

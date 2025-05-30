@@ -304,6 +304,77 @@
             </Setter>
         </Style>
 
+        <Style x:Key="datePickerForm" TargetType="DatePicker">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,10,0,30"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#000000"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="IsDropDownOpen" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DatePicker">
+                        <Grid>
+                            <!-- TextBox для отображения выбранной даты -->
+                            <TextBox Name="PART_TextBox"
+                             Background="White"
+                             BorderBrush="{TemplateBinding BorderBrush}"
+                             BorderThickness="1"
+                             VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Left"
+                             Padding="10,0"
+                             FontSize="16"
+                             IsReadOnly="True"
+                             Focusable="False"/>
+
+                            <!-- Кнопка для открытия календаря -->
+                            <Button Name="PART_Button"
+                            Background="White"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Width="30"
+                            Height="30"
+                            Content="📅"
+                            Focusable="False"
+                            Padding="0"/>
+
+                            <!-- Выпадающий календарь -->
+                            <Popup Name="PART_Popup"
+                           Placement="Bottom"
+                           IsOpen="{TemplateBinding IsDropDownOpen}"
+                           AllowsTransparency="True"
+                           Focusable="False"
+                           PopupAnimation="Slide">
+                                <Grid Background="White" MinWidth="{TemplateBinding ActualWidth}">
+                                    <Calendar Name="PART_Calendar"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch"/>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="PART_Button" Property="Foreground" Value="Gray"/>
+                                <Setter TargetName="PART_TextBox" Property="Foreground" Value="Gray"/>
+                                <Setter Property="Foreground" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!-- Стили для MainWindow -->
         
         <!-- Стили для кнопок -->

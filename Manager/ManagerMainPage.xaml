@@ -21,7 +21,7 @@
         <Storyboard x:Key="GrowVerticalLine">
             <DoubleAnimation Storyboard.TargetName="AnimatedLine"
                          Storyboard.TargetProperty="Height"
-                         From="0" To="190"
+                         From="0" To="135"
                          Duration="0:0:1"
                          DecelerationRatio="0.9"/>
         </Storyboard>

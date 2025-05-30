@@ -38,32 +38,31 @@ namespace ProjectFLS.Admin.DataPages.History
             var auditList = _auditAdapter.GetData();
             query = query?.ToLowerInvariant() ?? "";
 
-            // Получаем статусы и пользователей
-            var statuses = _statusAdapter.GetData();
-            var users = _usersAdapter.GetData();
+            // Получаем статусы и пользователей, но создаем словари для быстрого доступа
+            var statuses = _statusAdapter.GetData()
+                .ToDictionary(s => s.statusID, s => s.statusName);
+
+            var users = _usersAdapter.GetData()
+                .ToDictionary(u => $"{u.surname.ToLower()} {u.firstname.ToLower()}", u => $"{u.surname} {u.firstname}");
 
             // Фильтруем данные по всем полям
             var filtered = auditList.Where(audit =>
-                (audit.auditID.ToString().Contains(query)) ||  // Поиск по ID аудита
-                (audit.deliveryID.ToString().Contains(query)) ||  // Поиск по ID доставки
-                (audit.oldStatus != null && Convert.ToString(audit.oldStatus).ToLower().Contains(query)) ||  // Поиск по старому статусу
-                (audit.newStatus != null && Convert.ToString(audit.newStatus).ToLower().Contains(query)) ||  // Поиск по новому статусу
-                (users.FirstOrDefault(u => u.userID == Convert.ToInt32(audit.changeBy))?.surname?.ToLower().Contains(query) ?? false) // Поиск по фамилии пользователя
+                audit.auditID.ToString().Contains(query) ||  // Поиск по ID аудита
+                audit.deliveryID.ToString().Contains(query) ||  // Поиск по ID доставки
+                (audit.oldStatus != null && statuses.Values.Any(s => s.ToLower().Contains(query))) ||  // Поиск по старому статусу
+                (audit.newStatus != null && statuses.Values.Any(s => s.ToLower().Contains(query))) ||  // Поиск по новому статусу
+                (audit.changeBy != null && users.Keys.Any(u => u.Contains(query.ToLower()))) // Поиск по фамилии и имени пользователя
             ).ToList();
 
             // Преобразуем в нужный формат
             var historyList = filtered.Select(audit =>
             {
-                // Получаем статусы по ID
-                var oldStatusName = statuses.FirstOrDefault(s => s.statusID == audit.oldStatus)?.statusName ?? "Неизвестный статус";
-                var newStatusName = statuses.FirstOrDefault(s => s.statusID == audit.newStatus)?.statusName ?? "Неизвестный статус";
-                var user = users.FirstOrDefault(u => u.userID == Convert.ToInt32(audit.changeBy));
+                // Используем Contains для поиска статуса
+                var oldStatusName = statuses.Values.FirstOrDefault(s => s.ToLower().Contains(query)) ?? "Неизвестный статус";
+                var newStatusName = statuses.Values.FirstOrDefault(s => s.ToLower().Contains(query)) ?? "Неизвестный статус";
 
-                // Логируем, чтобы понять, что происходит
-                if (user == null)
-                {
-                    Console.WriteLine($"Пользователь с ID {audit.changeBy} не найден.");
-                }
+                // Поиск пользователя по фамилии и имени
+                var userName = users.Keys.FirstOrDefault(u => u.Contains(query.ToLower())) ?? "Неизвестный пользователь";
 
                 return new AuditRecord
                 {
@@ -72,12 +71,13 @@ namespace ProjectFLS.Admin.DataPages.History
                     ChangedAt = audit.changedAt,
                     OldStatus = oldStatusName,
                     NewStatus = newStatusName,
-                    ChangedBy = user != null ? $"{user.surname} {user.firstname}" : "Неизвестный пользователь", // Добавляем имя пользователя
+                    ChangedBy = userName,
                 };
             }).ToList();
 
             HistoryListView.ItemsSource = historyList; // Устанавливаем источник данных
         }
+
 
         // Метод для сортировки
         private void Sort_Click(object sender, RoutedEventArgs e)
@@ -101,6 +101,7 @@ namespace ProjectFLS.Admin.DataPages.History
         {
             var data = HistoryListView.ItemsSource.Cast<AuditRecord>().ToList();  // Преобразуем ItemsSource в список AuditRecord
 
+            // Для правильной сортировки учитываем тип данных
             var sortedData = _sortAscending
                 ? data.OrderBy(row => GetFieldValue(row, _currentSortField)).ToList()
                 : data.OrderByDescending(row => GetFieldValue(row, _currentSortField)).ToList();
@@ -112,17 +113,17 @@ namespace ProjectFLS.Admin.DataPages.History
         {
             switch (field)
             {
-                case "AuditID":
+                case "auditID":
                     return record.AuditID;
-                case "DeliveryID":
+                case "deliveryID":
                     return record.DeliveryID;
-                case "ChangedAt":
-                    return record.ChangedAt;
-                case "OldStatus":
+                case "changedAt":
+                    return record.ChangedAt;  // Должен корректно работать с типом DateTime
+                case "oldStatus":
                     return record.OldStatus;
-                case "NewStatus":
+                case "newStatus":
                     return record.NewStatus;
-                case "ChangedBy":
+                case "changedBy":
                     return record.ChangedBy;
                 default:
                     return null;
@@ -148,22 +149,23 @@ namespace ProjectFLS.Admin.DataPages.History
 
         private async Task RefreshAsync()
         {
-            // Получаем все данные
+            // Получаем все данные асинхронно
             var auditList = await Task.Run(() => _auditAdapter.GetData());
-            var statuses = _statusAdapter.GetData();
-            var users = _usersAdapter.GetData();
+            var statuses = await Task.Run(() => _statusAdapter.GetData());
+            var users = await Task.Run(() => _usersAdapter.GetData());
+
+            // Создаем словари для быстрого поиска
+            var statusesDict = statuses.ToDictionary(s => s.statusID, s => s.statusName);
+            var usersDict = users.ToDictionary(u => u.userID.ToString(), u => $"{u.surname} {u.firstname}");
 
             var historyList = auditList.Select(audit =>
             {
-                var oldStatusName = statuses.FirstOrDefault(s => s.statusID == audit.oldStatus)?.statusName ?? "Неизвестный статус";
-                var newStatusName = statuses.FirstOrDefault(s => s.statusID == audit.newStatus)?.statusName ?? "Неизвестный статус";
-                var user = users.FirstOrDefault(u => u.userID == Convert.ToInt32(audit.changeBy));
+                // Поиск статусов с использованием словаря
+                var oldStatusName = statusesDict.TryGetValue(audit.oldStatus, out var oldStatus) ? oldStatus : "Неизвестный статус";
+                var newStatusName = statusesDict.TryGetValue(audit.newStatus, out var newStatus) ? newStatus : "Неизвестный статус";
 
-                // Логируем, чтобы понять, что происходит
-                if (user == null)
-                {
-                    Console.WriteLine($"Пользователь с ID {audit.changeBy} не найден.");
-                }
+                // Используем App.CurentUserID для нахождения текущего пользователя
+                var userName = usersDict.TryGetValue(App.CurrentUserId.ToString(), out var user) ? user : "Неизвестный пользователь";
 
                 return new AuditRecord
                 {
@@ -172,12 +174,14 @@ namespace ProjectFLS.Admin.DataPages.History
                     ChangedAt = audit.changedAt,
                     OldStatus = oldStatusName,
                     NewStatus = newStatusName,
-                    ChangedBy = user != null ? $"{user.surname} {user.firstname}" : "Неизвестный пользователь", // Имя и фамилия
+                    ChangedBy = userName, // Имя и фамилия пользователя
                 };
             }).ToList();
 
+            // Устанавливаем источник данных в ListView
             HistoryListView.ItemsSource = historyList;
         }
+
 
         private void HistoryListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

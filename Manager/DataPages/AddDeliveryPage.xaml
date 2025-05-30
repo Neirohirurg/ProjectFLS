@@ -1,0 +1,79 @@
+﻿<Page x:Class="ProjectFLS.Manager.DataPages.AddDeliveryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Добавление доставки"
+      Background="White"
+      Unloaded="Page_Unloaded"
+      Loaded="Page_Loaded">
+
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+
+        <!-- Тип доставки -->
+        <Border Grid.Column="0" Grid.Row="0" Style="{StaticResource RoundedBorderBoxStyle}">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Тип доставки:" Target="{Binding ElementName=DeliveryTypeComboBox}" Style="{StaticResource labelForm}"/>
+                <ComboBox x:Name="DeliveryTypeComboBox" Style="{StaticResource comboBoxForm}" DisplayMemberPath="deliveryTypeName" SelectedValuePath="deliveryTypeID"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Склад отправитель -->
+        <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource RoundedBorderBoxStyle}">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Склад отправитель:" Target="{Binding ElementName=FromWarehouseComboBox}" Style="{StaticResource labelForm}"/>
+                <ComboBox x:Name="FromWarehouseComboBox" Style="{StaticResource comboBoxForm}" DisplayMemberPath="warehouseName" SelectedValuePath="warehouseID"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Склад получатель -->
+        <Border Grid.Column="0" Grid.Row="2" Style="{StaticResource RoundedBorderBoxStyle}">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Склад получатель:" Target="{Binding ElementName=ToWarehouseComboBox}" Style="{StaticResource labelForm}"/>
+                <ComboBox x:Name="ToWarehouseComboBox" Style="{StaticResource comboBoxForm}" DisplayMemberPath="warehouseName" SelectedValuePath="warehouseID"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Дилер -->
+        <Border Grid.Column="1" Grid.Row="0" Style="{StaticResource RoundedBorderBoxStyle}">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Дилер:" Target="{Binding ElementName=ToDealerComboBox}" Style="{StaticResource labelForm}"/>
+                <ComboBox x:Name="ToDealerComboBox" Style="{StaticResource comboBoxForm}" DisplayMemberPath="dealerName" SelectedValuePath="dealerID"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Транспорт -->
+        <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource RoundedBorderBoxStyle}">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Транспорт:" Target="{Binding ElementName=TransportComboBox}" Style="{StaticResource labelForm}"/>
+                <ComboBox x:Name="TransportComboBox" Style="{StaticResource comboBoxForm}" DisplayMemberPath="transportName" SelectedValuePath="transportID"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Дата доставки -->
+        <Border Grid.Column="1" Grid.Row="2" Style="{StaticResource RoundedBorderBoxStyle}">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Дата доставки:" Target="{Binding ElementName=DeliveryDatePicker}" Style="{StaticResource labelForm}"/>
+                <DatePicker x:Name="DeliveryDatePicker" Style="{StaticResource datePickerForm}"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="Сохранить" Style="{StaticResource RoundButtonStyle}" Click="SaveButton_Click"/>
+            <Button Content="Отмена" Style="{StaticResource RoundButtonStyle}" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

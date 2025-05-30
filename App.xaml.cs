@@ -1,4 +1,5 @@
 ﻿using ProjectFLS.Interfaces;
+using ProjectFLS.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,6 +17,12 @@ namespace ProjectFLS
     public partial class App : Application
     {
         public static int CurrentUserId { get; set; }
+
+        public static int CurrentWareHouseID { get; set; }
+
+        public static Partner _selectedPartner { get; set; }
+        
+
 
         public static Border mainStackPanelBorder { get; set; }
         public static StackPanel mainStackPanel { get; set; }

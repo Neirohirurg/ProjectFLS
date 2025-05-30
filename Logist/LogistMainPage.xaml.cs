@@ -9,6 +9,9 @@ using ProjectFLS.Admin.DataPages.DerictoriesButton;
 using ProjectFLS.Admin.DataPages.History;
 using ProjectFLS.Admin.DataPages.UsersButton;
 using System.Windows.Input;
+using ProjectFLS.Logist.Applications;
+using ProjectFLS.Logist.Deliveries;
+using ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories;
 
 namespace ProjectFLS.Logist
 {
@@ -17,12 +20,11 @@ namespace ProjectFLS.Logist
         private UserModel _user;
         private StackPanel _stackPanel;
         private Border _border;
+        private Frame _logistFrame;
 
-
-        public LogistMainPage()
-        {
-            InitializeComponent();
-        }
+        private ApplicationsPage _applicationsPage;
+        private DeliveriesPage _deliveriesPage;
+        private RoutesPage _routesPage;
 
         public LogistMainPage(UserModel user)
         {
@@ -30,7 +32,8 @@ namespace ProjectFLS.Logist
             _user = user;
             _stackPanel = App.mainStackPanel;
             _border = App.mainStackPanelBorder;
-
+            _logistFrame = this.LogistMainFrame;
+            _applicationsPage = new ApplicationsPage(LogistMainFrame);
         }
 
         private void UpdateWidthMainNavBarBorder()
@@ -44,6 +47,8 @@ namespace ProjectFLS.Logist
 
             ShowUsersNavBar();
 
+            _logistFrame.Navigate(_applicationsPage);
+
             var panelStoryboard = (Storyboard)FindResource("SlideInSidebar");
             panelStoryboard.Begin();
 
@@ -53,6 +58,7 @@ namespace ProjectFLS.Logist
             // Затем анимация полоски
             var lineStoryboard = (Storyboard)FindResource("GrowVerticalLine");
             lineStoryboard.Begin();
+
         }
 
         private void LogistMainFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
@@ -67,6 +73,13 @@ namespace ProjectFLS.Logist
             {
                 App.mainStackPanel.Children.Clear();
                 App.mainStackPanelBorder.Visibility = Visibility.Collapsed;
+            }
+
+            else if (e.Content is ApplicationsPage)
+            {
+                App.mainStackPanel.Children.Clear();
+                App.mainStackPanelBorder.Visibility = Visibility.Collapsed;
+                MessageBox.Show("!!!");
             }
         }
 
@@ -111,6 +124,11 @@ namespace ProjectFLS.Logist
         private void Change_Click(object sender, MouseButtonEventArgs e)
         {
             
+        }
+
+        private void applications_Click(object sender, RoutedEventArgs e)
+        {
+            _logistFrame.Navigate(_applicationsPage);
         }
     }
 }

@@ -179,7 +179,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Logist\Applications\ApplicationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Logist\Deliveries\DeliveriesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Logist\LogistMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Logist\Routes\RoutesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -295,8 +307,17 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Logist\Applications\ApplicationsPage.xaml.cs">
+      <DependentUpon>ApplicationsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Logist\Deliveries\DeliveriesPage.xaml.cs">
+      <DependentUpon>DeliveriesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Logist\LogistMainPage.xaml.cs">
       <DependentUpon>LogistMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Logist\Routes\RoutesPage.xaml.cs">
+      <DependentUpon>RoutesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

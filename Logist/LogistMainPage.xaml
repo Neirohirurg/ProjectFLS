@@ -44,7 +44,7 @@
                 <Grid>
                     <!-- Кнопки -->
                     <StackPanel Margin="10" x:Name="ButtonsPanel">
-                        <Button x:Name="applications" Content="Заявки" Style="{StaticResource RoundButtonStyle}" />
+                        <Button x:Name="applications" Content="Заявки" Style="{StaticResource RoundButtonStyle}" Click="applications_Click" />
                         <Button x:Name="deliveries" Content="Поставки" Style="{StaticResource RoundButtonStyle}" />
                         <Button x:Name="routes" Content="Маршруты" Style="{StaticResource RoundButtonStyle}" />
                     </StackPanel>

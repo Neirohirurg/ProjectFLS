@@ -146,6 +146,16 @@ namespace ProjectFLS.Manager.DataPages
                 ApproovButton.Opacity = 1; // Кнопка полностью видимая
                 SentButton.Opacity = 0.5; // Полупрозрачная кнопка
             }
+
+            else if (selectedDelivery.StatusName == "На складе" && selectedDelivery.ToWarehouseID == App.CurrentWareHouseID)
+            {
+                ApproovButton.IsEnabled = false; // Разрешаем кнопку подтверждения
+                SentButton.IsEnabled = true;  // Отключаем кнопку отправки
+                SentButton.Foreground = new SolidColorBrush(Colors.Black); // Черный цвет текста
+                ApproovButton.Foreground = new SolidColorBrush(Color.FromArgb(255, 221, 221, 221)); // #DDD
+                ApproovButton.Opacity = 1; // Кнопка полностью видимая
+                SentButton.Opacity = 0.5; // Полупрозрачная кнопка
+            }
             // Если склад назначения = текущий склад, а статус "Ожидание"
             else if (selectedDelivery.StatusName == "Ожидает отправления" && selectedDelivery.FromWarehouseID == App.CurrentWareHouseID)
             {
@@ -240,7 +250,7 @@ namespace ProjectFLS.Manager.DataPages
             if (selectedDelivery != null)
             {
                 // Проверяем, что это нужная доставка
-                selectedDelivery.StatusName = "На складе";  // Обновление состояния в списке
+                selectedDelivery.StatusName = "Ожидает отправления";  // Обновление состояния в списке
 
                 // Получаем ID статуса "На складе" из базы данных
                 var status = _deliveryStatusesAdapter.GetData()

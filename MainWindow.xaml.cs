@@ -1,6 +1,7 @@
 ﻿using ProjectFLS.Admin;
 using ProjectFLS.Interfaces;
 using ProjectFLS.Logist;
+using ProjectFLS.Logist.Applications;
 using ProjectFLS.Manager;
 using ProjectFLS.Models;
 using ProjectFLS.UI;
@@ -166,6 +167,11 @@ namespace ProjectFLS
             else if (e.Content is ISearchable searchablePage)
             {
                 searchablePage.EnableSearch();
+                this.EnableSearch();
+            }
+            else if (e.Content is LogistMainPage logistPage)
+            {
+
                 this.EnableSearch();
             }
         }

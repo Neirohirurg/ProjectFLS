@@ -1,0 +1,71 @@
+﻿<Page x:Class="ProjectFLS.Logist.Applications.ApplicationsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ProjectFLS.Logist.Applications"
+      mc:Ignorable="d" 
+      Title="Заявки" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовки столбцов для информации о заявках -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Tag="DeliveryType" Content="Тип Заявки" Style="{StaticResource HeaderButtonStyle}" Click="Sort_Click"/>
+            <Button Grid.Column="1" Tag="FromWarehouse" Content="Со склада" Style="{StaticResource HeaderButtonStyle}" Click="Sort_Click"/>
+            <Button Grid.Column="2" Tag="ToWarehouse" Content="В склад" Style="{StaticResource HeaderButtonStyle}" Click="Sort_Click"/>
+            <Button Grid.Column="3" Tag="ToDealer" Content="К партнёру" Style="{StaticResource HeaderButtonStyle}" Click="Sort_Click"/>
+            <Button Grid.Column="4" Tag="Transport" Content="Транспорт" Style="{StaticResource HeaderButtonStyle}" Click="Sort_Click"/>
+            <Button Grid.Column="5" Tag="Status" Content="Статус" Style="{StaticResource HeaderButtonStyle}" Click="Sort_Click"/>
+        </Grid>
+
+        <!-- Список заявок -->
+        <ListView Grid.Row="1" Name="ActiveDeliveryListView" Margin="5" ItemContainerStyle="{StaticResource ListViewItemStyle}"  Padding="5" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Style="{StaticResource ListViewItemGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{Binding DeliveryTypeName}" Grid.Column="0" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding FromWarehouseName}" Grid.Column="1" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding ToWarehouseName}" Grid.Column="2" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding ToDealerName}" Grid.Column="3" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding TransportName}" Grid.Column="4" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="{Binding StatusName}" Grid.Column="5" Style="{StaticResource TextBlockStyle}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Кнопки внизу -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Подтвердить заявку" 
+                    Style="{StaticResource RoundButtonStyle}" 
+                    Margin="10" 
+                    Click="ApproveButton_Click" 
+                    Width="200" Height="50" 
+                    x:Name="ApproveButton"/>
+        </StackPanel>
+    </Grid>
+</Page>

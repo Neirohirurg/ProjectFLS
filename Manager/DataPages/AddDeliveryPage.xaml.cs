@@ -215,9 +215,8 @@ namespace ProjectFLS.Manager.DataPages
                 if (it.IsTractor)
                 {
                     /* PartsTable: insert( string deliveryID, int? tractorID, int? partID, int qty )   */
-                //    _deliveryItemsTa.Insert(newId, it.TractorID, null, it.Quantity);
-                    int affected = _deliveryItemsTa.Insert(newId, it.TractorID, null, it.Quantity);
-                    MessageBox.Show($"Insert deliveryItem: {affected}");
+                    _deliveryItemsTa.Insert(newId, it.TractorID, null, it.Quantity);
+
                 }
                 else
                 {

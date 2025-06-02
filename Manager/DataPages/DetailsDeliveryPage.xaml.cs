@@ -33,6 +33,7 @@ namespace ProjectFLS.Manager.DataPages
 
             foreach (var row in itemsRows)
             {
+
                 var vm = new DeliveryItemVm { Quantity = row.quantity };
 
                 if (!row.IspartIDNull())          // ► запчасть
@@ -52,6 +53,7 @@ namespace ProjectFLS.Manager.DataPages
                 }
                 else if (!row.IstractorIDNull())  // ► трактор
                 {
+
                     var t = tractors.First(r => r.tractorID == row.tractorID);
                     vm = new DeliveryItemVm
                     {
@@ -66,6 +68,7 @@ namespace ProjectFLS.Manager.DataPages
                         DeliveryTypeName = "Трактор"
                     };
                 }
+
 
                 list.Add(vm);
             }

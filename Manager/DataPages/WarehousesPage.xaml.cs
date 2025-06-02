@@ -49,7 +49,7 @@ namespace ProjectFLS.Manager.DataPages
 
         public void EnableSearch() { }
 
-        public async void PerformSearch(string query)
+        public void PerformSearch(string query)
         {
             query = query?.ToLowerInvariant() ?? "";
 

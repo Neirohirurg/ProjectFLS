@@ -65,7 +65,9 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
             };
 
             var deleteLabel = new Label { Content = "Удалить", Style = (Style)Application.Current.FindResource("menuLabel"), Margin = new Thickness(5), Cursor = Cursors.Hand };
+#pragma warning disable CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
             deleteLabel.MouseLeftButtonUp += (s, e) => DeleteSelectedAsync();
+#pragma warning restore CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
 
             panel.Children.Add(addLabel);
             panel.Children.Add(editLabel);

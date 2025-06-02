@@ -23,8 +23,8 @@ namespace ProjectFLS.Logist
         private Frame _logistFrame;
 
         private ApplicationsPage _applicationsPage;
-        private DeliveriesPage _deliveriesPage;
-        private RoutesPage _routesPage;
+/*        private DeliveriesPage _deliveriesPage;
+        private RoutesPage _routesPage;*/
 
         public LogistMainPage(UserModel user)
         {

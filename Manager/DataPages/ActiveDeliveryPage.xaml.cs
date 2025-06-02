@@ -9,6 +9,7 @@ using ProjectFLS.flsdbDataSetTableAdapters;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using ProjectFLS.UI;
+using System.Windows.Input;
 
 namespace ProjectFLS.Manager.DataPages
 {
@@ -27,6 +28,13 @@ namespace ProjectFLS.Manager.DataPages
         private transportTableAdapter _transportAdapter;
         private deliveryStatusesTableAdapter _deliveryStatusesAdapter;
 
+        private ActiveDeliveryInfo _selectedDelivery;
+
+        private warehousePartsTableAdapter _wpAdapter;
+        private deliveryItemsTableAdapter _itemsAdapter;
+
+
+
         public ActiveDeliveryPage(Frame managerMainFrame)
         {
             InitializeComponent();
@@ -41,16 +49,18 @@ namespace ProjectFLS.Manager.DataPages
             _deliveryStatusesAdapter = new deliveryStatusesTableAdapter();
 
             _activeDeliveries = new List<ActiveDeliveryInfo>();
+            _wpAdapter = new warehousePartsTableAdapter();
+            _itemsAdapter = new deliveryItemsTableAdapter();
         }
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _mainBorder.Visibility = Visibility.Visible;
-            await LoadDeliveriesAsync();
+            LoadDeliveries();
             UpdateButtonVisibility();
         }
 
-        private async Task LoadDeliveriesAsync()
+        private void LoadDeliveries()
         {
             try
             {
@@ -153,8 +163,8 @@ namespace ProjectFLS.Manager.DataPages
                 SentButton.IsEnabled = true;  // Отключаем кнопку отправки
                 SentButton.Foreground = new SolidColorBrush(Colors.Black); // Черный цвет текста
                 ApproovButton.Foreground = new SolidColorBrush(Color.FromArgb(255, 221, 221, 221)); // #DDD
-                ApproovButton.Opacity = 1; // Кнопка полностью видимая
-                SentButton.Opacity = 0.5; // Полупрозрачная кнопка
+                ApproovButton.Opacity = 0.5; // Кнопка полностью видимая
+                SentButton.Opacity = 1; // Полупрозрачная кнопка
             }
             // Если склад назначения = текущий склад, а статус "Ожидание"
             else if (selectedDelivery.StatusName == "Ожидает отправления" && selectedDelivery.FromWarehouseID == App.CurrentWareHouseID)
@@ -177,42 +187,46 @@ namespace ProjectFLS.Manager.DataPages
             }
         }
 
-       
+        private void ActiveDeliveryListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (_selectedDelivery == null) return;                     // ничего не выбрано
+            NavigationService.Navigate(new DetailsDeliveryPage(_selectedDelivery.DeliveryID));
+        }
 
 
         // Обработчик события выбора элемента в ListView
         private void ActiveDeliveryListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateButtonVisibility(); // Обновляем видимость кнопок при изменении выбора
+            _selectedDelivery = (ActiveDeliveryInfo)ActiveDeliveryListView.SelectedItem;
+            UpdateButtonVisibility();
         }
 
         // Метод сортировки
         private void Sort_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn && btn.Tag is string field)
-            {
-                if (_currentSortField == field)
-                    _sortAscending = !_sortAscending;
-                else
-                {
-                    _currentSortField = field;
-                    _sortAscending = true;
-                }
+            var btn = sender as Button;
+            var tag = btn?.Tag as string;
+            if (tag == null || !_sortMap.ContainsKey(tag)) return;
 
-                ApplySorting();
-            }
+            _sortAscending = _currentSortField == tag ? !_sortAscending : true;
+            _currentSortField = tag;
+            ApplySorting();
         }
 
         private void ApplySorting()
         {
-            var sortedData = _sortAscending
-                ? _activeDeliveries.OrderBy(d => GetFieldValue(d, _currentSortField)).ToList()
-                : _activeDeliveries.OrderByDescending(d => GetFieldValue(d, _currentSortField)).ToList();
+            var field = _sortMap[_currentSortField];              // получаем настоящее имя свойства
+            Func<ActiveDeliveryInfo, object> keySelector = d =>
+                typeof(ActiveDeliveryInfo).GetProperty(field)?.GetValue(d);
 
-            ActiveDeliveryListView.ItemsSource = sortedData;
+            var sorted = _sortAscending
+                ? _activeDeliveries.OrderBy(keySelector).ToList()
+                : _activeDeliveries.OrderByDescending(keySelector).ToList();
+
+            ActiveDeliveryListView.ItemsSource = sorted;
         }
 
-        private object GetFieldValue(ActiveDeliveryInfo delivery, string field)
+/*        private object GetFieldValue(ActiveDeliveryInfo delivery, string field)
         {
             switch (field)
             {
@@ -231,7 +245,7 @@ namespace ProjectFLS.Manager.DataPages
                 default:
                     return null;
             }
-        }
+        }*/
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
@@ -245,32 +259,46 @@ namespace ProjectFLS.Manager.DataPages
 
         private void ApproovButton_Click(object sender, RoutedEventArgs e)
         {
-            // Обновление статуса на "На складе"
-            var selectedDelivery = ActiveDeliveryListView.SelectedItem as ActiveDeliveryInfo;
-            if (selectedDelivery != null)
+            if (_selectedDelivery == null) return;
+
+            var rows = _itemsAdapter.GetByDelivery(_selectedDelivery.DeliveryID);
+            int whId = _selectedDelivery.ToWarehouseID;
+
+            foreach (var it in rows)
             {
-                // Проверяем, что это нужная доставка
-                selectedDelivery.StatusName = "Ожидает отправления";  // Обновление состояния в списке
+                if (!it.IstractorIDNull()) continue; // Пропускаем тракторы
 
-                // Получаем ID статуса "На складе" из базы данных
-                var status = _deliveryStatusesAdapter.GetData()
-                    .FirstOrDefault(s => s.statusName == "На складе");
+                int partId = it.partID;
+                int qty = it.quantity;
 
-                if (status != null)
+                var existing = _wpAdapter.GetByWarehousePart(whId, partId).FirstOrDefault();
+
+                if (existing != null)
                 {
-                    // Обновление статуса в базе данных
-                    _deliveriesAdapter.UpdateStatus(status.statusID, selectedDelivery.DeliveryID);
-
-                    CustomMessageBox.Show("Доставка подтверждена", "Подтверждение", showCancel: false);
+                    existing.quantity += qty;
+                    _wpAdapter.Update(existing);
                 }
                 else
                 {
-                    MessageBox.Show("Статус не найден!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    var table = new flsdbDataSet.warehousePartsDataTable();
+                    var newRow = table.NewwarehousePartsRow();
+                    newRow.warehouseID = whId;
+                    newRow.partID = partId;
+                    newRow.quantity = qty;
+                    table.AddwarehousePartsRow(newRow);
+                    _wpAdapter.Update(table); // сохраняем
                 }
-
-                UpdateButtonVisibility();
             }
+
+            int statusId = _deliveryStatusesAdapter.GetData()
+                           .First(s => s.statusName == "На складе").statusID;
+            _deliveriesAdapter.UpdateStatus(statusId, _selectedDelivery.DeliveryID);
+
+            CustomMessageBox.Show("Доставка принята, склад обновлён", "Успех", showCancel: false);
+            LoadDeliveries();
+            UpdateButtonVisibility();
         }
+
 
         private void SentButton_Click(object sender, RoutedEventArgs e)
         {
@@ -310,7 +338,30 @@ namespace ProjectFLS.Manager.DataPages
             UpdateButtonVisibility();
         }
 
+        private void DetailsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is int deliveryId)
+            {
+                _managerMainFrame.Navigate(new DetailsDeliveryPage(deliveryId));
+            }
+            else
+            {
+                MessageBox.Show("Ошибка: не удалось получить ID доставки", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
+        private static readonly Dictionary<string, string> _sortMap = new Dictionary<string, string>()
+        {
+            ["DeliveryType"] = nameof(ActiveDeliveryInfo.DeliveryTypeName),
+            ["FromWarehouse"] = nameof(ActiveDeliveryInfo.FromWarehouseName),
+            ["ToWarehouse"] = nameof(ActiveDeliveryInfo.ToWarehouseName),
+            ["ToDealer"] = nameof(ActiveDeliveryInfo.ToDealerName),
+            ["Transport"] = nameof(ActiveDeliveryInfo.TransportName),
+            ["Status"] = nameof(ActiveDeliveryInfo.StatusName)
+        };
 
+        
+
+       
     }
 }

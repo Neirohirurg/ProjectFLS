@@ -66,6 +66,8 @@ namespace ProjectFLS {
         
         private deliveries1DataTable tabledeliveries1;
         
+        private warehousePartsDataTable tablewarehouseParts;
+        
         private global::System.Data.DataRelation relationFK_cityFuelPrices_city;
         
         private global::System.Data.DataRelation relationFK_cityFuelPrices_fuelType;
@@ -135,6 +137,10 @@ namespace ProjectFLS {
         private global::System.Data.DataRelation relationFK_deliveries_type1;
         
         private global::System.Data.DataRelation relationFK_deliveries_warehouses;
+        
+        private global::System.Data.DataRelation relationFK_warehouseParts_parts;
+        
+        private global::System.Data.DataRelation relationFK_warehouseParts_warehouses;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -226,6 +232,9 @@ namespace ProjectFLS {
                 }
                 if ((ds.Tables["deliveries1"] != null)) {
                     base.Tables.Add(new deliveries1DataTable(ds.Tables["deliveries1"]));
+                }
+                if ((ds.Tables["warehouseParts"] != null)) {
+                    base.Tables.Add(new warehousePartsDataTable(ds.Tables["warehouseParts"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -457,6 +466,16 @@ namespace ProjectFLS {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public warehousePartsDataTable warehouseParts {
+            get {
+                return this.tablewarehouseParts;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -584,6 +603,9 @@ namespace ProjectFLS {
                 }
                 if ((ds.Tables["deliveries1"] != null)) {
                     base.Tables.Add(new deliveries1DataTable(ds.Tables["deliveries1"]));
+                }
+                if ((ds.Tables["warehouseParts"] != null)) {
+                    base.Tables.Add(new warehousePartsDataTable(ds.Tables["warehouseParts"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -744,6 +766,12 @@ namespace ProjectFLS {
                     this.tabledeliveries1.InitVars();
                 }
             }
+            this.tablewarehouseParts = ((warehousePartsDataTable)(base.Tables["warehouseParts"]));
+            if ((initTable == true)) {
+                if ((this.tablewarehouseParts != null)) {
+                    this.tablewarehouseParts.InitVars();
+                }
+            }
             this.relationFK_cityFuelPrices_city = this.Relations["FK_cityFuelPrices_city"];
             this.relationFK_cityFuelPrices_fuelType = this.Relations["FK_cityFuelPrices_fuelType"];
             this.relationFK_dealers_city = this.Relations["FK_dealers_city"];
@@ -779,6 +807,8 @@ namespace ProjectFLS {
             this.relationFK_deliveries_to1 = this.Relations["FK_deliveries_to1"];
             this.relationFK_deliveries_type1 = this.Relations["FK_deliveries_type1"];
             this.relationFK_deliveries_warehouses = this.Relations["FK_deliveries_warehouses"];
+            this.relationFK_warehouseParts_parts = this.Relations["FK_warehouseParts_parts"];
+            this.relationFK_warehouseParts_warehouses = this.Relations["FK_warehouseParts_warehouses"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -831,6 +861,8 @@ namespace ProjectFLS {
             base.Tables.Add(this.tableuserStatus);
             this.tabledeliveries1 = new deliveries1DataTable();
             base.Tables.Add(this.tabledeliveries1);
+            this.tablewarehouseParts = new warehousePartsDataTable();
+            base.Tables.Add(this.tablewarehouseParts);
             this.relationFK_cityFuelPrices_city = new global::System.Data.DataRelation("FK_cityFuelPrices_city", new global::System.Data.DataColumn[] {
                         this.tablecities.cityIDColumn}, new global::System.Data.DataColumn[] {
                         this.tablecityFuelPrices.cityIDColumn}, false);
@@ -971,6 +1003,14 @@ namespace ProjectFLS {
                         this.tablewarehouses.warehouseIDColumn}, new global::System.Data.DataColumn[] {
                         this.tabledeliveries1.toWarehouseIDColumn}, false);
             this.Relations.Add(this.relationFK_deliveries_warehouses);
+            this.relationFK_warehouseParts_parts = new global::System.Data.DataRelation("FK_warehouseParts_parts", new global::System.Data.DataColumn[] {
+                        this.tableparts.partIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tablewarehouseParts.partIDColumn}, false);
+            this.Relations.Add(this.relationFK_warehouseParts_parts);
+            this.relationFK_warehouseParts_warehouses = new global::System.Data.DataRelation("FK_warehouseParts_warehouses", new global::System.Data.DataColumn[] {
+                        this.tablewarehouses.warehouseIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tablewarehouseParts.warehouseIDColumn}, false);
+            this.Relations.Add(this.relationFK_warehouseParts_warehouses);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1101,6 +1141,12 @@ namespace ProjectFLS {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializewarehouseParts() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -1216,6 +1262,9 @@ namespace ProjectFLS {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void deliveries1RowChangeEventHandler(object sender, deliveries1RowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void warehousePartsRowChangeEventHandler(object sender, warehousePartsRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -7936,6 +7985,302 @@ namespace ProjectFLS {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class warehousePartsDataTable : global::System.Data.TypedTableBase<warehousePartsRow> {
+            
+            private global::System.Data.DataColumn columnwarehouseID;
+            
+            private global::System.Data.DataColumn columnpartID;
+            
+            private global::System.Data.DataColumn columnquantity;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public warehousePartsDataTable() {
+                this.TableName = "warehouseParts";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal warehousePartsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected warehousePartsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn warehouseIDColumn {
+                get {
+                    return this.columnwarehouseID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn partIDColumn {
+                get {
+                    return this.columnpartID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn quantityColumn {
+                get {
+                    return this.columnquantity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public warehousePartsRow this[int index] {
+                get {
+                    return ((warehousePartsRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event warehousePartsRowChangeEventHandler warehousePartsRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event warehousePartsRowChangeEventHandler warehousePartsRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event warehousePartsRowChangeEventHandler warehousePartsRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event warehousePartsRowChangeEventHandler warehousePartsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddwarehousePartsRow(warehousePartsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public warehousePartsRow AddwarehousePartsRow(warehousesRow parentwarehousesRowByFK_warehouseParts_warehouses, int quantity) {
+                warehousePartsRow rowwarehousePartsRow = ((warehousePartsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        quantity};
+                if ((parentwarehousesRowByFK_warehouseParts_warehouses != null)) {
+                    columnValuesArray[0] = parentwarehousesRowByFK_warehouseParts_warehouses[0];
+                }
+                rowwarehousePartsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowwarehousePartsRow);
+                return rowwarehousePartsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public warehousePartsRow FindBywarehouseIDpartID(int warehouseID, int partID) {
+                return ((warehousePartsRow)(this.Rows.Find(new object[] {
+                            warehouseID,
+                            partID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                warehousePartsDataTable cln = ((warehousePartsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new warehousePartsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnwarehouseID = base.Columns["warehouseID"];
+                this.columnpartID = base.Columns["partID"];
+                this.columnquantity = base.Columns["quantity"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnwarehouseID = new global::System.Data.DataColumn("warehouseID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnwarehouseID);
+                this.columnpartID = new global::System.Data.DataColumn("partID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpartID);
+                this.columnquantity = new global::System.Data.DataColumn("quantity", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnquantity);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnwarehouseID,
+                                this.columnpartID}, true));
+                this.columnwarehouseID.AllowDBNull = false;
+                this.columnpartID.AutoIncrement = true;
+                this.columnpartID.AutoIncrementSeed = -1;
+                this.columnpartID.AutoIncrementStep = -1;
+                this.columnpartID.AllowDBNull = false;
+                this.columnpartID.ReadOnly = true;
+                this.columnquantity.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public warehousePartsRow NewwarehousePartsRow() {
+                return ((warehousePartsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new warehousePartsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(warehousePartsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.warehousePartsRowChanged != null)) {
+                    this.warehousePartsRowChanged(this, new warehousePartsRowChangeEvent(((warehousePartsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.warehousePartsRowChanging != null)) {
+                    this.warehousePartsRowChanging(this, new warehousePartsRowChangeEvent(((warehousePartsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.warehousePartsRowDeleted != null)) {
+                    this.warehousePartsRowDeleted(this, new warehousePartsRowChangeEvent(((warehousePartsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.warehousePartsRowDeleting != null)) {
+                    this.warehousePartsRowDeleting(this, new warehousePartsRowChangeEvent(((warehousePartsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemovewarehousePartsRow(warehousePartsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                flsdbDataSet ds = new flsdbDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "warehousePartsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class citiesRow : global::System.Data.DataRow {
@@ -9191,6 +9536,17 @@ namespace ProjectFLS {
                     return ((deliveryItemsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_items_part"])));
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public warehousePartsRow[] GetwarehousePartsRows() {
+                if ((this.Table.ChildRelations["FK_warehouseParts_parts"] == null)) {
+                    return new warehousePartsRow[0];
+                }
+                else {
+                    return ((warehousePartsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_warehouseParts_parts"])));
+                }
+            }
         }
         
         /// <summary>
@@ -9998,6 +10354,17 @@ namespace ProjectFLS {
                     return ((deliveries1Row[])(base.GetChildRows(this.Table.ChildRelations["FK_deliveries_warehouses"])));
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public warehousePartsRow[] GetwarehousePartsRows() {
+                if ((this.Table.ChildRelations["FK_warehouseParts_warehouses"] == null)) {
+                    return new warehousePartsRow[0];
+                }
+                else {
+                    return ((warehousePartsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_warehouseParts_warehouses"])));
+                }
+            }
         }
         
         /// <summary>
@@ -10361,6 +10728,76 @@ namespace ProjectFLS {
                 }
                 else {
                     return ((deliveryRoutesRow[])(base.GetChildRows(this.Table.ChildRelations["FK_dr_delivery1"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class warehousePartsRow : global::System.Data.DataRow {
+            
+            private warehousePartsDataTable tablewarehouseParts;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal warehousePartsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablewarehouseParts = ((warehousePartsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int warehouseID {
+                get {
+                    return ((int)(this[this.tablewarehouseParts.warehouseIDColumn]));
+                }
+                set {
+                    this[this.tablewarehouseParts.warehouseIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int partID {
+                get {
+                    return ((int)(this[this.tablewarehouseParts.partIDColumn]));
+                }
+                set {
+                    this[this.tablewarehouseParts.partIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int quantity {
+                get {
+                    return ((int)(this[this.tablewarehouseParts.quantityColumn]));
+                }
+                set {
+                    this[this.tablewarehouseParts.quantityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public partsRow partsRow {
+                get {
+                    return ((partsRow)(this.GetParentRow(this.Table.ParentRelations["FK_warehouseParts_parts"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_warehouseParts_parts"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public warehousesRow warehousesRow {
+                get {
+                    return ((warehousesRow)(this.GetParentRow(this.Table.ParentRelations["FK_warehouseParts_warehouses"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_warehouseParts_warehouses"]);
                 }
             }
         }
@@ -11065,6 +11502,40 @@ namespace ProjectFLS {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public deliveries1Row Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class warehousePartsRowChangeEvent : global::System.EventArgs {
+            
+            private warehousePartsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public warehousePartsRowChangeEvent(warehousePartsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public warehousePartsRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -13142,11 +13613,16 @@ SELECT itemID, deliveryID, tractorID, partID, quantity FROM deliveryItems WHERE 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT itemID, deliveryID, tractorID, partID, quantity FROM dbo.deliveryItems";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT * FROM deliveryItems\r\nWHERE deliveryID = @deliveryID";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@deliveryID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "deliveryID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13168,6 +13644,32 @@ SELECT itemID, deliveryID, tractorID, partID, quantity FROM deliveryItems WHERE 
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual flsdbDataSet.deliveryItemsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            flsdbDataSet.deliveryItemsDataTable dataTable = new flsdbDataSet.deliveryItemsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillBy(flsdbDataSet.deliveryItemsDataTable dataTable, int deliveryID) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(deliveryID));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual flsdbDataSet.deliveryItemsDataTable GetByDelivery(int deliveryID) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(deliveryID));
             flsdbDataSet.deliveryItemsDataTable dataTable = new flsdbDataSet.deliveryItemsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -19216,6 +19718,348 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class warehousePartsTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public warehousePartsTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "warehouseParts";
+            tableMapping.ColumnMappings.Add("warehouseID", "warehouseID");
+            tableMapping.ColumnMappings.Add("partID", "partID");
+            tableMapping.ColumnMappings.Add("quantity", "quantity");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [warehouseParts] WHERE (([warehouseID] = @Original_warehouseID) AND (" +
+                "[partID] = @Original_partID) AND ([quantity] = @Original_quantity))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_warehouseID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "warehouseID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_partID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "partID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_quantity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "quantity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [warehouseParts] ([warehouseID], [quantity]) VALUES (@warehouseID, @q" +
+                "uantity);\r\nSELECT warehouseID, partID, quantity FROM warehouseParts WHERE (partI" +
+                "D = SCOPE_IDENTITY()) AND (warehouseID = @warehouseID)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@warehouseID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "warehouseID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@quantity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "quantity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [warehouseParts] SET [warehouseID] = @warehouseID, [quantity] = @quantity WHERE (([warehouseID] = @Original_warehouseID) AND ([partID] = @Original_partID) AND ([quantity] = @Original_quantity));
+SELECT warehouseID, partID, quantity FROM warehouseParts WHERE (partID = @partID) AND (warehouseID = @warehouseID)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@warehouseID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "warehouseID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@quantity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "quantity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_warehouseID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "warehouseID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_partID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "partID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_quantity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "quantity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@partID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "partID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::ProjectFLS.Properties.Settings.Default.flsdbConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT warehouseID, partID, quantity\r\nFROM     warehouseParts";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT * FROM warehouseParts\r\nWHERE warehouseID = @warehouseID AND partID = @part" +
+                "ID;";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@warehouseID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "warehouseID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@partID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "partID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(flsdbDataSet.warehousePartsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual flsdbDataSet.warehousePartsDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            flsdbDataSet.warehousePartsDataTable dataTable = new flsdbDataSet.warehousePartsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillBy(flsdbDataSet.warehousePartsDataTable dataTable, int warehouseID, int partID) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(warehouseID));
+            this.Adapter.SelectCommand.Parameters[1].Value = ((int)(partID));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual flsdbDataSet.warehousePartsDataTable GetByWarehousePart(int warehouseID, int partID) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(warehouseID));
+            this.Adapter.SelectCommand.Parameters[1].Value = ((int)(partID));
+            flsdbDataSet.warehousePartsDataTable dataTable = new flsdbDataSet.warehousePartsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(flsdbDataSet.warehousePartsDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(flsdbDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "warehouseParts");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_warehouseID, int Original_partID, int Original_quantity) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_warehouseID));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_partID));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_quantity));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int warehouseID, int quantity) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(warehouseID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(quantity));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int warehouseID, int quantity, int Original_warehouseID, int Original_partID, int Original_quantity, int partID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(warehouseID));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(quantity));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_warehouseID));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_partID));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_quantity));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(partID));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int quantity, int Original_warehouseID, int Original_partID, int Original_quantity) {
+            return this.Update(Original_warehouseID, quantity, Original_warehouseID, Original_partID, Original_quantity, Original_partID);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -19266,6 +20110,8 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
         private userStatusTableAdapter _userStatusTableAdapter;
         
         private deliveries1TableAdapter _deliveries1TableAdapter;
+        
+        private warehousePartsTableAdapter _warehousePartsTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -19564,6 +20410,20 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public warehousePartsTableAdapter warehousePartsTableAdapter {
+            get {
+                return this._warehousePartsTableAdapter;
+            }
+            set {
+                this._warehousePartsTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -19661,6 +20521,10 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                             && (this._deliveries1TableAdapter.Connection != null))) {
                     return this._deliveries1TableAdapter.Connection;
                 }
+                if (((this._warehousePartsTableAdapter != null) 
+                            && (this._warehousePartsTableAdapter.Connection != null))) {
+                    return this._warehousePartsTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -19734,6 +20598,9 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                 if ((this._deliveries1TableAdapter != null)) {
                     count = (count + 1);
                 }
+                if ((this._warehousePartsTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -19745,21 +20612,21 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateUpdatedRows(flsdbDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._rolesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.roles.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._rolesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._userStatusTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.userStatus.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._userStatusTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._rolesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.roles.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._rolesTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -19781,21 +20648,21 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._warehousesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.warehouses.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._warehousesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._dealersTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.dealers.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._dealersTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._warehousesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.warehouses.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._warehousesTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -19844,21 +20711,21 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._deliveriesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.deliveries.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._deliveriesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._fuelTypesTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.fuelTypes.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._fuelTypesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._deliveriesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.deliveries.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._deliveriesTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -19880,21 +20747,21 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._deliveryItemsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.deliveryItems.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._deliveryItemsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._transportTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.transport.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._transportTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._deliveryItemsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.deliveryItems.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._deliveryItemsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -19907,6 +20774,15 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._warehouseTractorsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.warehouseTractors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._warehouseTractorsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._cityFuelPricesTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.cityFuelPrices.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -19916,12 +20792,12 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._warehouseTractorsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.warehouseTractors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._warehousePartsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.warehouseParts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._warehouseTractorsTableAdapter.Update(updatedRows));
+                    result = (result + this._warehousePartsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -19935,19 +20811,19 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateInsertedRows(flsdbDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._rolesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.roles.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._rolesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._userStatusTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.userStatus.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._userStatusTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._rolesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.roles.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._rolesTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -19967,19 +20843,19 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._warehousesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.warehouses.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._warehousesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._dealersTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.dealers.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._dealersTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._warehousesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.warehouses.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._warehousesTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -20023,19 +20899,19 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._deliveriesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.deliveries.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._deliveriesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._fuelTypesTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.fuelTypes.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._fuelTypesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._deliveriesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.deliveries.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._deliveriesTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -20055,19 +20931,19 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._deliveryItemsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.deliveryItems.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._deliveryItemsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._transportTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.transport.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._transportTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._deliveryItemsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.deliveryItems.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._deliveryItemsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -20079,6 +20955,14 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._warehouseTractorsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.warehouseTractors.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._warehouseTractorsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._cityFuelPricesTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.cityFuelPrices.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -20087,11 +20971,11 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._warehouseTractorsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.warehouseTractors.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._warehousePartsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.warehouseParts.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._warehouseTractorsTableAdapter.Update(addedRows));
+                    result = (result + this._warehousePartsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -20105,11 +20989,11 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateDeletedRows(flsdbDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._warehouseTractorsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.warehouseTractors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._warehousePartsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.warehouseParts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._warehouseTractorsTableAdapter.Update(deletedRows));
+                    result = (result + this._warehousePartsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -20121,6 +21005,14 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._warehouseTractorsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.warehouseTractors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._warehouseTractorsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._deliveryAuditTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.deliveryAudit.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -20129,19 +21021,19 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._transportTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.transport.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._transportTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._deliveryItemsTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.deliveryItems.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._deliveryItemsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._transportTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.transport.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._transportTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -20161,19 +21053,19 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._fuelTypesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.fuelTypes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._fuelTypesTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._deliveriesTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.deliveries.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._deliveriesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._fuelTypesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.fuelTypes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._fuelTypesTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -20217,19 +21109,19 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._dealersTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.dealers.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._dealersTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._warehousesTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.warehouses.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._warehousesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._dealersTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.dealers.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._dealersTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -20249,19 +21141,19 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._userStatusTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.userStatus.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._userStatusTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._rolesTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.roles.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._rolesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._userStatusTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.userStatus.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._userStatusTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -20401,6 +21293,11 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
             }
             if (((this._deliveries1TableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._deliveries1TableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Все адаптеры таблицы, управляемые диспетчером адаптера таблицы TableAdapterManage" +
+                        "r, должны использовать одинаковую строку подключения.");
+            }
+            if (((this._warehousePartsTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._warehousePartsTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Все адаптеры таблицы, управляемые диспетчером адаптера таблицы TableAdapterManage" +
                         "r, должны использовать одинаковую строку подключения.");
             }
@@ -20616,6 +21513,15 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                         adaptersWithAcceptChangesDuringUpdate.Add(this._deliveries1TableAdapter.Adapter);
                     }
                 }
+                if ((this._warehousePartsTableAdapter != null)) {
+                    revertConnections.Add(this._warehousePartsTableAdapter, this._warehousePartsTableAdapter.Connection);
+                    this._warehousePartsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._warehousePartsTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._warehousePartsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._warehousePartsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._warehousePartsTableAdapter.Adapter);
+                    }
+                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -20753,6 +21659,10 @@ SELECT deliveryID, deliveryTypeID, fromWarehouseID, toWarehouseID, toDealerID, t
                 if ((this._deliveries1TableAdapter != null)) {
                     this._deliveries1TableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._deliveries1TableAdapter]));
                     this._deliveries1TableAdapter.Transaction = null;
+                }
+                if ((this._warehousePartsTableAdapter != null)) {
+                    this._warehousePartsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._warehousePartsTableAdapter]));
+                    this._warehousePartsTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

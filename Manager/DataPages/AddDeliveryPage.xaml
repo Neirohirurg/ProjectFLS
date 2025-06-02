@@ -26,12 +26,15 @@
         <Border Grid.Column="0" Grid.Row="0" Style="{StaticResource RoundedBorderBoxStyle}">
             <StackPanel Orientation="Vertical">
                 <Label Content="Тип доставки:" Target="{Binding ElementName=DeliveryTypeComboBox}" Style="{StaticResource labelForm}"/>
-                <ComboBox x:Name="DeliveryTypeComboBox" Style="{StaticResource comboBoxForm}" DisplayMemberPath="deliveryTypeName" SelectedValuePath="deliveryTypeID"/>
+                <TextBox x:Name="DeliveryTypeTextBox"
+         Style="{StaticResource RoundedTextBoxStyle}" 
+         IsReadOnly="True"/>
+
             </StackPanel>
         </Border>
 
         <!-- Склад отправитель -->
-        <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource RoundedBorderBoxStyle}">
+        <Border Grid.Column="2" Grid.Row="1" Style="{StaticResource RoundedBorderBoxStyle}" x:Name="FromWarehouseBorder">
             <StackPanel Orientation="Vertical">
                 <Label Content="Склад отправитель:" Target="{Binding ElementName=FromWarehouseComboBox}" Style="{StaticResource labelForm}"/>
                 <ComboBox x:Name="FromWarehouseComboBox" Style="{StaticResource comboBoxForm}" DisplayMemberPath="warehouseName" SelectedValuePath="warehouseID"/>
@@ -39,7 +42,7 @@
         </Border>
 
         <!-- Склад получатель -->
-        <Border Grid.Column="0" Grid.Row="2" Style="{StaticResource RoundedBorderBoxStyle}">
+        <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource RoundedBorderBoxStyle}" x:Name="ToWarehouseBorder">
             <StackPanel Orientation="Vertical">
                 <Label Content="Склад получатель:" Target="{Binding ElementName=ToWarehouseComboBox}" Style="{StaticResource labelForm}"/>
                 <ComboBox x:Name="ToWarehouseComboBox" Style="{StaticResource comboBoxForm}" DisplayMemberPath="warehouseName" SelectedValuePath="warehouseID"/>
@@ -47,7 +50,7 @@
         </Border>
 
         <!-- Дилер -->
-        <Border Grid.Column="1" Grid.Row="0" Style="{StaticResource RoundedBorderBoxStyle}">
+        <Border Grid.Column="2" Grid.Row="0" Style="{StaticResource RoundedBorderBoxStyle}" x:Name="ToDealerBorder">
             <StackPanel Orientation="Vertical">
                 <Label Content="Дилер:" Target="{Binding ElementName=ToDealerComboBox}" Style="{StaticResource labelForm}"/>
                 <ComboBox x:Name="ToDealerComboBox" Style="{StaticResource comboBoxForm}" DisplayMemberPath="dealerName" SelectedValuePath="dealerID"/>
@@ -55,7 +58,7 @@
         </Border>
 
         <!-- Транспорт -->
-        <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource RoundedBorderBoxStyle}">
+        <Border Grid.Column="1" Grid.Row="0" Style="{StaticResource RoundedBorderBoxStyle}" x:Name="TransportBorder">
             <StackPanel Orientation="Vertical">
                 <Label Content="Транспорт:" Target="{Binding ElementName=TransportComboBox}" Style="{StaticResource labelForm}"/>
                 <ComboBox x:Name="TransportComboBox" Style="{StaticResource comboBoxForm}" DisplayMemberPath="transportName" SelectedValuePath="transportID"/>
@@ -63,12 +66,73 @@
         </Border>
 
         <!-- Дата доставки -->
-        <Border Grid.Column="1" Grid.Row="2" Style="{StaticResource RoundedBorderBoxStyle}">
+        <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource RoundedBorderBoxStyle}" x:Name="DeliveryDatePickerBorder">
             <StackPanel Orientation="Vertical">
                 <Label Content="Дата доставки:" Target="{Binding ElementName=DeliveryDatePicker}" Style="{StaticResource labelForm}"/>
                 <DatePicker x:Name="DeliveryDatePicker" Style="{StaticResource datePickerForm}"/>
             </StackPanel>
         </Border>
+
+        <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+            <Button x:Name="AddItemButton"
+                    Content="Добавить"
+                    Style="{StaticResource RoundButtonStyle}"
+                    Width="110" Height="32"
+                    HorizontalAlignment="Right"
+                    DockPanel.Dock="Bottom"
+                    Click="AddItemButton_Click"/>
+
+            <!-- Заголовки -->
+            <Grid DockPanel.Dock="Top" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="70"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Тип" Grid.Column="0" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="Наименование" Grid.Column="1" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="Длина (м)" Grid.Column="2" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="Ширина (м)" Grid.Column="3" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="Высота (м)" Grid.Column="4" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="Масса (кг)" Grid.Column="5" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="Кол-во" Grid.Column="6" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+
+            <!-- Список -->
+            <ListView x:Name="DeliveryItemsListView"
+                      Margin="5" Padding="2"
+                      ItemContainerStyle="{StaticResource ListViewItemStyle}">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Style="{StaticResource ListViewItemGridStyle}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="70"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="{Binding DeliveryTypeName}" Grid.Column="0" Style="{StaticResource TextBlockStyle}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding ItemName}" Grid.Column="1" Style="{StaticResource TextBlockStyle}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding LengthM}" Grid.Column="2" Style="{StaticResource TextBlockStyle}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding WidthM}" Grid.Column="3" Style="{StaticResource TextBlockStyle}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding HeightM}" Grid.Column="4" Style="{StaticResource TextBlockStyle}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding WeightKg}" Grid.Column="5" Style="{StaticResource TextBlockStyle}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding Quantity}" Grid.Column="6" Style="{StaticResource TextBlockStyle}" TextAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>
 
         <!-- Кнопки -->
         <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,0">

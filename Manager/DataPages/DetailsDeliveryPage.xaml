@@ -1,0 +1,98 @@
+﻿<Page x:Class="ProjectFLS.Manager.DataPages.DetailsDeliveryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Title="DetailsDeliveryPage">
+
+    <!-- card-обёртка -->
+    <Border Margin="40"
+            Background="White"
+            CornerRadius="10"
+            Padding="20"
+            BorderBrush="#DDDDDD"
+            BorderThickness="1"
+            >
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок страницы -->
+            <TextBlock Text="Содержимое доставки"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="#333"
+                       Margin="0 0 0 20"
+                       Grid.Row="0"/>
+
+            <!-- ===== Заголовки колонок ===== -->
+            <Grid Grid.Row="1" Margin="0 0 0 8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Тип"           Grid.Column="0" Style="{StaticResource TextBlockStyle}"/>
+                <TextBlock Text="Наименование"  Grid.Column="1" Style="{StaticResource TextBlockStyle}" TextAlignment="Center"/>
+                <TextBlock Text="Длина (м)"     Grid.Column="2" Style="{StaticResource TextBlockStyle}" TextAlignment="Center"/>
+                <TextBlock Text="Ширина (м)"    Grid.Column="3" Style="{StaticResource TextBlockStyle}" TextAlignment="Center"/>
+                <TextBlock Text="Высота (м)"    Grid.Column="4" Style="{StaticResource TextBlockStyle}" TextAlignment="Center"/>
+                <TextBlock Text="Масса (кг)"    Grid.Column="5" Style="{StaticResource TextBlockStyle}" TextAlignment="Center"/>
+                <TextBlock Text="Кол-во"        Grid.Column="6" Style="{StaticResource TextBlockStyle}" TextAlignment="Center"/>
+            </Grid>
+
+            <!-- ===== Список позиций ===== -->
+            <ListView x:Name="DeliveryItemsListView"
+                      Grid.Row="2"
+                      Padding="0"
+                      ItemContainerStyle="{StaticResource ListViewItemStyle}">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{Binding DeliveryTypeName}" Grid.Column="0" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="{Binding ItemName}"         Grid.Column="1" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="{Binding LengthM}"          Grid.Column="2" Style="{StaticResource TextBlockStyle}" TextAlignment="Center"/>
+                                <TextBlock Text="{Binding WidthM}"           Grid.Column="3" Style="{StaticResource TextBlockStyle}" TextAlignment="Center"/>
+                                <TextBlock Text="{Binding HeightM}"          Grid.Column="4" Style="{StaticResource TextBlockStyle}" TextAlignment="Center"/>
+                                <TextBlock Text="{Binding WeightKg}"         Grid.Column="5" Style="{StaticResource TextBlockStyle}" TextAlignment="Center"/>
+                                <TextBlock Text="{Binding Quantity}"         Grid.Column="6" Style="{StaticResource TextBlockStyle}" TextAlignment="Center"/>
+                            </Grid>
+                   
+                   
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!-- ===== Кнопка Назад ===== -->
+            <StackPanel Grid.Row="3" HorizontalAlignment="Center" Margin="0,25,0,0">
+                <Button Content="Назад"
+                        Style="{StaticResource RoundButtonStyle}"
+                        Width="160"
+                        Click="BackButton_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Page>

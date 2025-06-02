@@ -52,7 +52,9 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
             };
 
             var deleteLabel = new Label { Content = "Удалить", Style = (Style)Application.Current.FindResource("menuLabel"), Margin = new Thickness(5), Cursor = Cursors.Hand };
+#pragma warning disable CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
             deleteLabel.MouseLeftButtonUp += (s, e) => DeleteSelectedAsync();
+#pragma warning restore CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
 
             panel.Children.Add(addLabel);
             panel.Children.Add(editLabel);
@@ -183,7 +185,7 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
                     {
                         // Удаление маршрута
                         await Task.Run(() => _routesAdapter.DeleteQuery(routeID));
-                        await RefreshAsync();
+                        Refresh();
                         CustomMessageBox.Show("Успешно удалено.", "Удаление", showCancel: false);
                     }
                     catch (Exception ex)
@@ -195,7 +197,7 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
         }
 
         // Обновление списка маршрутов
-        public async Task RefreshAsync()
+        public void Refresh()
         {
             var routes = _routesAdapter.GetData();
             var cities = _citiesAdapter.GetData();
@@ -245,13 +247,13 @@ namespace ProjectFLS.Admin.DataPages.DerictoriesButton.Derictories
         }
 
         // Страница загружена, обновляем данные
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _stackpanelBorder.Visibility = Visibility.Visible;
 
             try
             {
-                await RefreshAsync();
+                Refresh();
             }
             catch (Exception ex)
             {

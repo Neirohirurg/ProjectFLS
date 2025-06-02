@@ -12,12 +12,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
         <!-- Заголовки столбцов для информации о доставках -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -36,11 +37,14 @@
         </Grid>
 
         <!-- Таблица с данными о доставках -->
-        <ListView Grid.Row="1" Name="ActiveDeliveryListView" Margin="5" ItemContainerStyle="{StaticResource ListViewItemStyle}" Padding="5" SelectionChanged="ActiveDeliveryListView_SelectionChanged">
+        <ListView Grid.Row="1" Name="ActiveDeliveryListView" Margin="5" ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                  Padding="5" SelectionChanged="ActiveDeliveryListView_SelectionChanged"
+                  MouseDoubleClick="ActiveDeliveryListView_MouseDoubleClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Style="{StaticResource ListViewItemGridStyle}">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -55,6 +59,10 @@
                         <TextBlock Text="{Binding ToDealerName}" Grid.Column="3" Style="{StaticResource TextBlockStyle}"/>
                         <TextBlock Text="{Binding TransportName}" Grid.Column="4" Style="{StaticResource TextBlockStyle}"/>
                         <TextBlock Text="{Binding StatusName}" Grid.Column="5" Style="{StaticResource TextBlockStyle}"/>
+                        <Button Content="Детали доставки" 
+                                Click="DetailsButton_Click" Tag="{Binding DeliveryID}" 
+                                Style="{StaticResource RoundButtonStyle}" 
+                                Height="34" Grid.Column="6"></Button>
 
                     </Grid>
                 </DataTemplate>

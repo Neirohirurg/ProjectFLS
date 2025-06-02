@@ -79,7 +79,9 @@ namespace ProjectFLS.Manager
                 }
                 else if (e.Content is InWarehouse inWarehousePage)
                 {
+#pragma warning disable CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
                     _inWarehouse.RefreshAsync();
+#pragma warning restore CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
                     App.mainStackPanel.IsEnabled = true;
                     _inWarehouse.SetupNavigationPanel(_stackPanel, _border);
                 }
@@ -133,9 +135,9 @@ namespace ProjectFLS.Manager
                 ManagerMainFrame.Navigate(new AddEditDealerPage(this.ManagerMainFrame));
             };
 
-           /* // Добавление метки для удаления партнёра
-            var deleteLabel = new Label { Content = "Удалить", Style = (Style)Aplication.Current.FindResource("menuLabel"), Margin = new Thickness(5), Cursor = Cursors.Hand };
-            deleteLabel.MouseLeftButtonUp += (s, e) => DeleteSelectedPartner();*/
+            /* // Добавление метки для удаления партнёра
+             var deleteLabel = new Label { Content = "Удалить", Style = (Style)Aplication.Current.FindResource("menuLabel"), Margin = new Thickness(5), Cursor = Cursors.Hand };
+             deleteLabel.MouseLeftButtonUp += (s, e) => DeleteSelectedPartner();*/
 
             panel.Children.Add(addLabel);
             //panel.Children.Add(deleteLabel);

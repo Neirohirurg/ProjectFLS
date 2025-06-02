@@ -168,8 +168,9 @@ namespace ProjectFLS.Manager.DataPages
             var addLabel = new Label { Content = "Оформить доставку", Style = (Style)Application.Current.FindResource("menuLabel"), Margin = new Thickness(5), Cursor = Cursors.Hand };
             addLabel.MouseLeftButtonUp += (s, e) =>
             {
+
                 _stackpanel.IsEnabled = false;
-                _managerMainFrame.Navigate(new AddDeliveryPage());
+                _managerMainFrame.Navigate(new AddDeliveryPage(_managerMainFrame));
             };
 
             var activeLabel = new Label { Content = "Активные доставки", Style = (Style)Application.Current.FindResource("menuLabel"), Margin = new Thickness(5), Cursor = Cursors.Hand };

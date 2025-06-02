@@ -335,6 +335,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Manager\DataPages\AddItemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\DataPages\DetailsDeliveryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\DataPages\InWarehouse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -362,6 +370,12 @@
     <Compile Include="Manager\DataPages\AddEditDealerPage.xaml.cs">
       <DependentUpon>AddEditDealerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\DataPages\AddItemPage.xaml.cs">
+      <DependentUpon>AddItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\DataPages\DetailsDeliveryPage.xaml.cs">
+      <DependentUpon>DetailsDeliveryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\DataPages\InWarehouse.xaml.cs">
       <DependentUpon>InWarehouse.xaml</DependentUpon>
     </Compile>
@@ -372,6 +386,7 @@
       <DependentUpon>WarehousesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ActiveDeliveryInfo.cs" />
+    <Compile Include="Models\DeliveryItemVm.cs" />
     <Compile Include="Models\WarehouseTractorData.cs" />
     <Compile Include="Manager\ManagerMainPage.xaml.cs">
       <DependentUpon>ManagerMainPage.xaml</DependentUpon>

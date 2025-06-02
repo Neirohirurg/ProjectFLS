@@ -49,8 +49,8 @@ namespace ProjectFLS.Admin.DataPages.History
             var filtered = auditList.Where(audit =>
                 audit.auditID.ToString().Contains(query) ||  // Поиск по ID аудита
                 audit.deliveryID.ToString().Contains(query) ||  // Поиск по ID доставки
-                (audit.oldStatus != null && statuses.Values.Any(s => s.ToLower().Contains(query))) ||  // Поиск по старому статусу
-                (audit.newStatus != null && statuses.Values.Any(s => s.ToLower().Contains(query))) ||  // Поиск по новому статусу
+                (audit?.oldStatus != null && statuses.Values.Any(s => s.ToLower().Contains(query))) ||  // Поиск по старому статусу
+                (audit?.newStatus != null && statuses.Values.Any(s => s.ToLower().Contains(query))) ||  // Поиск по новому статусу
                 (audit.changeBy != null && users.Keys.Any(u => u.Contains(query.ToLower()))) // Поиск по фамилии и имени пользователя
             ).ToList();
 

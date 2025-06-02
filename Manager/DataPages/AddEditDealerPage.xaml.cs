@@ -45,7 +45,7 @@ namespace ProjectFLS.Manager.DataPages
         }
 
 
-        private async Task LoadDeliveriesAsync()
+        private void LoadDeliveries()
         {
             try
             {
@@ -58,11 +58,16 @@ namespace ProjectFLS.Manager.DataPages
 
                 _activeDeliveries.Clear();
 
-                // Фильтрация доставок по DealerID
                 foreach (var delivery in deliveries)
                 {
                     // Пропускаем доставки, которые не принадлежат выбранному дилеру
                     if (delivery.toDealerID != App._selectedPartner.DealerID)
+                        continue;
+
+                    var deliveryStatus = deliveryStatuses.FirstOrDefault(ds => ds.statusID == delivery.statusID);
+
+                    // ❗ Фильтруем по статусу "Отправлен к дилеру"
+                    if (deliveryStatus == null || deliveryStatus.statusName != "Отправлен к дилеру")
                         continue;
 
                     var deliveryType = deliveryTypes.FirstOrDefault(dt => dt.deliveryTypeID == delivery.deliveryTypeID);
@@ -70,7 +75,6 @@ namespace ProjectFLS.Manager.DataPages
                     var toWarehouse = warehouses.FirstOrDefault(w => w.warehouseID == delivery.toWarehouseID);
                     var toDealer = dealers.FirstOrDefault(d => d.dealerID == delivery.toDealerID);
                     var transportDetails = transport.FirstOrDefault(t => t.transportID == delivery.transportID);
-                    var deliveryStatus = deliveryStatuses.FirstOrDefault(ds => ds.statusID == delivery.statusID);
 
                     var activeDelivery = new ActiveDeliveryInfo
                     {
@@ -89,7 +93,6 @@ namespace ProjectFLS.Manager.DataPages
                     _activeDeliveries.Add(activeDelivery);
                 }
 
-                // Обновляем источник данных для ListView
                 ActiveDeliveryListView.ItemsSource = _activeDeliveries;
             }
             catch (Exception ex)
@@ -119,32 +122,11 @@ namespace ProjectFLS.Manager.DataPages
 
         private void UpdateButtonVisibility()
         {
-            try
-            {
-                DisableApproovButton();
-                switch (selectedDelivery.StatusName)
-                {
-                    case "Отправлен к дилеру":
-                        EnableApproovButton();
-                        break;
-                    case "Доставлено":
-                        DisableApproovButton();  // Если статус уже "Доставлено" или "Отправлен к дилеру", отключаем кнопку
-                        break;
-                    default:
-                        DisableApproovButton();  // В остальных случаях, включаем кнопку
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Если произошла ошибка при обновлении видимости кнопок
-                Console.WriteLine($"Ошибка: {ex.Message}");
-                DisableApproovButton();  // Отключаем кнопку в случае ошибки
-            }
+            ApproovButton.IsEnabled = selectedDelivery != null;
         }
 
 
-        // Метод для отключения кнопки ApproovButton
+        /*// Метод для отключения кнопки ApproovButton
         // Метод для отключения кнопки ApproovButton
         private void DisableApproovButton()
         {
@@ -159,7 +141,7 @@ namespace ProjectFLS.Manager.DataPages
             ApproovButton.IsEnabled = true;
             ApproovButton.Foreground = new SolidColorBrush(Colors.Black); // Черный цвет текста
             ApproovButton.Opacity = 0.5; // Полностью видимая кнопка
-        }
+        }*/
 
 
         // Обработчик события выбора элемента в ListView
@@ -268,10 +250,10 @@ namespace ProjectFLS.Manager.DataPages
         }
 
 
-        private async void Page_Loaded_1(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _mainBorder.Visibility = Visibility.Collapsed;
-            await LoadDeliveriesAsync();
+            LoadDeliveries();
 
         }
     }

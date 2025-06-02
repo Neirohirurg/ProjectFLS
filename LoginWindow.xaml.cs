@@ -31,20 +31,20 @@ namespace ProjectFLS
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            /*string username = UsernameTextBox.Text.Trim();
+/*            string username = UsernameTextBox.Text.Trim();
             string password = PasswordBox.Password;
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 CustomMessageBox.Show("Введите логин и пароль.", "Уведомление", showCancel: false);
                 return;
-            }
+            }*/
 
-*/
+
             var usersTable = new flsdbDataSetTableAdapters.usersTableAdapter();
             var rolesTable = new flsdbDataSetTableAdapters.rolesTableAdapter();
-/*            var userRows = usersTable.GetData().Where(u => u.username == username && u.password == password);
-            var user = userRows.FirstOrDefault();*/
+            /*            var userRows = usersTable.GetData().Where(u => u.username == username && u.password == password);
+                        var user = userRows.FirstOrDefault();*/
 
             var userRow = usersTable.GetData().FirstOrDefault(u => u.userID == 2);
             var user = userRow;
